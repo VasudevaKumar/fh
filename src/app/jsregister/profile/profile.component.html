@@ -1,0 +1,170 @@
+<div class="py-4">
+    <div class="container">
+       <div class="row" *ngIf="isContentLoaded">
+          <!-- Main Content -->
+          <aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
+             <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+                <div class="py-4 px-3 border-bottom" *ngIf="myProfileBasicInfo.length > 0">
+                   <img src="{{myProfileBasicInfo[0].imageProfile | replaceImg78}}" class="img-fluid mt-2 rounded-circle" alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
+                   <h5 class="font-weight-bold text-dark mb-1 mt-4">{{myProfileBasicInfo[0].firstName}} {{myProfileBasicInfo[0].lastName}}</h5>
+                   <p class="mb-0 text-muted">{{myProfileBasicInfo[0].positionName}}</p>
+                </div>
+                <!-- 
+                <div class="d-flex">
+                   <div class="col-6 border-right p-3">
+                      <h6 class="font-weight-bold text-dark mb-1">{{totalConnects[0].totalConneections}}</h6>
+                      <p class="mb-0 text-black-50 small">Connections</p>
+                   </div>
+                   <div class="col-6 p-3">
+                      <h6 class="font-weight-bold text-dark mb-1">{{totalConnects[0].totalViews}}</h6>
+                      <p class="mb-0 text-black-50 small">Views</p>
+                   </div>
+                </div>
+                
+
+                <div class="overflow-hidden border-top">
+                   <a class="font-weight-bold p-3 d-block" href="#" (click)="logout(); false;"> Log Out </a>
+                </div>
+                -->
+
+             </div>
+             <div class="box shadow-sm border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">Skills</h6>
+                </div>
+                <div class="box-body">
+                   
+                  <div class="d-flex align-items-center osahan-post-header p-3 border-bottom people-list" *ngFor="let item of skillInfo;">
+                      <div class="font-weight-bold">
+                         <div class="text-truncate">{{item.skillName}}</div>
+                      </div>
+                   </div>
+
+                </div>
+             </div>
+
+             <div class="border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">Social profiles</h6>
+                   <p class="mb-0 mt-0 small">Add elsewhere links to your profile.
+                   </p>
+                </div>
+                <div class="box-body">
+                   <div class="p-3 border-bottom">
+                      <div class="position-relative icon-form-control mb-2" *ngIf="socialMediaLinks[0].socialProfile!=''">
+                         <i class="feather-instagram position-absolute text-warning"></i>
+                         <a href="https://{{socialMediaLinks[0].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[0].socialProfile}}</a>
+                      </div>
+                      <div class="position-relative icon-form-control mb-2" *ngIf="socialMediaLinks[1].socialProfile!=''">
+                         <i class="feather-facebook position-absolute text-primary"></i>
+                         <a href="https://{{socialMediaLinks[1].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[1].socialProfile}}</a>
+                      </div>
+                      <div class="position-relative icon-form-control mb-2" *ngIf="socialMediaLinks[2].socialProfile!=''">
+                         <i class="feather-twitter position-absolute text-info"></i>
+                         <a href="https://{{socialMediaLinks[2].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[2].socialProfile}}</a>
+                      </div>
+                      <div class="position-relative icon-form-control mb-2" *ngIf="socialMediaLinks[3].socialProfile!=''">
+                         <i class="feather-youtube position-absolute text-danger"></i>
+                         <a href="https://{{socialMediaLinks[3].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[3].socialProfile}}</a>
+                      </div>
+                      <div class="position-relative icon-form-control mb-0" *ngIf="socialMediaLinks[4].socialProfile!=''">
+                         <i class="feather-github position-absolute text-dark"></i>
+                         <a href="https://{{socialMediaLinks[4].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[4].socialProfile}}</a>
+                      </div>
+                   </div>
+                   <!-- <div class="overflow-hidden text-center p-3">
+                      <a class="font-weight-bold btn btn-light rounded p-3 d-block" href="#"> Update Social Profiles </a>
+                   </div>
+                -->
+ 
+                </div>
+             </div>
+
+             <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+               <img src="assets/images/add/tomorrow.png" class="img-fluid" alt="Responsive image">
+             </div>
+          </aside>
+          <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-2 col-md-12 col-sm-12 col-12">
+             <div class="box shadow-sm border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">About You</h6>
+                </div>
+                <div class="box-body p-3" *ngIf="myProfileBasicInfo.length >0 ">
+                  {{myProfileBasicInfo[0].about}}
+                </div>
+             </div>
+             <div class="box shadow-sm border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">Experience</h6>
+                </div>
+                <div class="box-body p-3 border-bottom" *ngFor="let item of expInfo"> 
+                   <div class="d-flex align-items-top job-item-header pb-2">
+                      <div class="mr-2">
+                         <h6 class="font-weight-bold text-dark mb-0">{{item.positionName}}</h6>
+                         <div class="text-truncate text-primary">{{item.companyName}}</div>
+                         <div class="small text-gray-500">{{item.fromDate}} - {{item.toDate}} ({{item.tenure}}) </div>
+                      </div>
+                      <!-- <img class="img-fluid ml-auto mb-auto" src="img/l3.png" alt=""> -->
+                   </div>
+                   <p class="mb-0">{{item.description}}</p>
+                </div>
+
+             </div>
+             <div class="box shadow-sm border rounded bg-white mb-3">
+               <div class="box-title border-bottom p-3">
+                  <h6 class="m-0">Education</h6>
+               </div>
+               <div class="box-body p-3 border-bottom" *ngFor="let item of eduInfo">
+                  <div class="d-flex align-items-top job-item-header pb-2">
+                     <div class="mr-2">
+                        <h6 class="font-weight-bold text-dark mb-0">{{item.className}}</h6>
+                        <div class="text-truncate text-primary">{{item.collageName}}</div>
+                        <div class="small text-gray-500">{{item.fromDate}} - {{item.toDate}} ({{item.tenure}}) </div>
+                     </div>
+                  </div>
+                  <p class="mb-0">{{item.description}}</p>
+               </div>
+            </div>
+          </main>
+          <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
+             <div class="box shadow-sm border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">Which companies viewed your profile</h6>
+                </div>
+                <div class="box-body p-3" *ngIf="companyProfiles.length==0">
+                  <p class="mb-0">No one viewed your profile</p>
+                </div>
+                <div class="box-body p-3" *ngIf="companyProfiles.length>0">
+                  <div class="d-flex align-items-center osahan-post-header mb-3 people-list" *ngFor="let companyProfile of companyProfiles">
+                      <div class="dropdown-list-image mr-3">
+                         <img class="rounded-circle" src="{{companyProfile.companyLogo | replaceImg40}}" alt="" onerror="this.src='assets/files/profilePics/blank.png';">
+                         <div class="status-indicator bg-success"></div>
+                      </div>
+                      <div class="font-weight-bold mr-2">
+                         <div class="text-truncate">{{companyProfile.contactPersonName}}</div>
+                         <div class="small text-gray-500">@{{companyProfile.companyName}}
+                         </div>
+                      </div>
+                   </div>
+                </div>
+
+             </div>
+
+             <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+               <img src="assets/images/add/doordonot.png" class="img-fluid" alt="Responsive image">
+             </div>
+
+             <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+               <img src="assets/images/add/facehireLogin.png" class="img-fluid" alt="Responsive image">
+            </div>
+
+            <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+               <img src="assets/images/add/openjobfair.png" class="img-fluid" alt="Responsive image">
+            </div>
+
+
+             
+          </aside>
+       </div>
+    </div>
+ </div>

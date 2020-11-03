@@ -1,0 +1,248 @@
+<div class="py-4">
+    <div class="container">
+       <div class="row">
+          <!-- Main Content -->
+          <main class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+             <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
+                <div class="pl-3 pt-3 pr-3 border-bottom mb-0 pb-3">
+                      <!-- More suggestions for you -->
+                      <form class="job-search p-3 border-bottom">
+                        <div class="input-group">
+                           <input type="text" id="searchString" class="form-control" placeholder="More suggestions for you" aria-label="Search" aria-describedby="basic-addon2" (keydown.enter)="filterConnects(); false;" (change)="filterConnects(); false;" (blur)="filterConnects(); false;">
+                           <div class="input-group-append">
+                              <button class="btn btn-outline-secondary blackColor btnLineheight125" type="button" (click)="filterConnects(); false;">
+                              <i class="feather-search"></i>
+                              </button>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+                <ul class="nav border-bottom osahan-line-tab" id="myTab" role="tablist">
+                   <li class="nav-item">
+                      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">People</a>
+                   </li>
+                   <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Groups</a>
+                   </li>
+                  <!-- <li class="nav-item">
+                      <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Pages</a>
+                   </li> -->
+                   <li class="nav-item">
+                      <a class="nav-link" id="type-tab" data-toggle="tab" href="#type" role="tab" aria-controls="type" aria-selected="false">Hashtags</a>
+                   </li>
+                   <li class="nav-item">
+                     <a class="nav-link" id="type-tab" data-toggle="tab" href="#myconnectTab" role="tab" aria-controls="myconn" aria-selected="false">My Connects</a>
+                  </li>
+
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                      <div class="p-3">
+                        <div class="row" *ngIf ="filterConnectPeople.length == 0">No connections found </div>
+                         <div class="row" *ngIf ="filterConnectPeople.length > 0">
+                            <div class="col-md-4" *ngFor="let item of filterConnectPeople | keyvalue; index as i;">
+                                 <div class="border network-item rounded mb-3">
+                                     <div class="p-3 d-flex align-items-center network-item-header">
+                                        <div class="dropdown-list-image mr-3">
+                                           <img class="rounded-circle" src="{{item.value['connections'].imageProfile | replaceImg40}}" alt="" onerror="this.src='assets/files/profilePics/blank.png';" alt="">
+                                        </div>
+                                        <a href="" (click)="showProfile(item.value['connections'].id); false;" title="show profile">
+                                        <div class="font-weight-bold">
+                                           <h6 class="font-weight-bold text-dark mb-0">{{item.value['connections'].firstName}} {{item.value['connections'].lastName}}</h6>
+                                           <div class="small text-black-50">{{item.value['connections'].positionName}} at {{item.value['connections'].companyName}}</div>
+                                        </div>
+                                       </a>
+                                     </div>
+                                     <div class="d-flex align-items-center p-3 border-top border-bottom network-item-body">
+                                        <div class="overlap-rounded-circle" *ngIf="item.value['connections'].mutual.length >0">
+                                           <img class="rounded-circle shadow-sm" *ngFor="let cmt of item.value['connections'].mutual" data-toggle="tooltip" data-placement="top" title="{{cmt.firstName}} {{cmt.lastName}}" src="{{cmt.imageProfile | replaceImg40}}" alt="" onerror="this.src='assets/files/profilePics/blank.png';" alt="">
+                                        </div>
+                                        <span class="font-weight-bold small text-primary">{{item.value['connections'].mutual.length}} mutual connections</span>
+                                     </div>
+                                     <div class="network-item-footer py-3 d-flex text-center">
+                                        <div class="col-6 pl-3 pr-1" *ngIf="item.value['connections'].status_type == NULL">
+                                           <button type="button" class="btn btn-primary btn-sm btn-block" (click)="connectme(item.value['connections'].id, i);" id="btn_{{i}}"> Connect </button>
+                                        </div>
+
+                                        <div class="col-6 pl-3 pr-1" *ngIf="item.value['connections'].status_type == 'P'">
+                                          <button type="button" class="btn btn-primary btn-sm btn-block" disabled > Request sent </button>
+                                       </div>
+
+
+                                       <div class="col-6 pl-3 pr-1" *ngIf="item.value['connections'].status_type == 'A'" >
+                                          <button type="button" class="btn btn-primary btn-sm btn-block btn-green" disabled > Connected </button>
+                                       </div>
+
+
+                                        <div class="col-6 pr-3 pl-1" *ngIf="item.value['connections'].follow_type == NULL">
+                                           <button type="button" class="btn btn-primary btn-sm btn-block" (click)="followMe(item.value['connections'].id, i);" id="flbtn_{{i}}"> <i class="feather-user-plus"></i> Follow </button>
+                                        </div>
+
+                                        <div class="col-6 pr-3 pl-1" *ngIf="item.value['connections'].follow_type == 'A'">
+                                          <button type="button" class="btn btn-primary btn-sm btn-block" > <i class="feather-user-plus"></i> Following </button>
+                                       </div>
+
+                                     </div>
+                                  </div>
+                              
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <div class="p-1 w-100">
+
+                        <form style="width:100%;" [formGroup]="GroupsForm" (ngSubmit)="onSubmit()" style="margin:0px 0px 0px 2px; padding:0px">
+                           <div class="js-form-message">
+                           <div class="form-group">
+                              <div class="flex-shrink-1" style="padding:10px;">
+                              <input type="text" class="form-control" placeholder="Add group" (focus)="hideMessage('groupExisted'); false;" formControlName="addGroup" [ngClass]="{ 'is-invalid': submitted && f.addGroup.errors }" aria-label="Add group"  style="width:50%; float: left;"/>
+                               <button type="submit" class="btn btn-primary btn-sm" style="float: left; margin:2px 0px 0px 5px;">Save</button>
+                               <div style='clear:both'></div>
+                               <div *ngIf="submitted && f.addGroup.errors" class="invalid-feedback">
+                                 <div *ngIf="f.addGroup.errors.required">Add group is required</div>
+                                 <div *ngIf="f.addGroup.errors.pattern">Only characters and spaces are allowed.</div>
+                           </div>
+                           <div class="warning-block" style="display:none;" id="groupExisted">Group was already existed.</div>
+
+                              </div>
+                           </div>
+                        </div>
+                    </form>
+            
+
+                      </div>
+
+                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="p-3">
+                           <div class="row" *ngIf ="filterAllGroups.length == 0">No groups found </div>
+                           <div class="row" *ngIf ="filterAllGroups.length > 0">
+                              <div class="col-md-4" *ngFor="let allGroup of filterAllGroups; index as i;">
+                                    <div class="border network-item rounded mb-3">
+                                       <div class="p-3 d-flex align-items-center network-item-header">
+                                          <div class="dropdown-list-image mr-3">
+                                             <img class="rounded-circle" src="{{allGroup.imageProfile | replaceImg40}}" alt="" onerror="this.src='assets/files/profilePics/blank.png';" alt="">
+                                          </div>
+                                          <div class="font-weight-bold">
+                                             <h6 class="font-weight-bold text-dark mb-0">{{allGroup.firstName}} {{allGroup.lastName}}</h6>
+                                             <div class="small text-black-50">Created {{allGroup.groupName}}</div>
+                                          </div>
+                                       </div>
+                                       <div class="network-item-footer py-3 d-flex text-center">
+                                          <div class="col-7 pl-3 pr-1" *ngIf="allGroup.status_type == 'No'">
+                                             <button type="button" class="btn btn-primary btn-sm btn-block" (click)="addMeToGroup(allGroup.id, i);" id="addGroupbtn_{{i}}"> Add to group </button>
+                                          </div>
+
+                                          <div class="col-7 pl-3 pr-1" *ngIf="allGroup.status_type == 'Yes'">
+                                             <button type="button" class="btn btn-primary btn-sm btn-block" disabled> Added to group </button>
+                                          </div>
+
+  
+                                       </div>
+                                    </div>
+                                
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+
+                   </div>
+                   <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                      <div class="p-3 w-100">
+                         <h6>Working.... </h6>
+                      </div>
+                   </div>
+                   <div class="tab-pane fade" id="type" role="tabpanel" aria-labelledby="type-tab">
+                      <div class="p-1 w-100">
+                        <form style="width:100%;" [formGroup]="HashTagForm" (ngSubmit)="onHashTagSubmit()" style="margin:0px 0px 0px 2px; padding:0px">
+                           <div class="js-form-message">
+                           <div class="form-group">
+                              <div class="flex-shrink-1" style="padding:10px;">
+                              <input type="text" class="form-control" placeholder="Add hashtag" formControlName="addHashtag" [ngClass]="{ 'is-invalid': submitted && h.addHashtag.errors }" aria-label="Add hashtag"  style="width:50%; float: left;" (change)="verifyHashTag($event.target.value); false;" [(ngModel)] = "hashtagValue"/>
+                               <button type="submit" class="btn btn-primary btn-sm" style="float: left; margin:2px 0px 0px 5px;">Save</button>
+                               <div style='clear:both'></div>
+                               <div *ngIf="submitted && h.addHashtag.errors" class="invalid-feedback">
+                                 <div *ngIf="h.addHashtag.errors.required">Add hashtag is required</div>
+                                 <div *ngIf="h.addHashtag.errors.pattern">Invalid hashtag.</div>
+                                 </div>
+                                 <div *ngIf="!isHashTagAvailable" class="warning-block">
+                                    {{hashtagMsg}}
+                              </div>
+
+
+                              </div>
+                           </div>
+                        </div>
+                    </form>
+
+                      </div>
+                   </div>
+                   
+                    <div class="tab-pane" id="myconnectTab" role="tabpanel" aria-labelledby="home-tab">
+                     <div class="p-3">
+                        <div class="row" *ngIf ="filterMyconnects.length == 0">No connections found </div>
+                        <div class="row" *ngIf ="filterMyconnects.length > 0">
+                           <div class="col-md-4" *ngFor="let myconnect of filterMyconnects">
+                                 <div class="border network-item rounded mb-3">
+                                    <div class="p-3 d-flex align-items-center network-item-header">
+                                       <div class="dropdown-list-image mr-3">
+                                          <img class="rounded-circle" src="{{myconnect.imageProfile}}" alt="" onerror="this.src='assets/files/profilePics/blank.png';" alt="">
+                                       </div>
+                                       <a href="" (click)="showProfile(myconnect.id); false;" title="show profile">
+                                       <div class="font-weight-bold">
+                                          <h6 class="font-weight-bold text-dark mb-0">{{myconnect.firstName}} {{myconnect.lastName}}</h6>
+                                          <div class="small text-black-50">{{myconnect.positionName}} at {{myconnect.companyName}}</div>
+                                       </div>
+                                    </a>
+                                    </div>
+                                    
+                                 </div>
+                             
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+
+                </div>
+             </div>
+          </main>
+          <aside class="col col-xl-3 order-xl-2 col-lg-12 order-lg-2 col-12">
+             <div class="box mb-3 shadow-sm border rounded bg-white list-sidebar">
+                <div class="box-title p-3">
+                   <h6 class="m-0">Manage my network</h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                   
+                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-users mr-2 text-dark"></i> Connections <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalConneections}}</span></li>
+                   
+                   
+                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-book mr-2 text-dark"></i> Contacts <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalContacts}}</span></li>
+                   
+                   
+                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-user-check mr-2 text-dark"></i> People I Follow <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalFollow}}</span></li>
+                   
+                   
+                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-message-circle mr-2 text-dark"></i> Groups <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalGroups}}</span></li>
+                   
+                   
+                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-clipboard mr-2 text-dark"></i> Page <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalPages}}</span></li>
+                   
+                   
+                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-tag mr-2 text-dark"></i> Hashtag <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalHashTag}}</span></li>
+                   
+                </ul>
+             </div>
+             <div class="box shadow-sm mb-3 border rounded bg-white ads-box text-center">
+               <img src="assets/images/add/facehireLogin.png" class="img-fluid" alt="Responsive image">
+             </div>
+          </aside>
+       </div>
+    </div>
+    <div id="overlay" *ngIf="isLoaderRequired">
+        <div class="spinner"></div>
+        <br/>
+        Loading...
+     </div>
+     
+ </div>

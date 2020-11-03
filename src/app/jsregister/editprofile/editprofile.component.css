@@ -1,0 +1,11 @@
+label {
+    display: inline-block;
+    margin-bottom: .2rem;
+    color:#000;
+  }
+  .form-control:focus{
+    color: #000 !important;
+  }
+  .warning-block{
+    text-align: left;
+  }

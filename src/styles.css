@@ -1,0 +1,388 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+
+.alertsContainer .alertsRow.success .iconpanel{
+    height:80px !important
+}
+.alertsContainer .alertsRow.success .messagepanel{
+    height:80px !important
+}
+.alertsContainer .alertsRow.error .iconpanel{
+    height:60px !important
+}
+.alertsContainer .alertsRow.error .messagepanel{
+    height:60px !important
+}
+.alertsContainer .alertsRow.warn .iconpanel{
+    height:60px !important
+}
+.alertsContainer .alertsRow.warn .messagepanel{
+    height:60px !important
+}
+.cursorHand{
+    cursor: hand !important;
+}
+.nogutter{
+    margin: 0px !important;
+    padding: 0px !important;
+}
+.warning-block{
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+    text-align:center;
+
+}
+/* You can add global styles to this file, and also import other style files */
+.alertsContainer .alertsRow.success .iconpanel{
+  height:80px !important
+}
+.alertsContainer .alertsRow.success .messagepanel{
+  height:80px !important
+}
+.alertsContainer .alertsRow.error .iconpanel{
+  height:60px !important
+}
+.alertsContainer .alertsRow.error .messagepanel{
+  height:60px !important
+}
+.alertsContainer .alertsRow.warn .iconpanel{
+  height:60px !important
+}
+.alertsContainer .alertsRow.warn .messagepanel{
+  height:60px !important
+}
+
+.cursorHand{
+  cursor: hand !important;
+}
+.nogutter{
+  margin: 0px !important;
+  padding: 0px !important;
+}
+.warning-block{
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545;
+  text-align:center;
+
+}
+.registration-login-form{
+  min-height:120px !important;
+}
+.landing-content{
+  min-height:120px !important;
+}
+.btn-md{
+  font-size: 0.85rem;
+}
+.forgotClass a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+}
+.forgotClass{
+  float: right; margin-right: 15px;
+}
+#signUpContainer{
+  margin-top:150px;
+}
+.toprightCorner{
+  padding-top:0px;
+}
+#loginDialog{
+  display:none;
+}
+.wellcomeBigText{
+  padding:0px; margin:0px; color:white; font-weight: bold;
+}
+.wellcomSmallText{
+  padding:0px; margin:0px; color:white; font-weight: normal;
+}
+.mb-10{
+  margin-bottom:10px;
+}
+/*
+.pl-3{
+  padding-left:3px !important;
+}
+*/
+
+/*
+.iti--allow-dropdown{
+  line-height: 43px !important;
+}
+*/
+
+.ml-5{
+  margin-left: 5px;
+}
+#registrationFormID .invalid-feedback
+{
+  color: #fff !important;
+}
+#registrationFormID .warning-block
+{
+  color: #fff !important;
+}
+#registrationFormID .form-control:focus
+{
+  color: #fff !important;
+}
+#registrationFormID .form-control{
+  padding: 0.75rem !important;
+}
+.fontWhite{
+  color: #fff !important;
+  font-weight: normal;
+}
+.mt-1{
+  margin-top:1px;
+}
+.mt-8{
+  margin-left: 8px;
+}
+.mt--5{
+  margin-left: -5px;
+}
+.halfwidth{
+  width: 50%;
+}
+.verticalMiddle{
+  vertical-align: middle;
+}
+.mt-15{
+  margin-top: 15px;
+}
+.ml-5{
+  margin-left: 5px;
+}
+.mr-5{
+  margin-right: 5px !important;
+}
+.ml-20{
+  margin-left: 20px;
+}
+.mb-6{
+  margin-bottom: 6px;
+}
+.btn-info {
+  color: #fff !important;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+#cmRegistrationFormID .form-control{
+  padding: 0.4rem !important;
+}
+
+#cmRegistrationFormID .iti--allow-dropdown{
+  line-height: 30px !important;
+}
+.defaultcursor{
+  cursor: pointer;
+}
+.mt-60{
+  margin-top:60px;
+}
+.mt-20{
+  margin-top: 20px;
+}
+.h6, h6{
+  font-size: 0.85rem;
+}
+.h4, h4{
+  font-size: 1.20rem;
+}
+.ml-50{
+  margin-left: 50px;
+}
+.ui-dialog-titlebar-close {
+  background: url("http://code.jquery.com/ui/1.10.3/themes/smoothness/images/ui-icons_888888_256x240.png") repeat scroll -93px -128px rgba(0, 0, 0, 0);
+  border: medium none;
+}
+.ui-dialog-titlebar-close:hover {
+  background: url("http://code.jquery.com/ui/1.10.3/themes/smoothness/images/ui-icons_222222_256x240.png") repeat scroll -93px -128px rgba(0, 0, 0, 0);
+}
+
+
+.autocomplete-container{
+  height: calc(1.5em + .75rem + 2px) !important;;
+}
+.input-container input{
+  height: calc(1.5em + .75rem + 2px) !important;;
+  border: 1px solid #ced4da !important;
+}
+.suggestions-container ul li a {
+  padding: 4px 15px !important;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  color: rgba(0,0,0,.87);
+  font-size: 12px !important;
+}
+.warning-block{
+  width: 100%;
+  margin-top: .25rem;
+  font-size: 80%;
+  color: #dc3545
+}
+.dropdown-list ul li{
+  padding:4px !important;
+}
+.c-btn{
+  font-size:0.75rem !important;
+  color:#495057 !important;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer; 
+}
+.autocomplete-container{
+    box-shadow: none !important;
+}
+/*
+.no-titlebar .ui-widget-content {
+  border:none !important;
+}
+.no-titlebar .ui-dialog-titlebar {
+  display: none;
+}
+.yes-titlebar .ui-dialog-titlebar {
+  display: block;
+}
+*/
+
+.cursorHand{
+    cursor: hand !important;
+}
+#mainClassLeft{
+  text-align: center; float:left; width:554px; padding: 0.4px !important;
+  background-color: rgb(195, 195, 199);
+  margin-right:1px;
+}
+#mainClassRight{
+  padding: 0.5px !important; text-align: center; float:right;
+  background-color: rgb(195, 195, 199);
+  width: 554px;
+}
+.full-width{
+  width: 100%;
+}
+.no-border{
+  border:none;
+}
+.gy-box img {
+  width: 34%;
+  border-right: 2px solid transparent;
+}
+/*
+.ui-widget-header{
+  border: none;
+  background: none;
+}
+*/
+.dropdown-list{
+  width: 24rem!important;
+}
+.font-12{
+  font-size: 12px;
+}
+.p-2{
+  padding-left:2px;
+}
+.ui-widget{
+  font-size: 0.75rem;
+}
+.mt-10{
+  margin-top: 10px !important;
+}
+
+.ae-picker-label{
+height:0% !important;
+}
+.readMsg{
+background-color: #edf2f6;
+}
+.mt--2{
+margin-top:-2px;
+}
+
+.mt--15{
+margin-top:-15px;
+}
+.mt--25{
+  margin-top:-25px;
+  }
+.isDisabled {
+cursor: not-allowed;
+/*opacity: 0.5;*/
+text-decoration: none;
+}
+.h-40{
+height: 40px;
+}
+.cursorHand{
+  cursor: pointer !important;
+}
+.fullwidth{
+  width:100%;
+}
+
+.btn-green{
+  background: green !important;
+  border: green !important;
+  padding: 7px !important;
+}
+.material-icons{
+  font-size: 21px !important;
+}
+.pt-5{
+  padding-top: 5px !important;
+}
+.pl-5{
+  padding-left: 5px !important;
+}
+.width92{
+  width: 92% !important;
+}
+.pt-20{
+  padding-top:20px !important;
+}
+/*html, body { height: 100%; }*/
+.mat-icon{
+  cursor:pointer;
+}
+
+/* AG Grid*/
+
+.ag-header-viewport{
+  background-color:lightgrey !important;
+}
+.ag-theme-balham{
+  font-size: 13px !important;
+}
+.fa-sm {
+  font-size:1.43em;
+}
+.all-listing-flex-container {
+display: flex;
+flex-wrap: nowrap;
+}
+
+.all-listing-flex-container > div {
+background-color: #f1f1f1;
+width: 125px;
+margin: 0px 0px 0px 5px;
+text-align: center;
+line-height: 15px;
+font-size: 12px;
+}
+
+body { margin: 0; font-size: 13px; font-family: 'Ubuntu', sans-serif; }
+

@@ -1,0 +1,87 @@
+<div class="profile-cover text-center">
+    <img class="img-fluid" [src]="imageSrcLeft || 'assets/img/company-profile.jpg'" alt="">
+ </div>
+ <div class="bg-white shadow-sm border-bottom">
+    <div class="container" *ngIf="isEmployeeProfileLoaded">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="d-flex align-items-center py-3">
+                <div class="profile-left">
+                   <h5 class="font-weight-bold text-dark mb-1 mt-0">{{jobProfile[0]['lookingFor']}}</h5>
+                   <p class="mb-0 text-muted"><a class="mr-2 font-weight-bold" href="#">{{employeeProfiles[0]['companyName']}}</a> <i class="feather-map-pin"></i> {{employeeProfiles[0]['address']}} -- DatePosted {{jobProfile[0]['created_at']}}</p>
+                </div>
+                <div class="profile-right ml-auto">
+                   <!-- <button type="button" class="btn btn-light mr-1"> &nbsp; Save &nbsp; </button> -->
+                   <button type="button" class="btn btn-primary" (click)="applyJob();"> &nbsp; Apply &nbsp; </button>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <div class="py-4">
+    <div class="container" *ngIf="isEmployeeProfileLoaded">
+       <div class="row">
+          <!-- Main Content -->
+ 
+          <main class="col col-xl-9 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+             <div class="box shadow-sm border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">Job Details</h6>
+                </div>
+                <div class="box-body">
+                   <table class="table table-borderless mb-0">
+                      <tbody>
+                         <tr class="border-bottom"><th class="p-3">Job Location:</th><td class="p-3">{{jobProfile[0]['jobLocation']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Years:</th><td class="p-3">{{jobProfile[0]['yearMin']}} - {{jobProfile[0]['yearMax']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Salary:</th><td class="p-3">{{jobProfile[0]['salMin']}} - {{jobProfile[0]['salMax']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Job Role:</th><td class="p-3">{{jobProfile[0]['jobRole']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Industry Type:</th><td class="p-3">{{jobProfile[0]['industryType']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Functional area:</th><td class="p-3">{{jobProfile[0]['functionalArea']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Employment Type:</th><td class="p-3">{{jobProfile[0]['employmentType']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Role category:</th><td class="p-3">{{jobProfile[0]['roleCategory']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Required qualification:</th><td class="p-3">{{jobProfile[0]['requiredQualification']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Job Description:</th><td class="p-3" [innerHTML] = "jobProfile[0]['jobDesription']"></td></tr>
+                         <tr class="border-bottom"><th class="p-3">Job Responsibilities:</th><td class="p-3" [innerHTML] = "jobProfile[0]['jobRes']"></td></tr>
+                         <tr class="border-bottom"><th class="p-3">Benefits & Perks:</th><td class="p-3" [innerHTML] = "jobProfile[0]['jobBenefit']"></td></tr>
+ 
+                      </tbody>
+                   </table>
+                </div>
+             </div>
+             
+          </main>
+          <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+             <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+                <div class="p-5">
+                   <img src="../employee/{{employeeProfiles[0]['companyLogo']}}" class="img-fluid" alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
+                </div>
+                <div class="p-3 border-top border-bottom">
+                   <h5 class="font-weight-bold text-dark mb-1 mt-0">{{employeeProfiles[0]['companyName']}}</h5>
+                   <p class="mb-0 text-muted">{{employeeProfiles[0]['address']}}
+                   </p>
+                </div>
+                <div class="p-3">
+                   <div class="d-flex align-items-top mb-2">
+                      <p class="mb-0 text-muted">Posted</p>
+                      <p class="font-weight-bold text-dark mb-0 mt-0 ml-auto">{{jobProfile[0]['created_at']}}</p>
+                   </div>
+                   <!-- 
+                   <div class="d-flex align-items-top">
+                      <p class="mb-0 text-muted">Applicant Rank</p>
+                      <p class="font-weight-bold text-dark mb-0 mt-0 ml-auto">25</p>
+                   </div>
+                   -->
+                </div>
+             </div>
+             <div class="box shadow-sm border rounded bg-white mb-3">
+                <img src="assets/images/add/startyourjob.png" class="img-fluid" alt="Responsive image">
+             </div>
+             <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center">
+                <img src="assets/images/add/openjobfair.png" class="img-fluid" alt="Responsive image">
+             </div>
+          </aside>
+          
+       </div>
+    </div>
+ </div>

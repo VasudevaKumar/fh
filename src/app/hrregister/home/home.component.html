@@ -1,0 +1,291 @@
+<div class="profile-cover text-center">
+    <form [formGroup]="HomPageForm" style="width:100%;" enctype="multipart/form-data" style="margin:0px; padding:0px;">
+     <img [src]="imageSrcLeft || 'assets/img/employee_default.png'" id="leftSidePrfilePicImg" (click)="fn_leftSidePrfilePic();" class="cursorHand" style="width:1335px; height:270px">
+             <input type="file" id="leftSideFile" style="display:none" name="file-attachment" (change)="onLeftSidePicChange($event);" accept="image/*" formControlName="leftSideFile"/> 
+             <div *ngIf="ImageSizeerror" class="warning-block">Please upload large images (more than 1500 X 300)</div>
+             <div *ngIf="ImageTypeeerror" class="warning-block">Only allow images (.png , .jpg, .jpg)</div>
+          </form>
+  </div>
+  <div class="profile-cover text-left">
+   <main class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12 cursorHand"> 
+      <i class="fa fa-trash" aria-hidden="true" title="Delete picture" (click)="deleteProfilePic(); false;"></i></main>
+  </div>
+  <div class="bg-white shadow-sm border-bottom" *ngIf="isEmployeeProfileLoaded && employeeProfiles.length > 0">
+     <div class="container">
+        <div class="row">
+           <div class="col-md-12">
+              <div class="d-flex align-items-center py-3">
+                 <div class="profile-left">
+                    <h5 class="font-weight-bold text-dark mb-1 mt-0">{{employeeProfiles[0]['companyName']}} <span class="text-info"><i data-toggle="tooltip" data-placement="top" title="Verified" class="feather-check-circle"></i></span></h5>
+                    <p class="mb-0 text-muted"> {{employeeProfiles[0]['Industry']}} | {{employeeProfiles[0]['address']}}, {{employeeProfiles[0]['locationName']}}</p>
+                 </div>
+                 <div class="profile-right ml-auto">
+                  <button type="button" class="btn btn-light mr-2" (click)="gotoWebSite(); false;"> <i class="feather-external-link"></i> Visit website </button>
+  
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  <div class="pb-4 pt-3">
+     <div class="container">
+        <div class="row">
+           <!-- Main Content -->
+           <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+              <div class="box shadow-sm rounded bg-white mb-3 overflow-hidden">
+                 <ul class="nav border-bottom osahan-line-tab" id="myTab" role="tablist">
+                    <li class="nav-item">
+                       <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Update</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Jobs</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" id="type-tab" data-toggle="tab" href="#type" role="tab" aria-controls="type" aria-selected="false">Life</a>
+                    </li>
+ 
+                 </ul>
+              </div>
+              <div class="tab-content" id="myTabContent">
+                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                       <div class="box-title border-bottom p-3">
+                          <h6 class="m-0">About</h6>
+                       </div>
+                       <div class="box-body p-3" *ngIf="isEmployeeProfileLoaded">
+                         {{employeeProfiles[0]['about']}}
+                       </div>
+                    </div>
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                       <div class="box-title border-bottom p-3">
+                          <h6 class="m-0">Overview</h6>
+                       </div>
+                       <div class="box-body">
+                          <table class="table table-borderless mb-0" *ngIf="isEmployeeProfileLoaded">
+                             <tbody>
+                                <tr class="border-bottom">
+                                   <th class="p-3">Website</th>
+                                   <td class="p-3"><a href="http://{{employeeProfiles[0]['website']}}" target="_blank">{{employeeProfiles[0]['website']}}</a></td>
+                                </tr>
+                                <tr class="border-bottom">
+                                   <th class="p-3">Industry</th>
+                                   <td class="p-3">{{employeeProfiles[0]['Industry']}}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                   <th class="p-3">Company size</th>
+                                   <td class="p-3">{{employeeProfiles[0]['sizeOfCompany']}}+ employees <i data-toggle="tooltip" data-placement="top" class="feather-info text-info"></i> </td>
+                                </tr>
+                                <tr class="border-bottom">
+                                   <th class="p-3">Headquarters</th>
+                                   <td class="p-3">{{employeeProfiles[0]['headQuarters']}}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                   <th class="p-3">Type</th>
+                                   <td class="p-3">{{employeeProfiles[0]['companyType']}}</td>
+                                </tr>
+                                <tr class="border-bottom">
+                                   <th class="p-3">Founded</th>
+                                   <td class="p-3">{{employeeProfiles[0]['founded']}}</td>
+                                </tr>
+                                <tr>
+                                   <th class="p-3">Specialties</th>
+                                   <td class="p-3">{{employeeProfiles[0]['specialties']}}</td>
+                                </tr>
+                             </tbody>
+                          </table>
+                       </div>
+                    </div>
+                    <!--
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                       <div class="box-title border-bottom p-3">
+                          <h6 class="m-0">Locations</h6>
+                       </div>
+                       <div class="p-3">
+                          <div class="row">
+                             <div class="col-md-6">
+                                <div class="card overflow-hidden" *ngIf="isEmployeeProfileLoaded">
+                                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3501889.172354371!2d73.15671299623955!3d31.003573085499198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391964aa569e7355%3A0x8fbd263103a38861!2sPunjab!5e0!3m2!1sen!2sin!4v1575738201305!5m2!1sen!2sin" width="100%" height="150" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                                   <div class="card-body">
+                                      <h6 class="card-title">{{employeeProfiles[0]['companyName']}} - Postal Address</h6>
+                                      <p class="card-text" *ngIf="isEmployeeProfileLoaded">{{employeeProfiles[0]['address']}}</p>
+                                      
+                                   </div>
+                                </div>
+                             </div>
+                             <div class="col-md-6">
+                                <div class="card overflow-hidden" *ngIf="isEmployeeProfileLoaded">
+                                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109552.19658166621!2d75.78663235513761!3d30.900473637624447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a837462345a7d%3A0x681102348ec60610!2sLudhiana%2C%20Punjab!5e0!3m2!1sen!2sin!4v1575738867148!5m2!1sen!2sin" width="100%" height="150" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                                   <div class="card-body">
+                                      <h6 class="card-title">{{employeeProfiles[0]['companyName']}} -  HQ</h6>
+                                      <p class="card-text" *ngIf="isEmployeeProfileLoaded">{{employeeProfiles[0]['headQuarters']}}</p>
+                                      
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+                  -->
+                 </div>
+                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="row" *ngIf="isContentLoaded">
+                      
+                      <div class="box shadow-sm border rounded bg-white mb-3 osahan-post" style="width: 100%;">
+                         <div class="p-3">
+                            <!-- <textarea placeholder="Add Comment..." class="form-control border-0 p-0 shadow-none" rows="1" (change)="pushComment($event.target.value, i,item.value['posts'].id);" (blur)="clearValue($event);" value=""></textarea> -->
+                            <input type="text" placeholder="Add updates..." class="form-control border-0 p-0 shadow-none" (keydown.enter)="pushUpdates($event.target.value, $event);" >
+                         </div>
+                      </div>
+ 
+                      <div class="box shadow-sm border rounded bg-white mb-3 osahan-post" style="width: 100%;" *ngFor="let companyUpdate of companyUpdates; index as i">
+                       <div class="p-3 d-flex align-items-center border-bottom osahan-post-header" style="width: 100%;">
+                          <div class="dropdown-list-image mr-3">
+                             <img class="rounded-circle" src="{{companyUpdate.companyLogo | replaceImg40}}" alt="">
+                             <div class="status-indicator bg-success"></div>
+                          </div>
+                          <div class="font-weight-bold">
+                             <div class="text-truncate">{{companyUpdate.contactPersonName}}</div>
+                             <div class="small text-gray-500">{{companyUpdate.contactPersonDesignation}} at {{companyUpdate.companyName}}</div>
+                          </div>
+                          <span class="ml-auto small">{{companyUpdate.created_at}}</span>
+                       </div>
+                       <div class="p-3 border-bottom osahan-post-body">
+                          <p class="mb-0">{{companyUpdate.message}}</p>
+                       </div>
+                    </div>
+                        
+                   </div>
+              
+                 </div>
+                 <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="box shadow-sm border rounded bg-white p-3">
+                       <div class="row" *ngIf="isContentLoaded">
+                          
+                         <div class="col-md-6" *ngFor="let activeJobPosting of activeJobPostings">
+                             <!-- <a href="job-profile.html"> -->
+                                <div class="border job-item mb-3">
+                                   <div class="d-flex align-items-center p-3 job-item-header">
+                                      <div class="overflow-hidden mr-2">
+                                         <h6 class="font-weight-bold text-dark mb-0 text-truncate">{{activeJobPosting.jobRole}}</h6>
+                                         <div class="text-truncate text-primary">{{activeJobPosting.companyName}}</div>
+                                         <div class="small text-gray-500"><i class="feather-map-pin"></i> {{activeJobPosting.jobLocation}}</div>
+                                      </div>
+                                      <img class="img-fluid ml-auto" src="{{activeJobPosting.companyLogo | replaceImg40}}" alt="" onerror="this.src='assets/files/profilePics/blank.png';">
+                                   </div>
+                                   <div class="p-3 job-item-footer">
+                                      <small class="text-gray-500"><i class="feather-clock"></i> Posted on {{activeJobPosting.postedon}}</small>
+                                   </div>
+                                </div>
+                            <!-- </a> -->
+                          </div>
+ 
+                       </div>
+                    </div>
+                 </div>
+                 <div class="tab-pane fade" id="type" role="tabpanel" aria-labelledby="type-tab" *ngIf="isContentLoaded">
+                    <div class="box shadow-sm border rounded bg-white mb-3">
+                       <div class="box-title border-bottom p-3">
+                          <h6 class="m-0">Careers at {{employeeProfiles[0]['companyName']}}</h6>
+                       </div>
+ 
+                       <div class="box shadow-sm border rounded bg-white mb-3 osahan-post" style="width: 100%;">
+                         <div class="p-3">
+                            <textarea placeholder="Add Comment..." class="form-control border-0 p-0 shadow-none" rows="2" (keydown.enter)="pushCareer($event.target.value, $event);"></textarea>
+                            <!-- <input type="text" placeholder="Add updates..." class="form-control border-0 p-0 shadow-none" (keydown.enter)="pushUpdates($event.target.value, i, $event);" >-->
+                         </div>
+                      </div>
+                      
+                      <div class="row" >
+                       <div class="box-body p-3" *ngFor="let companyCareer of companyCareers">
+                          {{companyCareer.careerDeatils}}
+                          <div class="p-3 job-item-footer">
+                            <small class="text-gray-500"><i class="feather-clock"></i> Posted on {{companyCareer.created_at}}</small>
+                         </div>
+                         
+                       </div>
+                       
+ 
+                       </div>
+ 
+                    </div>
+                   
+                 </div>
+                
+              </div>
+           </main>
+           <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+              <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center" *ngIf="isEmployeeProfileLoaded">
+                 <div class="p-5">
+                    <img src="{{employeeProfiles[0]['companyLogo']}}" class="img-fluid" alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
+                 </div>
+                 <div class="p-3">
+                    <div class="d-flex align-items-top">
+                       <p class="mb-0 text-dark font-weight-bold">All Employees</p>
+                       <p class="font-weight-bold text-info mb-0 mt-0 ml-auto">{{employeeProfiles[0]['sizeOfCompany']}}</p>
+                    </div>
+                 </div>
+              </div>
+              <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center">
+                 <img src="assets/img/job1.png" class="img-fluid" alt="Responsive image">
+              </div>
+           </aside>
+           <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
+              <div class="box shadow-sm border rounded bg-white mb-3" *ngIf="isContentLoaded && similarCompanyProfiles.length>0">
+                 <div class="box-title border-bottom p-3">
+                    <h6 class="m-0">Similar pages</h6>
+                 </div>
+                 <div class="box-body p-3">
+ 
+                    <div class="d-flex align-items-center osahan-post-header mb-3 people-list" *ngFor="let similarCompanyProfile of similarCompanyProfiles">
+                       <div class="dropdown-list-image mr-3">
+                          <img class="rounded-circle" src="{{similarCompanyProfile.companyLogo | replaceImg40}}" alt="">
+                       </div>
+                       <div class="font-weight-bold mr-2">
+                          <div class="text-truncate"><a [routerLink]="['/hrregister/profile/'+similarCompanyProfile.id]">{{similarCompanyProfile.companyName}}</a></div>
+                          <div class="small text-gray-500">{{similarCompanyProfile.Industry}}</div>
+                       </div>
+                    </div>
+                 
+                 </div>
+              </div>
+              
+              <div class="box shadow-sm border rounded bg-white mb-3">
+                <img src="assets/img/ads1.png" class="img-fluid" alt="Responsive image">
+              </div>
+              <div class="box shadow-sm mb-3 border rounded bg-white ads-box text-center">
+                 <img src="assets/img/ads1.png" class="img-fluid" alt="Responsive image">
+              </div>
+ 
+           </aside>
+        </div>
+     </div>
+ 
+     <div id="waitDialog" style="display: none; "></div>
+ 
+     <div id="imageCropDailogL" style="display: none; display: flex;  justify-content: center;">
+       <image-cropper
+       [imageChangedEvent]="imageChangedEvent"
+       [maintainAspectRatio]="true"
+       [aspectRatio]="4 / 1"
+       [resizeToWidth]="1335" 
+       [resizeToHeight]="270"
+       format="png"
+       (imageCropped)="imageCroppedL($event)"
+       (imageLoaded)="imageLoadedL()"
+       (cropperReady)="cropperReadyL()"
+       (loadImageFailed)="loadImageFailedL()"
+   ></image-cropper>
+   </div>
+   
+   <div id="overlay" *ngIf="isHomePicUploaing">
+      <div class="spinner"></div>
+      <br/>
+      Loading...
+   </div>
+
+ 
+  </div>

@@ -1,0 +1,21 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { HrpostingsComponent } from './hrpostings.component';
+import { PostjobComponent } from './postjob/postjob.component';
+import { EditjobComponent } from './editjob/editjob.component';
+import { UserprofilesComponent } from './userprofiles/userprofiles.component';
+import { HrauthService } from  './../../../_services/hrauth.service';
+
+const routes: Routes = [
+    { path: '', canActivate: [HrauthService] ,component: HrpostingsComponent },
+    { path: 'postJob', canActivate: [HrauthService] , component: PostjobComponent },
+    { path: 'editJob/:id', canActivate: [HrauthService] , component: EditjobComponent },
+    { path: 'userprofile/:id', canActivate: [HrauthService] , component: UserprofilesComponent }
+  ];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class HrpostingsRoutingModule { }

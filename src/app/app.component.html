@@ -1,0 +1,12 @@
+<div class="d-flex flex-column h-100">
+    <facehiring-menucomponent *ngIf="isHeaderVisible"></facehiring-menucomponent>
+    <div id="main-container-mid" class="p-2 flex-grow-1">
+      <div class="mt-2">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-beat" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<app-alerts></app-alerts>
+</div>
+

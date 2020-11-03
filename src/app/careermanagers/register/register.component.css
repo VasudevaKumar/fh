@@ -1,0 +1,53 @@
+label {
+  display: inline-block;
+  margin-bottom: .5rem;
+  color:#fff;
+}
+.form-control:focus{
+  color: #000 !important;
+}
+.registration-login-form{
+    min-height:120px !important;
+  }
+  .landing-content{
+    min-height:120px !important;
+  }
+  .warning-block{
+    text-align: left;
+    color: #ffffff;
+  }
+  .header-spacer--standard{
+    margin-bottom: 0px;
+  }
+  .header-spacer--standard{
+    height: 80px;
+  }
+  .bottomPosition{
+    position: absolute;
+    left:    0;
+    bottom:   0;
+  }
+  .invalid-feedback{
+    color: #ffffff;
+  }
+  .form-control:focus{
+    color: #ffffff;
+  }
+.thankyouPg{
+  margin-top: 250px;
+}
+.eq-column{
+  display: flex;
+}
+@media only screen and (max-width: 600px)
+{
+  .eq-column{
+    display: block;
+  }
+  .clsButton{
+    margin-top: 40px;
+  }
+  .header-spacer--standard{
+    height: 5px;
+  }
+}

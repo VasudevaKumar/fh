@@ -1,0 +1,427 @@
+<div class="py-4">
+    <div class="container">
+       <div class ="row">
+          <form [formGroup]="editForm" (ngSubmit)="onSubmit()" style="width:100%;" enctype="multipart/form-data">
+          <div class="row">
+          <!-- Main Content -->
+          <aside class="col-md-4">
+             <div class="mb-3 border rounded bg-white profile-box text-center w-10">
+                <div class="pl-4 pt-3 d-flex align-items-left" style="font-size: 1rem;"><strong>Company Logo</strong></div>
+                <div class="p-4 d-flex align-items-center">
+                 <img [src]="imageSrc || 'assets/img/p13.png'" class="img-fluid rounded-circle" alt="Responsive image">
+                   <div class="pl-4">
+                      <label data-toggle="tooltip" data-placement="top" data-original-title="Upload New Picture" class="btn btn-info m-0" for="fileAttachmentBtn">
+                      <i class="feather-image"></i>
+                            <input id="fileAttachmentBtn" name="file-attachment" type="file" class="d-none" (change)="onFileChange($event);" formControlName="file" accept="image/*">
+                      </label>
+ 
+                      <label data-toggle="tooltip" data-placement="top" data-original-title="Delete" class="btn btn-danger mb-0 ml-1" (click)="resetImage();">
+                         <i class="feather-trash-2"></i>
+                      </label>
+                      <div class="warning-block">
+                        <div *ngIf="ImageRequired">Profile picture is required</div>
+                        <div *ngIf="ImageWidth">Profile picture should be greater than 200px width (200X200)</div>
+                        <div *ngIf="ImageSizeerror">Image should be less than 2MB size</div>
+                        <div *ngIf="ImageTypeeerror">Only allow images (.png , .jpg, .jpg)</div>
+                      </div>
+ 
+                   </div>
+ 
+                </div>
+             </div>
+             <div class="border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">About Company</h6>
+                </div>
+                <div class="box-body">
+                   <div class="p-3 border-bottom">
+                      <div class="form-group mb-4">
+                         <!-- <label class="mb-1">BIO</label> -->
+                         <div class="position-relative">
+                            <textarea class="form-control" rows="6" name="text" formControlName="aboutCompany" class="form-control" 
+                            [ngClass]="{ 'is-invalid': submitted && f.aboutCompany.errors }" placeholder="Enter about your company" [maxLength]="250">
+                         </textarea>
+                         <div *ngIf="submitted && f.aboutCompany.errors" class="invalid-feedback">
+                            <div *ngIf="f.aboutCompany.errors.required">About Company is required</div>
+                         </div>
+ 
+                         </div>
+                      </div>
+
+                   </div>
+                   <!-- <div class="overflow-hidden text-center p-3">
+                      <a class="font-weight-bold btn btn-light rounded p-3 d-block" href="#"> SAVE </a>
+                   </div>
+                -->
+ 
+                </div>
+             </div>
+          </aside>
+        
+          <main class="col-md-8">
+             <div class="border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">Edit Profile</h6>
+                   <p class="mb-0 mt-0 small">
+                   </p>
+                </div>
+                <div class="box-body p-3">
+                   
+                      <div class="row">
+                         <!-- Input -->
+                         <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label id="nameLabel" class="form-label">
+                               Company Name
+                               <span class="text-danger">*</span>
+                               </label>
+                               <div class="form-group">
+                                  <input type="text" formControlName="companyName" class="form-control" 
+                                  [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" placeholder="Enter your company name" aria-label="Enter your company name" />
+                                  <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.companyName.errors.required">Company name required</div>
+                                        <div *ngIf="f.companyName.errors.pattern">Only characters and spaces are allowed.</div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                         <!-- End Input -->
+                         <!-- Input -->
+                         <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label id="usernameLabel" class="form-label">
+                               Contact Person Name
+                               <span class="text-danger">*</span>
+                               </label>
+                               <div class="form-group">
+                                  <input type="text" formControlName="companyContact" class="form-control" 
+                                  [ngClass]="{ 'is-invalid': submitted && f.companyContact.errors }" placeholder="Enter company contact name" aria-label="Enter company contact name" />
+                                  <div *ngIf="submitted && f.companyContact.errors" class="invalid-feedback">
+                                        <div *ngIf="f.companyContact.errors.required">Contact person name is required</div>
+                                        <div *ngIf="f.companyContact.errors.pattern">Only characters and spaces are allowed.</div>
+                                  </div>
+ 
+                               </div>
+                            </div>
+                         </div>
+                         <!-- End Input -->
+                      </div>
+
+
+                      <div class="row">
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label id="nameLabel" class="form-label">
+                              Contact Person Designation
+                              <span class="text-danger">*</span>
+                              </label>
+                              <div class="form-group">
+                                 <input type="text" formControlName="designation" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.designation.errors }" placeholder="Enter contact person designation" aria-label="Enter contact person designation" />
+                                 <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+                                       <div *ngIf="f.designation.errors.required">Contact person designation is required</div>
+                                       <div *ngIf="f.designation.errors.pattern">Only characters and spaces are allowed.</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- End Input -->
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label id="phoneNumberLabel" class="form-label">
+                               Phone number
+                               <span class="text-danger">*</span>
+                               </label>
+                               <div class="form-group">
+                                  <ngx-intl-tel-input
+                                     [inputId]="'primaryPhoneNumber'"
+                                     [cssClass]="'custom'" 
+                                     [preferredCountries]="preferredCountries"
+                                     [enableAutoCountrySelect]="false" 
+                                     [enablePlaceholder]="true" 
+                                     [searchCountryFlag]="true"
+                                     [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                     [selectFirstCountry]="false" 
+                                     [selectedCountryISO]="CountryISO.India"
+                                     [maxLength]="10" 
+                                     [tooltipField]="TooltipLabel.Name" 
+                                     [phoneValidation]="true" 
+                                     (ngModelChange)="hidePhoneAvailability()"
+                                     [separateDialCode]="separateDialCode"
+                                     name="phoneNumber" formControlName="phoneNumber">
+                                     </ngx-intl-tel-input>
+ 
+                                  <div *ngIf="submitted && f.phoneNumber.errors" class="warning-block">
+                                     <div *ngIf="f.phoneNumber.errors.required">Phone number is required</div>
+                                  </div>
+ 
+                                  <div *ngIf="submitted && f.phoneNumber.invalid" class="warning-block">
+                                     Invalid phone number
+                                  </div>
+                                  
+                                  <div id ="phoneAvailability" class="warning-block" style="display: none;">
+                                  </div>
+ 
+                               </div>
+                            </div>
+                         </div>
+                        <!-- End Input -->
+                     </div>
+
+ 
+                       <div class="row">
+                         <!-- Input -->
+                         <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label id="locationLabel" class="form-label">
+                               Size of company
+                               <span class="text-danger">*</span>
+                               </label>
+                                     <div class = "form-group">
+                                      <input type="text" formControlName="sizeOfCompany" class="form-control" 
+                                     [ngClass]="{ 'is-invalid': submitted && f.sizeOfCompany.errors }" placeholder="Enter size of the company" aria-label="Enter size of the company" />
+                                     <div *ngIf="submitted && f.sizeOfCompany.errors" class="invalid-feedback">
+                                           <div *ngIf="f.sizeOfCompany.errors.required">Company size is required</div>
+                                           <div *ngIf="f.sizeOfCompany.errors.pattern">Only numbers are allowed.</div>
+                                     </div>
+ 
+                                  </div>
+ 
+                                  <!-- <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success"> -->
+                            </div>
+                         </div>
+                         <!-- End Input -->
+                         <!-- Input -->
+                         <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label  class="form-label">
+                               Web site
+                               <span class="text-danger">*</span>
+                               </label>
+                               <div class="form-group">
+                                  <input type="text" class="form-control" name="webSite" [ngClass]="{ 'is-invalid': submitted && f.webSite.errors }" formControlName="webSite" placeholder="Enter website" aria-label="Enter website">
+                                  <div *ngIf="submitted && f.webSite.errors" class="invalid-feedback">
+                                     <div *ngIf="f.webSite.errors.required">Website is required</div>
+                                     <div *ngIf="f.webSite.errors.pattern">Enter valid website address</div>
+ 
+                               </div>
+ 
+                               </div>
+                            </div>
+                         </div>
+                         <!-- End Input -->
+                      </div>
+                     
+
+
+
+                      
+                      <div class="row">
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label  class="form-label">
+                               Industry
+                               <span class="text-danger">*</span>
+                               </label>
+                                     <div class = "form-group">
+                                      <input type="text" formControlName="Industry" class="form-control" 
+                                     [ngClass]="{ 'is-invalid': submitted && f.Industry.errors }" placeholder="IT Industry" aria-label="Enter Industry" />
+                                     <div *ngIf="submitted && f.Industry.errors" class="invalid-feedback">
+                                           <div *ngIf="f.Industry.errors.required">Industry is required</div>
+                                           <div *ngIf="f.Industry.errors.pattern">Only characters and spaces are allowed.</div>
+                                     </div>
+ 
+                                  </div>
+ 
+                                  <!-- <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success"> -->
+                            </div>
+                         </div>
+                        <!-- End Input -->
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label class="form-label">
+                               Company type
+                               <span class="text-danger">*</span>
+                               </label>
+                               <div class="form-group">
+                                  <input type="text" class="form-control" name="companyType" [ngClass]="{ 'is-invalid': submitted && f.companyType.errors }" formControlName="companyType" placeholder="Public Sector" aria-label="Enter company type">
+                                  <div *ngIf="submitted && f.companyType.errors" class="invalid-feedback">
+                                     <div *ngIf="f.companyType.errors.required">Company type is required</div>
+                                     <div *ngIf="f.companyType.errors.pattern">Only characters and spaces are allowed.</div>
+                               </div>
+ 
+                               </div>
+                            </div>
+                         </div>
+                        <!-- End Input -->
+                     </div>
+
+
+                     <div class="row">
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label id="locationLabel" class="form-label">
+                               Founded
+                               <span class="text-danger">*</span>
+                               </label>
+                                     <div class = "form-group">
+                                      <input type="text" formControlName="Founded" class="form-control" 
+                                     [ngClass]="{ 'is-invalid': submitted && f.Founded.errors }" placeholder="1990" aria-label="Founded" [maxLength]="4"/>
+                                     <div *ngIf="submitted && f.Founded.errors" class="invalid-feedback">
+                                           <div *ngIf="f.Founded.errors.required">Founded is required</div>
+                                           <div *ngIf="f.Founded.errors.pattern">Only numbers are allowed.</div>
+ 
+                                     </div>
+ 
+                                  </div>
+ 
+                                  <!-- <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success"> -->
+                            </div>
+                         </div>
+                        <!-- End Input -->
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label id="locationLabel" class="form-label">
+                               Location
+                               <span class="text-danger">*</span>
+                               </label>
+                                     <div class = "form-group" *ngIf="!isLocationsLoaded"><img src="assets/img/smallLoading.gif"></div>
+                                     <div class = "form-group" *ngIf="isLocationsLoaded">
+                                     <ng-autocomplete 
+                                       [data]="locations"
+                                       [searchKeyword]="location_keyword"
+                                       placeHolder="Select location"
+                                       formControlName="ddlLocation"
+                                       (selected)='selectLocationEvent($event)'
+                                       (inputChanged)='onChangeLocationSearch($event)'
+                                       (inputFocused)='onLocationFocused($event)'
+                                       (closed) = 'onLocationClosed($event)'
+                                       [itemTemplate]="itemTemplate"
+                                       [notFoundTemplate]="notFoundTemplate">                                 
+                                     </ng-autocomplete>
+                                      
+                                     <ng-template #itemTemplate let-item>
+                                        <a [innerHTML]="item.locationName"></a>
+                                     </ng-template>
+                                      
+                                     <ng-template #notFoundTemplate let-notFound>
+                                     <div [innerHTML]="notFound"></div>
+                                     </ng-template>
+ 
+                                     <span class="help-block warning-block" id="invalid-location" *ngIf="showLocationErrorMessage">Location is required</span>
+ 
+                                  </div>
+                                     
+                                    
+                                                                     
+ 
+                                  <!-- <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success"> -->
+                                  
+                               
+                            </div>
+                         </div>
+                        <!-- End Input -->
+                     </div>
+
+                      <div class="row">
+                      
+                        <!-- Input -->
+                        
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label id="locationLabel" class="form-label">
+                              Address
+                              <span class="text-danger">*</span>
+                              </label>
+                                    <div class = "form-group">
+                                     <input type="text" formControlName="companyAddress" class="form-control" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.companyAddress.errors }" placeholder="Enter size of the company" aria-label="Enter size of the company" [maxLength]="250"/>
+                                    <div *ngIf="submitted && f.companyAddress.errors" class="invalid-feedback">
+                                          <div *ngIf="f.companyAddress.errors.required">Company address is required</div>
+                                    </div>
+
+                                 </div>
+
+                                 <!-- <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success"> -->
+                           </div>
+                        </div>
+
+                        <!-- End Input -->
+
+                        <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label id="emailLabel" class="form-label">
+                               Head Quarters
+                               <span class="text-danger">*</span>
+                               </label>
+                               <div class="form-group">
+                                  <input type="text" class="form-control" name="headQts" [ngClass]="{ 'is-invalid': submitted && f.headQts.errors }" formControlName="headQts" placeholder="Mountain View, CA" aria-label="Enter head quarters">
+                                  <div *ngIf="submitted && f.headQts.errors" class="invalid-feedback">
+                                     <div *ngIf="f.headQts.errors.required">Head quarters is required</div>
+                                     <div *ngIf="f.companyAddress.errors.pattern">Enter valid address</div>
+                               </div>
+ 
+                               </div>
+                            </div>
+                         </div>
+
+
+                     </div>
+                     
+
+                     <div class="row">
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label id="locationLabel" class="form-label">
+                              Specialties
+                              <span class="text-danger">*</span>
+                              </label>
+                                    <div class = "form-group">
+                                     <input type="text" formControlName="specialties" class="form-control" 
+                                    [ngClass]="{ 'is-invalid': submitted && f.specialties.errors }" placeholder="search, ads, mobile, android, online video, apps, machine learning, virtual reality" aria-label="Enter specialties" [maxLength]="250"/>
+                                    <div *ngIf="submitted && f.specialties.errors" class="invalid-feedback">
+                                          <div *ngIf="f.specialties.errors.required">Specialties is required</div>
+                                          <div *ngIf="f.specialties.errors.pattern">Special characters not allowed</div>
+                                    </div>
+
+                                 </div>
+
+                                 <!-- <input type="text" class="form-control" name="location" value="Ludhiana, Punjab" placeholder="Enter your location" aria-label="Enter your location" required="" aria-describedby="locationLabel" data-msg="Please enter your location." data-error-class="u-has-error" data-success-class="u-has-success"> -->
+                           </div>
+                        </div>
+                        <!-- End Input -->
+                     </div>
+                   
+                </div>
+             </div>
+
+             <div class="mb-3 text-right">
+               <button [disabled]="loading" class="btn btn-primary" (click)="cancelRegForm(); false;">
+                  Cancel
+             </button>
+                <button [disabled]="loading" class="btn btn-primary ml-5" type="submit">
+                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                   Save Changes
+               </button>
+             </div>
+         
+          </main>
+ 
+       </div>
+       </form>
+ 
+       </div>
+ 
+ 
+    </div>
+ 
+    <div id="waitDialog" style="display:none;"></div>
+    
+ </div>

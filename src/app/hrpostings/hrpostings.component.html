@@ -1,0 +1,192 @@
+<!-- CRM Menu -->
+<nav class="navbar navbar-expand navbar-dark bg-dark osahan-nav-top p-0" style="margin-top:-15px !important;">
+    <div style="float:left; padding-left:125px; color:aliceblue; font-weight: bold; font-size: 14px;"><a style="color:#FFF;" [routerLink]="['/hrregister/home']">Facehiring</a></div>
+     <div class="container" *ngIf="isDataLoaded">
+      <ul class="navbar-nav ml-auto d-flex align-items-left">
+        <!-- 
+        <li class="nav-item" >
+            <a class="nav-link" href="/employee/schedule"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">My Interviews</span></a>
+         </li>  
+         --> 
+         
+           <li class="nav-item dropdown ml-1 osahan-profile-dropdown">
+            <a class="nav-link dropdown-toggle pr-0" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <span class="d-none d-lg-inline">All Job Postings</span>
+           </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow-sm">
+               <div class="dropdown-divider"></div>
+               <a class="dropdown-item" href="" (click)="gridFilter('All', 'position'); false;"> All Positions</a>
+               <a class="dropdown-item" href="" (click)="gridFilter(postionVal, 'position'); false;" *ngFor="let postionVal of positionList;">{{postionVal}}</a>
+            </div>
+         </li>
+  
+  
+         <li class="nav-item dropdown ml-1 osahan-profile-dropdown">
+          <a class="nav-link dropdown-toggle pr-0" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="d-none d-lg-inline">Status</span>
+        </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow-sm">
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="" (click)="gridFilter('All', 'status'); false;"> All Statuses</a>
+              <a class="dropdown-item" href="" (click)="gridFilter(statusVal, 'status'); false;" *ngFor="let statusVal of statusList;"> {{statusVal}}</a>
+           </div>
+         </li>  
+         <!-- 
+         <li class="nav-item">
+            <a class="nav-link" href="#"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Untouch based profiles</span></a>
+         </li>  
+  
+         <li class="nav-item">
+            <a class="nav-link" href="#"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Setting Password</span></a>
+         </li>
+        -->
+      </ul>
+        <ul class="navbar-nav ml-auto d-flex align-items-center">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/hrregister/home']"><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline">Home</span></a>
+         </li>  
+  
+       </ul>
+  
+     </div>
+     <div id ="menuWaitDialog" style="display: none;"></div>
+  </nav>
+  <!-- CRM Menu-->
+  
+  
+  <div class="col-md-12 nogutter" *ngIf="isGridDataReady" style="margin-top: 10px !important;">
+      <div class="col-md-12" style="cursor:pointer;">
+          <div class="col-md-4 float-left all-listing-flex-container">
+            <div class="col-md-1 float-left" *ngIf="usedPostings<10">
+              <i class="fa fa-plus-circle fa-2x" aria-hidden="true" title="Add Job Posting" (click)="postAJob(); false;"></i>
+            </div>
+  
+            <div class="col-md-6 float-left"> {{positionSearchString}}</div>
+            <div class="col-md-4 float-left text-left"> {{statusSearchString}}</div>
+          
+          </div>
+  
+          <div class="col-md-6 float-right text-right">
+            <div class="all-listing-flex-container text-right float-right">
+              <div><span>Total Postings</span><span><strong>{{totalPostings}}</strong></span></div>
+              <div><span>Used Postings</span><span><strong>{{usedPostings}}</strong></span></div>
+              <div><span>Remaining Postings</span><span><strong>{{remainingPostings}}</strong></span></div>
+              <div><span>Active Postings</span><span><strong>{{activePostings}}</strong></span></div>
+              <div><span>Paused Postings</span><span><strong>{{pausedPostings}}</strong></span></div>
+            </div>
+          </div>
+          <div class="float-none"><br/></div>
+      </div>
+      <div class="col-md-12 mt-10"></div>
+      <div class="float-none"></div>
+      <div style="height: 500px; width: 100%; padding: 0px; margin: 0px;">
+        <ag-grid-angular
+          #agGrid
+          style="width: 100%;"
+          id="myGrid"
+          class="ag-theme-balham"
+          [columnDefs]="columnDefs"
+          [rowData]="rowData"
+          (gridReady)="onGridReady($event)"
+        ></ag-grid-angular>
+      </div>
+    </div>
+  
+    <div id="viewdialog" style="display: none;" *ngIf="selectedJobPosting">
+      <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+        
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Looking For:</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.lookingFor}}</div>
+        </div>
+  
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Job Location:</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.jobLocation}}</div>
+        </div>
+        
+      </div>
+     
+  
+      <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+        
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Years:</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.yearMin}} - {{selectedJobPosting.yearMax}} Years</div>
+        </div>
+  
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Salary:</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.salMin}} - {{selectedJobPosting.salMax}}</div>
+        </div>
+  
+      </div>
+  
+      <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+        
+  
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Job Role</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.jobRole}}</div>
+        </div>
+  
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Industry Type</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.industryType}}</div>
+        </div>
+        
+  
+      </div>
+  
+      <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+  
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Functional area:</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.functionalArea}}</div>
+        </div>
+  
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Employment Type</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.employmentType}}</div>
+        </div>
+      </div>
+  
+      <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Role category</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.roleCategory}}</div>
+        </div>
+  
+        <div class="col-md-6 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Required qualification:</div>
+          <div class="col-md-7 text-left float-left">{{selectedJobPosting.requiredQualification}}</div>
+        </div>
+  
+      </div>
+  
+      <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+        <div class="col-md-12 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Job Description</div>
+          <div class="col-md-7 text-left float-left" [innerHTML] = "selectedJobPosting.jobDesription"></div>
+        </div>
+      </div>
+  
+      <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+        <div class="col-md-12 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Job Responsibilities</div>
+          <div class="col-md-7 text-left float-left" [innerHTML] = "selectedJobPosting.jobRes"></div>
+        </div>
+      </div>
+  
+      <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+        <div class="col-md-12 nogutter float-left">
+          <div class="col-md-5 text-left float-left">Benefits & Perks</div>
+          <div class="col-md-7 text-left float-left" [innerHTML] = "selectedJobPosting.jobBenefit"></div>
+        </div>
+      </div>
+  
+  
+  
+    </div>

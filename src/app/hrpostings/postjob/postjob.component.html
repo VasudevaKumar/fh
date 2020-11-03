@@ -1,0 +1,331 @@
+<div class="py-4" *ngIf="isContentLoaded">
+    <div class="container">
+       <div class ="row">
+          <form [formGroup]="postJobForm" (ngSubmit)="onSubmit()" style="width:100%;" enctype="multipart/form-data">
+          <div class="row">
+          <!-- Main Content -->
+         <aside class="col-md-3">
+            <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+               <div class="py-4 px-3 border-bottom">
+                  <img src="{{employeeProfiles[0]['companyLogo']}}" class="img-fluid mt-2 rounded-circle" alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
+                  <h5 class="font-weight-bold text-dark mb-1 mt-4">{{employeeProfiles[0]['companyName']}}</h5>
+               </div>
+            </div>
+         </aside>
+
+
+        
+          <main class="col-md-9">
+             <div class="border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">Post a job</h6>
+                   <p class="mb-0 mt-0 small">
+                   </p>
+                </div>
+                <div class="box-body p-3">
+                   
+                      <div class="row">
+                         <!-- Input -->
+                         <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label  class="form-label">
+                              Looking For
+                               <span class="text-danger">*</span>
+                               </label>
+                               <div class="form-group">
+                                  <input type="text" formControlName="lookingFor" class="form-control" 
+                                  [ngClass]="{ 'is-invalid': submitted && f.lookingFor.errors }" placeholder="Looking for (Ex: Software Engineer with Angular)" aria-label="Looking for" />
+                                  <div *ngIf="submitted && f.lookingFor.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lookingFor.errors.required">Looking for is required</div>
+                                        <div *ngIf="f.lookingFor.errors.pattern">Only characters and spaces are allowed.</div>
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                         <!-- End Input -->
+                         <!-- Input -->
+                         <div class="col-sm-6 mb-2">
+                            <div class="js-form-message">
+                               <label  class="form-label">
+                               Job Location
+                               <span class="text-danger">*</span>
+                               </label>
+                               <div class="form-group">
+                                  <input type="text" formControlName="jobLocation" class="form-control" 
+                                  [ngClass]="{ 'is-invalid': submitted && f.jobLocation.errors }" placeholder="Enter job location" aria-label="Enter job location" />
+                                  <div *ngIf="submitted && f.jobLocation.errors" class="invalid-feedback">
+                                        <div *ngIf="f.jobLocation.errors.required">Job location is required</div>
+                                        <div *ngIf="f.jobLocation.errors.pattern">Only characters and spaces are allowed.</div>
+                                  </div>
+ 
+                               </div>
+                            </div>
+                         </div>
+                         <!-- End Input -->
+                      </div>
+
+                      <div class="row">
+                        <!-- Input -->
+                        <div class="col-sm-6 col-md-3 mb-3 mb-sm-6">
+                            <label  class="form-label">
+                                Years
+                                 <span class="text-danger">*</span>
+                                 </label>
+                           <div class="js-form-message">
+                              <div class="form-group">
+                                 <input type="text" formControlName="yearMin" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.yearMin.errors }" placeholder="Min.Yrs" aria-label="Minimum years" [maxLength]="2"/>
+                                 <div *ngIf="submitted && f.yearMin.errors" class="invalid-feedback">
+                                       <div *ngIf="f.yearMin.errors.required">Minimum years is required</div>
+                                       <div *ngIf="f.yearMin.errors.pattern">Only numbers are allowed.</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3 mb-3 mb-sm-6">
+                            <label  class="form-label">
+                                
+                                 <span class="text-danger">&nbsp;</span>
+                                 </label>
+                            <div class="js-form-message">
+                               <div class="form-group">
+                                  <input type="text" formControlName="yearMax" class="form-control" 
+                                  [ngClass]="{ 'is-invalid': submitted && f.yearMax.errors }" placeholder="Max.Yrs" aria-label="Maximum years" [maxLength]="2"/>
+                                  <div *ngIf="submitted && f.yearMax.errors" class="invalid-feedback">
+                                        <div *ngIf="f.yearMax.errors.required">Maximum years is required</div>
+                                        <div *ngIf="f.yearMax.errors.pattern">Only numbers are allowed.</div>
+                                        <div *ngIf="f.yearMax.errors.yearMax">Max years should be greater than or equal to Min years</div>
+                                        
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      
+                        <div class="col-sm-6 col-md-3 mb-3 mb-sm-6">
+                            <label  class="form-label">
+                                Salary
+                                 <span class="text-danger">*</span>
+                                 </label>
+                           <div class="js-form-message">
+                              <div class="form-group">
+                                 <input type="text" formControlName="salMin" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.salMin.errors }" placeholder="Min.Salary" aria-label="Minimum salary" />
+                                 <div *ngIf="submitted && f.salMin.errors" class="invalid-feedback">
+                                       <div *ngIf="f.salMin.errors.required">Minimum salary is required</div>
+                                       <div *ngIf="f.salMin.errors.pattern">Only numbers are allowed.</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="col-sm-6 col-md-3 mb-3 mb-sm-6">
+                            <label  class="form-label">
+                                
+                                 <span class="text-danger">&nbsp;</span>
+                                 </label>
+                            <div class="js-form-message">
+                               <div class="form-group">
+                                  <input type="text" formControlName="salMax" class="form-control" 
+                                  [ngClass]="{ 'is-invalid': submitted && f.salMax.errors }" placeholder="Max.Salary" aria-label="Maximum years" />
+                                  <div *ngIf="submitted && f.salMax.errors" class="invalid-feedback">
+                                        <div *ngIf="f.salMax.errors.required">Maximum salary is required</div>
+                                        <div *ngIf="f.salMax.errors.pattern">Only numbers are allowed.</div>
+                                        <div *ngIf="f.salMax.errors.salMax">Max salary should be greater than or equal to Min salary</div>
+
+                                  </div>
+                               </div>
+                            </div>
+                         </div>
+                      
+
+
+                        <!-- End Input -->
+                        <!-- Input -->
+                      
+                        <!-- End Input -->
+                     </div>
+
+                     <div class="row">
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label  class="form-label">
+                             Job Role
+                              <span class="text-danger">*</span>
+                              </label>
+                              <div class="form-group">
+                                 <input type="text" formControlName="jobRole" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.jobRole.errors }" placeholder="Job Role (Ex:Software Developer)" aria-label="Looking for" />
+                                 <div *ngIf="submitted && f.jobRole.errors" class="invalid-feedback">
+                                       <div *ngIf="f.jobRole.errors.required">Job role is required</div>
+                                       <div *ngIf="f.jobRole.errors.pattern">Only characters and spaces are allowed.</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- End Input -->
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label  class="form-label">
+                              Industry Type
+                              <span class="text-danger">*</span>
+                              </label>
+                              <div class="form-group">
+                                 <input type="text" formControlName="industryType" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.industryType.errors }" placeholder="Industry Type (Ex: IT-Software, Software Services)" aria-label="Enter Industry type" />
+                                 <div *ngIf="submitted && f.industryType.errors" class="invalid-feedback">
+                                       <div *ngIf="f.industryType.errors.required">Industry Type is required</div>
+                                       <div *ngIf="f.industryType.errors.pattern">Only characters and spaces are allowed.</div>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+                        <!-- End Input -->
+                     </div>
+
+                     <div class="row">
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label  class="form-label">
+                             Functional area
+                              <span class="text-danger">*</span>
+                              </label>
+                              <div class="form-group">
+                                 <input type="text" formControlName="functionalArea" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.functionalArea.errors }" placeholder="Functional Area (Ex:Application Engineer)" aria-label="Functional Area" />
+                                 <div *ngIf="submitted && f.functionalArea.errors" class="invalid-feedback">
+                                       <div *ngIf="f.functionalArea.errors.required">Functional area is required</div>
+                                       <div *ngIf="f.functionalArea.errors.pattern">Only characters and spaces are allowed.</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- End Input -->
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label  class="form-label">
+                              Employment Type
+                              <span class="text-danger">*</span>
+                              </label>
+                              <div class="form-group">
+                                 <input type="text" formControlName="employmentType" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.employmentType.errors }" placeholder="Employment Type (Ex: Fulltime , Parttime)" aria-label="Enter Industry type" />
+                                 <div *ngIf="submitted && f.employmentType.errors" class="invalid-feedback">
+                                       <div *ngIf="f.employmentType.errors.required">Employment Type is required</div>
+                                       <div *ngIf="f.employmentType.errors.pattern">Only characters and spaces are allowed.</div>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+                        <!-- End Input -->
+                     </div>
+
+
+                     <div class="row">
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label  class="form-label">
+                             Role category
+                              <span class="text-danger">*</span>
+                              </label>
+                              <div class="form-group">
+                                 <input type="text" formControlName="roleCategory" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.roleCategory.errors }" placeholder="Role category (Ex:Programming & Design)" aria-label="Role category" />
+                                 <div *ngIf="submitted && f.roleCategory.errors" class="invalid-feedback">
+                                       <div *ngIf="f.roleCategory.errors.required">Role category is required</div>
+                                       <div *ngIf="f.roleCategory.errors.pattern">Only characters and spaces are allowed.</div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- End Input -->
+                        <!-- Input -->
+                        <div class="col-sm-6 mb-2">
+                           <div class="js-form-message">
+                              <label  class="form-label">
+                              Required qualification
+                              <span class="text-danger">*</span>
+                              </label>
+                              <div class="form-group">
+                                 <input type="text" formControlName="requiredQualification" class="form-control" 
+                                 [ngClass]="{ 'is-invalid': submitted && f.requiredQualification.errors }" placeholder="Qualification (Ex: Any Graduate in Any Specialization)" aria-label="Enter required qualification" />
+                                 <div *ngIf="submitted && f.requiredQualification.errors" class="invalid-feedback">
+                                       <div *ngIf="f.requiredQualification.errors.required">Required qualification is required</div>
+                                       <div *ngIf="f.requiredQualification.errors.pattern">Only characters and spaces are allowed.</div>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </div>
+                        <!-- End Input -->
+                     </div>
+
+                     <div class="row">
+                        <label  class="form-label">
+                           Job Description
+                           <span class="text-danger">*</span>
+                           </label>
+                        <angular-editor formControlName="jobDesription" [config]="config"></angular-editor>
+                        <div *ngIf="submitted && f.jobDesription.errors" class="warning-block">
+                           <div *ngIf="f.jobDesription.errors.required">Job description is required</div>
+                        </div>
+                     </div>
+                     
+                     <div class="row" class="defaultHeight"></div>
+
+                     <div class="row">
+                        <label  class="form-label">
+                           Job Responsibilities
+                           <span class="text-danger">*</span>
+                           </label>
+                        <angular-editor formControlName="jobRes" [config]="config"></angular-editor>
+                        <div *ngIf="submitted && f.jobRes.errors" class="warning-block">
+                           <div *ngIf="f.jobRes.errors.required">Job Responsibilities is required</div>
+                        </div>
+                     </div>
+
+                     <div class="row"></div>
+
+                     <div class="row">
+                        <label  class="form-label">
+                           Benefits & Perks
+                           <span class="text-danger">*</span>
+                           </label>
+                        <angular-editor formControlName="jobBenefit" [config]="config"></angular-editor>
+                        <div *ngIf="submitted && f.jobBenefit.errors" class="warning-block">
+                           <div *ngIf="f.jobBenefit.errors.required">Benefits & Perks are required</div>
+                        </div>
+                     </div>
+
+
+                </div>
+             </div>
+
+             <div class="mb-3 text-right">
+               <button [disabled]="loading" class="btn btn-primary" (click)="cancelRegForm(); false;">
+                  Cancel
+               </button>
+                <button [disabled]="loading" class="btn btn-primary ml-5" type="submit">
+                   <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                   Save Changes
+               </button>
+             </div>
+         
+          </main>
+ 
+       </div>
+       </form>
+ 
+       </div>
+ 
+ 
+    </div>
+    
+ </div>

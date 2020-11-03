@@ -1,0 +1,248 @@
+<div class="content-bg-wrap"></div>
+<!-- Header Standard Landing  -->
+<div class="row nogutter">
+	<div class="col col-8 col-xl-8 col-lg-8 col-md-8 col-sm-8 float-left nogutter">
+		<div class="header--standard header--standard-landing" id="header--standard">
+			<div class="container-fluid">
+				<div class="header--standard-wrap" style="float:left;">
+					<a href="#" class="logo">
+						<div class="title-block">
+							<h4 class="logo-title"><strong>Facehiring</strong></h4>
+							<div style="font-size: 10px;">Konnecting | Jobseekers</div>
+						</div>
+					</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col col-4 col-xl-4 col-lg-4 col-md-4 col-sm-4 nogutter float-right toprightCorner">
+		<div class="header--standard header--standard-landing" style="margin-top:-25px">
+			<div class="container-fluid">
+				<div class="header--standard-wrap col-md-12 float-right" style="float:left; display:flex;">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="header-spacer--standard"></div>
+<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+	<div class="col col-4 col-xl-4 col-lg-4 col-md-4 col-sm-4"></div>
+	<ng-template [ngIf]="registrationPage">
+		<div class="col col-8 col-xl-8 col-lg-8 col-md-8 col-sm-8 float-right">
+			<div class="container-fluid" id="cmRegistrationFormID">
+				<form [formGroup]="CMregisterForm" (ngSubmit)="processRegistration()" enctype="multipart/form-data">
+
+					<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+						<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 eq-column">
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+								<label id="nameLabel" class="form-label">
+									First Name
+									<span class="text-danger">*</span>
+								</label>
+
+								<div class="form-group label-floating">
+									<input type="text" formControlName="firstName" class="form-control"
+										[ngClass]="{ 'is-invalid': submitted && fr.firstName.errors }"
+										placeholder="Enter your first name" aria-label="Enter your first name"
+										autocomplete="off" />
+									<div *ngIf="submitted && fr.firstName.errors" class="invalid-feedback">
+										<div *ngIf="fr.firstName.errors.required">First name is required</div>
+										<div *ngIf="fr.firstName.errors.pattern">Only characters and spaces are allowed
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+								<label id="nameLabel" class="form-label">
+									Last Name
+									<span class="text-danger">*</span>
+								</label>
+								<div class="form-group label-floating">
+									<input type="text" formControlName="lastName" class="form-control"
+										[ngClass]="{ 'is-invalid': submitted && fr.lastName.errors }"
+										placeholder="Enter your last name`" aria-label="Enter your last name"
+										autocomplete="off" />
+									<div *ngIf="submitted && fr.lastName.errors" class="invalid-feedback">
+										<div *ngIf="fr.lastName.errors.required">Last name is required</div>
+										<div *ngIf="fr.lastName.errors.pattern">Only characters and spaces are allowed
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+						<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 eq-column">
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+								<label id="nameLabel" class="form-label">
+									Collage Name
+									<span class="text-danger">*</span>
+								</label>
+								<div class="form-group label-floating">
+									<input type="text" formControlName="collageName" class="form-control"
+										[ngClass]="{ 'is-invalid': submitted && fr.collageName.errors }"
+										placeholder="Enter collage name`" aria-label="Enter collage name"
+										autocomplete="off" />
+									<div *ngIf="submitted && fr.collageName.errors" class="invalid-feedback">
+										<div *ngIf="fr.collageName.errors.required">Collage name is required</div>
+										<div *ngIf="fr.collageName.errors.pattern">Special characters not allowed</div>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+								<label id="nameLabel" class="form-label">
+									Department Name
+									<span class="text-danger">*</span>
+								</label>
+
+								<div class="form-group label-floating">
+									<input type="text" formControlName="departmentName" class="form-control"
+										[ngClass]="{ 'is-invalid': submitted && fr.departmentName.errors }"
+										placeholder="Enter department name" aria-label="Enter department name"
+										autocomplete="off" />
+									<div *ngIf="submitted && fr.departmentName.errors" class="invalid-feedback">
+										<div *ngIf="fr.departmentName.errors.required">Department name is required</div>
+										<div *ngIf="fr.departmentName.errors.pattern">Special characters not allowed
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+
+
+						<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 eq-column">
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+								<label id="nameLabel" class="form-label">
+									Email
+									<span class="text-danger">*</span>
+								</label>
+
+								<div class="form-group label-floating">
+									<input type="text" formControlName="regEmailAddress" class="form-control"
+										[ngClass]="{ 'is-invalid': submitted && fr.regEmailAddress.errors }"
+										placeholder="Enter your email" aria-label="Enter your email"
+										autocomplete="off" />
+									<div *ngIf="submitted && fr.regEmailAddress.errors" class="invalid-feedback">
+										<div *ngIf="fr.regEmailAddress.errors.required">Email is required</div>
+										<div *ngIf="fr.regEmailAddress.errors.pattern">Invalid email address</div>
+									</div>
+
+								</div>
+							</div>
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+								<label id="nameLabel" class="form-label">
+									Phone
+									<span class="text-danger">*</span>
+								</label>
+								<div class="form-group">
+									<ngx-intl-tel-input [inputId]="'primaryPhoneNumber'" [cssClass]="'custom'"
+										[preferredCountries]="preferredCountries" [enableAutoCountrySelect]="false"
+										[enablePlaceholder]="true" [searchCountryFlag]="true"
+										[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+										[selectFirstCountry]="false" [selectedCountryISO]="CountryISO.India"
+										[maxLength]="10" [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+										[separateDialCode]="separateDialCode" name="phoneNumber"
+										formControlName="phoneNumber">
+									</ngx-intl-tel-input>
+
+									<div *ngIf="submitted && fr.phoneNumber.errors" class="warning-block">
+										<div *ngIf="fr.phoneNumber.errors.required">Phone number is required</div>
+									</div>
+
+									<div *ngIf="submitted && fr.phoneNumber.invalid" class="warning-block">
+										Invalid phone number
+									</div>
+
+
+
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 eq-column">
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+								<label id="nameLabel" class="form-label">
+									Profile Picture
+									<span class="text-danger">*</span>
+									&nbsp; <span style="font-size: smaller;">(Please upload greater than 200X200 pictures)</span>
+								</label>
+								<div class="mb-1 border rounded bg-white profile-box text-center w-10">
+									<div class="p-4 d-flex align-items-center">
+										<img [src]="imageSrc || 'assets/img/p13.png'" class="img-fluid rounded-circle"
+											alt="Responsive image">
+										<div class="pl-4">
+											<label data-toggle="tooltip" data-placement="top"
+												data-original-title="Upload New Picture"
+												class="btn btn-info m-0 defaultcursor" for="fileAttachmentBtn">
+												<i class="feather-image"></i>
+												<input id="fileAttachmentBtn" name="file-attachment" type="file"
+													class="d-none" (change)="onFileChange($event);"
+													formControlName="file" accept="image/*"
+													[ngClass]="{ 'is-invalid': submitted && fr.file.errors }">
+											</label>
+
+											<label data-toggle="tooltip" data-placement="top"
+												data-original-title="Delete"
+												class="btn btn-danger mb-0 ml-1 defaultcursor" (click)="resetImage();">
+												<i class="feather-trash-2"></i>
+											</label>
+
+											<div *ngIf="submitted && fr.file.errors" class="invalid-feedback">
+												<div *ngIf="fr.file.errors.required">Profile picture is required</div>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 clsButton">
+								<button [disabled]="loading" class="btn btn-lg btn-primary ml-20 mb-6 bottomPosition">
+									<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+									Register
+								</button>
+							</div>
+
+						</div>
+
+						<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 eq-column" >
+							<div class="col-12 col-6 col-xl-6 col-lg-6 col-md-6 col-sm-6">
+								<div class="warning-block">
+									<div *ngIf="ImageRequired">Profile picture is required</div>
+									<div *ngIf="ImageWidth">Profile picture should be greater than 200px width (200X200)</div>
+									<div *ngIf="ImageSizeerror">Image should be less than 2MB size</div>
+									<div *ngIf="ImageTypeeerror">Only allow images (.png , .jpg, .jpg)</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+
+				</form>
+			</div>
+		</div>
+	</ng-template>
+
+	<ng-template [ngIf]="thankyouPage">
+		<div class="col col-8 col-xl-8 col-lg-8 col-md-8 col-sm-8 float-right thankyouPg">
+			<div class="container-fluid">
+				<div class="col-12 col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+					<h5 class="fontWhite">Thank you for the registration as a career manager.</h5>
+					<h5 class="fontWhite"><a [routerLink]="['/careermanagers']" class="fontWhite"><u>Click here</u></a>&nbsp;to view the details</h5>
+				</div>	
+			</div>
+		</div>
+	</ng-template>
+</div>

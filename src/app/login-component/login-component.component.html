@@ -1,0 +1,135 @@
+<div class="content-bg-wrap"></div>
+<!-- Header Standard Landing  -->
+<div class="row nogutter">
+<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 nogutter float-left">
+<div class="header--standard header--standard-landing" id="header--standard">
+	<div class="container-fluid">
+		<div class="header--standard-wrap" style="float:left;">
+			<a href="#" class="logo">
+				<div class="title-block">
+					<h4 class="logo-title"><strong>Facehiring</strong></h4>
+					<div style="font-size: 10px;">Konnecting | Jobseekers</div>
+				</div>
+			</a>
+
+			
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 nogutter float-right toprightCorner">
+<div class="header--standard header--standard-landing" style="margin-top:-25px">
+	<div class="container-fluid">
+		<div class="header--standard-wrap col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 float-right" style="float:left; display:flex;">
+			<div class="col-md-6 float-left text-left nogutter"> 
+				
+				<div class="col col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-left text-left">
+					<a href="#" class="logo" [routerLink]="['/careermanagers']"><div class="title-block"><h6 class="logo-title">Career Managers</h6></div></a>
+				</div>
+				<div class="col col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 float-left text-left"></div>
+				
+				<div class="col-md-2 float-left text-right">
+					<div class="title-block"><h6 class="logo-title" style="color:#fff;">Login as</h6></div>
+				</div>
+				<div class="col-md-2 float-left text-left">
+					<a href="#" class="logo"><div class="title-block"><h6 class="logo-title" (click)="openLoginForm('2'); false;">Jobseeker</h6></div></a>
+				</div>
+				<div class="col-md-2 float-left text-left">
+					<a href="#" class="logo"><div class="title-block"><h6 class="logo-title"  (click)="openLoginForm('3'); false;">Employer</h6></div></a>
+				</div>
+
+			</div>
+		
+			
+		</div>
+	</div>
+</div>
+</div>
+
+</div>
+
+<!-- ... end Header Standard Landing  -->
+<div class="header-spacer--standard"></div>
+<ng-template [ngIf]="loginPage">
+<div class="container" id="signUpContainer">
+<div class="row display-flex">
+
+		<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+			<div class="landing-content"> 
+				<div>
+					<h4 class="wellcomeBigText">Welcome to the Biggest Jobseekers Network</h4>
+					<h6 class="wellcomSmallText">In the World with 5 billion active users searching jobs and connecting jobseekers</h6>
+				</div>
+				<div class="col-md-12 title h5 mb-10;" style="padding-left:3px; margin-bottom: 10px; ">Create an account</div>
+				<div class="col-md-12 nogutter">
+					<div class="float-left col-md-6 nogutter">
+						<a href="" class="btn btn-md btn-border c-white" [routerLink]="['/hrregister']">I am employer</a>
+					</div>
+
+					<div class="float-left col-md-6 nogutter">
+						<a href="" class="btn btn-md btn-border c-white" [routerLink]="['/jsregister/signup']">I am Jobseeker</a>
+					</div>
+			</div>
+
+			</div>
+		</div>
+
+		
+	<div id="loginDialog">
+		<div class="row" style="margin: 0px; padding: 0px;">
+			<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+			<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+				<div class="form-group label-floating">
+					<input type="text" formControlName="emailAddress" class="form-control width92" 
+					 [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" placeholder="Enter your email" aria-label="Enter your email" autocomplete="off"/>
+					 <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+						<div *ngIf="f.emailAddress.errors.required">Email is required</div>
+						<div *ngIf="f.emailAddress.errors.pattern">Invalid email address</div>
+					  </div>
+
+				</div>
+				<div class="form-group label-floating">
+					
+					<input [type]="hide ? 'password' : 'text'" formControlName="password" class="form-control width92 float-left" 
+						 [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Enter your password`" aria-label="Enter your password" autocomplete="off"/>
+									
+						 <mat-icon matSuffix (click)="hide = !hide" class="float-left pl-5 pt-5">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+					
+						 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+							<div *ngIf="f.password.errors.required">Password is required</div>
+							<div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+					  </div>
+					
+				</div>
+
+
+				<button [disabled]="loading" class="btn btn-primary mt-10">
+					<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+					Login
+				</button>
+
+				<div class="py-3 d-flex align-item-center forgotClass">
+					<a href="" (click)="forgotPassword(); false;">Forgot password?</a>
+				</div>
+
+						
+				<!-- <div class="or"></div> 
+
+				<a href="#" class="btn btn-lg bg-facebook full-width btn-icon-left"><i class="fab fa-facebook-f" aria-hidden="true"></i>Login with Facebook</a>
+
+				<a href="#" class="btn btn-lg bg-twitter full-width btn-icon-left"><i class="fab fa-twitter" aria-hidden="true"></i>Login with Twitter</a>
+--> 
+				<p>Don’t you have an account? Register Now! it’s really simple and you can start enjoing all the benefits!</p>
+			</div>
+		</form>
+		</div>
+    </div>
+	
+</div>
+</div>
+</ng-template>
+
+
+
