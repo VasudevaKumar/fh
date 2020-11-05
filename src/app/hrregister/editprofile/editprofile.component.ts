@@ -455,7 +455,7 @@ onFileChange(event) {
     this.HrserviceService_
         .verifyEmailAvailabilityForEdit(emailAddress , this.loggedInEmployeeID)
         .subscribe((resp) => {
-            console.log(resp.length);
+            // console.log(resp.length);
         if(resp.length>0)
         {
             $("#emailAddress").val('');
@@ -489,7 +489,7 @@ onFileChange(event) {
               invalid.push(name);
           }
       }
-      console.log(invalid);
+      // console.log(invalid);
   }
 
   public getEmployeeProfile(employeeID)
@@ -500,7 +500,7 @@ onFileChange(event) {
       .subscribe(employeeProfiles => (_that.employeeProfiles = employeeProfiles))
       .add(() => {
         /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
-        console.log(_that.employeeProfiles);
+        // console.log(_that.employeeProfiles);
         this.assignEmployeeDetails();
       });
 

@@ -39,7 +39,7 @@ export class CareermanagersComponent implements OnInit {
       .add(() => {
         this.isContentLoaded = true;
         $('#overlay').fadeOut();
-          console.log(this.careermanagerdetails);
+          // console.log(this.careermanagerdetails);
 
       });
   }

@@ -22,9 +22,24 @@ import { PostjobComponent } from './postjob/postjob.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditjobComponent } from './editjob/editjob.component';
 import { UserprofilesComponent } from './userprofiles/userprofiles.component';
+import { ViewprofileComponent } from './viewprofile/viewprofile.component';
+
+@Pipe({name: 'replaceImg78'})
+export class replaceImg78Pipe implements PipeTransform {
+  transform(value: string): string {
+    return value.replace('profilePics_130','profilePics_78');
+  }
+}
+
+@Pipe({name: 'replaceImg40'})
+export class replaceImg40Pipe implements PipeTransform {
+  transform(value: string): string {
+    return value.replace('profilePics_130','profilePics_40');
+  }
+}
 
 @NgModule({
-  declarations: [HrpostingsComponent, PostjobComponent, EditjobComponent, UserprofilesComponent],
+  declarations: [HrpostingsComponent, replaceImg78Pipe,replaceImg40Pipe, PostjobComponent, EditjobComponent, UserprofilesComponent, ViewprofileComponent],
   imports: [
     CommonModule,
     HrpostingsRoutingModule,

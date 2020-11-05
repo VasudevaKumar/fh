@@ -29,6 +29,7 @@ export class JobdetailComponent implements OnInit {
   imageSrcLeft: string;
   loggedInEmployeeID:any;
   currentUser:any;
+  isAlreadyApplied:any
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -42,6 +43,7 @@ export class JobdetailComponent implements OnInit {
       this.jobID = localStorage.getItem('jobID');
       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.loggedInEmployeeID  = this.currentUser[0].user_id;
+      this.isAlreadyApplied = localStorage.getItem('isAlreadyAppled')
       this.getSingleJob(this.jobID);
     }
     /*

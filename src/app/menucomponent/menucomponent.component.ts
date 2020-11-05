@@ -64,8 +64,8 @@ export class MenucomponentComponent implements OnInit {
     this._interactionService.teacherMessage$
     .subscribe(
       message => {
-        console.log('serview');
-        console.log(message);
+       // console.log('serview');
+       // console.log(message);
         this.role_id = message;
 
       });
@@ -205,7 +205,7 @@ export class MenucomponentComponent implements OnInit {
   }
   displayMessage(ID , postID, category)
   {
-    console.log('display message');
+    // console.log('display message');
     const _that = this;
     
     if(category == 'comments')

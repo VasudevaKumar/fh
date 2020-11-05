@@ -166,7 +166,7 @@ export class ConnectionsComponent implements OnInit {
       _that.filterAllGroups = _that.allGroups;
       _that.filterMyconnects =_that.myconnects;
 
-      console.log( _that.filterConnectPeople);
+     // console.log( _that.filterConnectPeople);
       this.isContentLoaded = true;
      // this.spinner.hide();
 

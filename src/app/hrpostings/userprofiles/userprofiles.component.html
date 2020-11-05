@@ -1,13 +1,61 @@
-<div class="col-md-12 nogutter" *ngIf="isGridDataReady" style="margin-top: 10px !important;">
-    <div style="height: 500px; width: 100%; padding: 0px; margin: 0px;">
-        <ag-grid-angular
-          #agGrid
-          style="width: 100%;"
-          id="myGrid"
-          class="ag-theme-balham"
-          [columnDefs]="columnDefs"
-          [rowData]="rowData"
-          (gridReady)="onGridReady($event)"
-        ></ag-grid-angular>
-      </div>
+<div class="py-4" *ngIf="isGridDataReady">
+
+  <div class="container" *ngIf="jobListings.length==0">
+    <div class="row" style="font-size:12px;">
+       <!-- Main Content -->
+       <main class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+          <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
+            <div class="col-md-12 p-3" style="background-color:#dedede;"><h6 class="font-weight-bold text-dark mb-0 text-truncate">No profiles found for this job</h6></div>
+          </div>
+          </main>
+          </div>
+  </div>
+
+  <div class="container" *ngIf="jobListings.length>0">
+     <div class="row" style="font-size:12px;" *ngFor="let item of jobListings">
+        <!-- Main Content -->
+        <main class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+           <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
+             
+              <div class="tab-content" id="myTabContent">
+                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                   <div class="p-3 border-top">
+                       <div class="row">
+                          <div class="col-md-12">
+                            <div class="col-md-12 p-3" style="background-color:#dedede;"><h6 class="font-weight-bold text-dark mb-0 text-truncate">{{item.firstName}} {{item.lastName}}, {{item.location}}</h6></div>
+                                <div class="border job-item mb-3">
+                                   <div class="d-flex align-items-center p-3 job-item-header">
+                                      <div class="col-md-10 nogutter float-left">
+                                      <div class="overflow-hidden mr-2">
+                                        <div class="pl-1 pb-2 col-md-12 float-left"><div class="col-md-1 float-left"><strong>Skills:</strong></div><div class="col-md-11 float-left">{{item.skills}}</div></div>       
+                                        <div class="pl-1 pb-2 col-md-12 float-left"><div class="col-md-1 float-left"><strong>Exp:</strong></div><div class="col-md-11 float-left">{{item.experienceString}}</div></div>       
+                                        <div class="pl-1 pb-2 col-md-12 float-left"><div class="col-md-1 float-left"><strong>Education:</strong></div><div class="col-md-11 float-left">{{item.educationString}}</div></div>       
+                                       
+                                      </div>
+                                    </div>
+                                    <div class="col-md-2 nogutter float-left">
+                                      <img class="img-fluid ml-auto"  src="{{item.imageProfile | replaceImg78}}" alt="" style="width: 78px; height: 78px;" onerror="this.src='assets/files/profilePics/blank.png';">
+                                      <br />
+                                      <i class="fa fa-phone" aria-hidden="true"></i><span style="font-size: 10px;">{{item.primaryPhone}}</span>
+                                    </div>
+                                   </div>
+                                   <div class="p-3 job-item-footer">
+                                      <small class=""><i class="feather-clock"></i> Applied on {{item.applied_date}}</small>
+                                      <small class="ml-5"><i class="feather-download"></i><a href="https://facehiring.com/{{item.resumePath}}">Download Resume</a></small>
+                                      <small class="ml-5"><i class="feather-user"></i><a href="" target="_blank" [routerLink]="'/hrpostings/viewprofile/'+item.user_id">View Profile</a></small>
+
+                                   </div>
+                                </div>
+                             
+                          </div>
+                          
+                       </div>
+                    </div>
+                 </div>
+                
+              </div>
+           </div>
+        </main>
+     </div>
+  </div>
 </div>

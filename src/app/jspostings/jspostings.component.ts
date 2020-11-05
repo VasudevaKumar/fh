@@ -331,7 +331,7 @@ export class JspostingsComponent implements OnInit {
     {
       this.isPostEmpty = false;
       this.issueInPost = false;
-      console.log(this.thoughts);
+      // console.log(this.thoughts);
 
       if(this.thoughts == '')
       {

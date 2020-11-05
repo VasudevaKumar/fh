@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(this.currentUser);
+    // console.log(this.currentUser);
     
      this.loggedInEmployeeID  = this.currentUser[0].user_id;
        // this.loggedInEmployeeID  = 13

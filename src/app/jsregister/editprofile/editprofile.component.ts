@@ -1141,7 +1141,7 @@ onFileChange(event) {
       .subscribe(employeeProfiles => (_that.employeeProfiles = employeeProfiles))
       .add(() => {
         /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
-        console.log(_that.employeeProfiles);
+       //  console.log(_that.employeeProfiles);
         this.assignEmployeeDetails();
         _that.edus = _that.employeeProfiles['educationDetails'];
         _that.exps = _that.employeeProfiles['professionalExp'];

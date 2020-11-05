@@ -108,7 +108,7 @@ export class CompanyprofileComponent implements OnInit {
 
       this.isContentLoaded = true;
       // console.log(this.companyUpdates);
-      console.log(this.companyCareers);
+     // console.log(this.companyCareers);
       this.spinner.hide();
 
     }

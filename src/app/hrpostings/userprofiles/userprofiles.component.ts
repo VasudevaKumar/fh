@@ -27,25 +27,6 @@ export class UserprofilesComponent implements OnInit {
   jobID:any;
   public isGridDataReady = false;
 
-   /* AG - Grid Variables */
-  // tslint:disable-next-line: member-ordering
-  public gridApi: any;
-  // tslint:disable-next-line: member-ordering
-  public gridColumnApi: any;
-  // tslint:disable-next-line: member-ordering
-  public columnDefs: any;
-  // tslint:disable-next-line: member-ordering
-  public components: any;
-  // tslint:disable-next-line: member-ordering
-  public defaultColDef: any;
-  // tslint:disable-next-line: member-ordering
-  public groupDefaultExpanded: any;
-  // tslint:disable-next-line: member-ordering
-  public rowSelection: any;
-  // tslint:disable-next-line: member-ordering
-  public rowData: any;
-  // tslint:disable-next-line: member-ordering
-
   public gridOptions: any;
   userSubscription: Subscription;
 
@@ -77,132 +58,17 @@ export class UserprofilesComponent implements OnInit {
       const _that = this;
           this.HrserviceService_
         .getjobListings(employeeID , jobID)
-        .subscribe(rowData => (_that.rowData = rowData))
+        .subscribe(jobListings => (_that.jobListings = jobListings))
         .add(() => {
           /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
-          // console.log(_that.rowData);
+         // console.log(_that.jobListings);
           this.isGridDataReady = true;
-          this.generateGrid();
+          
           this.spinner.hide();
         });
   }
 
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    $('#myGrid').height($(window).height() - 100);
-   }
-
-   
-  generateGrid()
-   {
-    const _that = this;
-    this.columnDefs = [
-      {
-        headerName: 'First Name',
-        width: 150,
-        field: 'firstName',
-        sortable: true,
-        filter: true,
-        pinned: 'left',
-        resizable: true
-      },
-      {
-        headerName: 'Last Name',
-        width: 150,
-        field: 'lastName',
-        sortable: true,
-        filter: true,
-        resizable: true,
-        pinned: 'left'
-      },
-      {
-        headerName: 'Email Address',
-        width: 200,
-        field: 'emailAddress',
-        sortable: true,
-        resizable: true
-      },
-      {
-        headerName: 'Gender',
-        width: 150,
-        field: 'genderName',
-        sortable: true,
-        resizable: true
-      },
-      {
-        headerName: 'Location',
-        width: 150,
-        field: 'locationName',
-        sortable: true,
-        resizable: true
-      },
-      {
-        headerName: 'Company Name',
-        width: 150,
-        field: 'companyName',
-        sortable: true,
-        resizable: true
-      },
-      {
-        headerName: 'Position Name',
-        width: 150,
-        field: 'positionName',
-        sortable: true,
-        filter: true,
-        resizable: true
-      },
-      {
-        headerName: 'Phone Number',
-        width: 150,
-        field: 'primaryPhone',
-        sortable: true,
-        filter: true,
-        resizable: true
-      },
-      {
-        headerName: 'Alternate Phone',
-        width: 150,
-        field: 'alternatePhone',
-        sortable: true,
-        filter: true,
-        resizable: true
-      },
-      {
-        headerName: 'Image',
-        width: 150,
-        field: 'imageProfile',
-        sortable: true,
-        filter: true,
-        resizable: true
-      }
-      
-  ];
-    /*
-    this.rowData = [
-        { make: 'Toyota', model: 'Celica', price: 35000 },
-        { make: 'Ford', model: 'Mondeo', price: 32000 },
-        { make: 'Porsche', model: 'Boxter', price: 72000 }
-    ];
-    */
-
-   this.defaultColDef = {
-    sortable: true,
-    filter: true,
-    resizable: true
-  };
-
-  this.gridOptions = {
-    columnDefs: this.columnDefs,
-    angularCompileHeaders: true,
-    rowData: null,
-    overlayLoadingTemplate: '<span class="ag-overlay-loading-center">Please wait while your rows are loading</span>',
-    overlayNoRowsTemplate: '<span style="padding: 10px; border: 2px solid #444; background: lightgoldenrodyellow;">This is a custom \'no rows\' overlay</span>'
-
-  };
-
  
-
-   }
+   
 
 }

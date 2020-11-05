@@ -12,7 +12,9 @@
                 </div>
                 <div class="profile-right ml-auto">
                    <!-- <button type="button" class="btn btn-light mr-1"> &nbsp; Save &nbsp; </button> -->
-                   <button type="button" class="btn btn-primary" (click)="applyJob();"> &nbsp; Apply &nbsp; </button>
+                   <button type="button" class="btn btn-primary" (click)="applyJob();" *ngIf="isAlreadyApplied=='No'"> &nbsp; Apply &nbsp; </button>
+                   <button type="button" class="btn btn-primary" *ngIf="isAlreadyApplied=='Yes'" style="cursor: none;"> &nbsp; Applied &nbsp; </button>
+
                 </div>
              </div>
           </div>

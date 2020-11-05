@@ -45,6 +45,7 @@ export class MyjobsComponent implements OnInit {
 
     this.spinner.show();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    localStorage.setItem('isAlreadyAppled', 'Yes');
     this.loggedInEmployeeID  = this.currentUser[0].user_id;
     this.myjobs(this.loggedInEmployeeID);
   }

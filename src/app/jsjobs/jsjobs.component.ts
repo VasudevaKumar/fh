@@ -44,6 +44,9 @@ export class JsjobsComponent implements OnInit {
 
     this.spinner.show();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    
+    localStorage.setItem('isAlreadyAppled', 'No');
+
     this.loggedInEmployeeID  = this.currentUser[0].user_id;
 
     this.userSubscription = this.route.params.subscribe(
@@ -58,7 +61,7 @@ export class JsjobsComponent implements OnInit {
   async loadContent(employeeID, appliedString)
     {
       const _that = this;
-      console.log('appliedString' + appliedString);
+      // console.log('appliedString' + appliedString);
       const res1 = this.HrserviceService_.getLatestJobs(employeeID).toPromise();
       let res = await Promise.all([res1]);
       //let res = await Promise.all([res1, res4]);
@@ -68,7 +71,7 @@ export class JsjobsComponent implements OnInit {
       this.isContentLoaded = true;
        this.spinner.hide();
       
-       console.log(_that.getLatestJobs);
+       //console.log(_that.getLatestJobs);
 
 
      

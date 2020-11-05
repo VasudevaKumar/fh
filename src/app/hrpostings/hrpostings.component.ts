@@ -422,8 +422,8 @@ export class HrpostingsComponent implements OnInit {
       this.rowData = this.jobPostings;
     }
     
-    console.log(this.positionSearch);
-    console.log(this.rowData);
+    // console.log(this.positionSearch);
+    // console.log(this.rowData);
     this.generateDropdowns();
     this.generateGrid();
   }
