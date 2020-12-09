@@ -74,7 +74,7 @@
                            <div class="js-form-message">
                               <div class="form-group">
                                  <input type="text" formControlName="yearMin" class="form-control" 
-                                 [ngClass]="{ 'is-invalid': submitted && f.yearMin.errors }" placeholder="Min.Yrs" aria-label="Minimum years" [maxLength]="2"/>
+                                 [ngClass]="{ 'is-invalid': submitted && f.yearMin.errors }" placeholder="Min.Yrs" aria-label="Minimum years" [maxLength]="2" (change)="removeYearMax(); false;" />
                                  <div *ngIf="submitted && f.yearMin.errors" class="invalid-feedback">
                                        <div *ngIf="f.yearMin.errors.required">Minimum years is required</div>
                                        <div *ngIf="f.yearMin.errors.pattern">Only numbers are allowed.</div>
@@ -91,7 +91,7 @@
                             <div class="js-form-message">
                                <div class="form-group">
                                   <input type="text" formControlName="yearMax" class="form-control" 
-                                  [ngClass]="{ 'is-invalid': submitted && f.yearMax.errors }" placeholder="Max.Yrs" aria-label="Maximum years" [maxLength]="2"/>
+                                  [ngClass]="{ 'is-invalid': submitted && f.yearMax.errors }" placeholder="Max.Yrs" aria-label="Maximum years" [maxLength]="2" id="yearMaxID"/>
                                   <div *ngIf="submitted && f.yearMax.errors" class="invalid-feedback">
                                         <div *ngIf="f.yearMax.errors.required">Maximum years is required</div>
                                         <div *ngIf="f.yearMax.errors.pattern">Only numbers are allowed.</div>
@@ -104,13 +104,13 @@
                       
                         <div class="col-sm-6 col-md-3 mb-3 mb-sm-6">
                             <label  class="form-label">
-                                Salary
-                                 <span class="text-danger">*</span>
+                                Salary <span class="text-danger">*</span>
+                                <span class="small-font ml-3">(Lakhs per annum EX: 4.50)</span>
                                  </label>
                            <div class="js-form-message">
                               <div class="form-group">
                                  <input type="text" formControlName="salMin" class="form-control" 
-                                 [ngClass]="{ 'is-invalid': submitted && f.salMin.errors }" placeholder="Min.Salary" aria-label="Minimum salary" />
+                                 [ngClass]="{ 'is-invalid': submitted && f.salMin.errors }" placeholder="Min.Salary" aria-label="Minimum salary" (change)="removeMaxSalary(); false;" />
                                  <div *ngIf="submitted && f.salMin.errors" class="invalid-feedback">
                                        <div *ngIf="f.salMin.errors.required">Minimum salary is required</div>
                                        <div *ngIf="f.salMin.errors.pattern">Only numbers are allowed.</div>
@@ -127,7 +127,7 @@
                             <div class="js-form-message">
                                <div class="form-group">
                                   <input type="text" formControlName="salMax" class="form-control" 
-                                  [ngClass]="{ 'is-invalid': submitted && f.salMax.errors }" placeholder="Max.Salary" aria-label="Maximum years" />
+                                  [ngClass]="{ 'is-invalid': submitted && f.salMax.errors }" placeholder="Max.Salary" aria-label="Maximum years" id="salMaxID" />
                                   <div *ngIf="submitted && f.salMax.errors" class="invalid-feedback">
                                         <div *ngIf="f.salMax.errors.required">Maximum salary is required</div>
                                         <div *ngIf="f.salMax.errors.pattern">Only numbers are allowed.</div>

@@ -7,7 +7,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 const routes: Routes = [  
- { path: '', component: LoginComponentComponent },
+ 
  { path : 'activate/:string',component:ActivateComponent},
  { path : 'forgotPassword',  component:ForgotPasswordComponent},
  { path : 'updatePassword/:string',component:UpdatePasswordComponent},
@@ -17,12 +17,13 @@ const routes: Routes = [
  { path: 'jsjobs', loadChildren: () => import('./jsjobs/jsjobs.module').then(m => m.JsjobsModule) },
  { path: 'hrregister', loadChildren: () => import('./hrregister/hrregister.module').then(m => m.HrregisterModule) },
  { path: 'hrpostings', loadChildren: () => import('./hrpostings/hrpostings.module').then(m => m.HrpostingsModule) },
+ { path: 'js', loadChildren: () => import('./jsmessages/jsmessages.module').then(m => m.JsmessagesModule) },
+ { path: '', component: LoginComponentComponent },
  { path: '**', component: LoginComponentComponent }
 ];
 @NgModule({
  imports: [
      RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
 })],
  exports: [RouterModule]
 })

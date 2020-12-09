@@ -27,10 +27,12 @@ Version: 1.0
  body {
      background: #edf2f6;
      font-size: 13px;
-     font-family: 'Ubuntu', sans-serif;
+    /* font-family: 'Ubuntu', sans-serif; */
+    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif !important; 
 }
  p{
-     color: #888da8
+   /*  color: #888da8 */
+   color: #000;
 }
 /* End body */
 /* Slider */

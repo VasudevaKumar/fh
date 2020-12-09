@@ -233,14 +233,15 @@ export class HrserviceService {
         ).pipe(map((data: any) => data.data));
   }
 
-  getjobListings(employeeID:any, jobID)
+  getjobListings(employeeID:any, jobID, statusID)
   {
     const api = this.env.apiBaseURL+'/Employee/getjobListings';
     return this.http.post(
         api,
         {
             employeeID:employeeID,
-            jobID:jobID
+            jobID:jobID,
+            statusID:statusID
         },
         ).pipe(map((data: any) => data.data));
   }
@@ -260,6 +261,15 @@ export class HrserviceService {
     return this.http.post(
         api,
         {employeeID:employeeID},
+        ).pipe(map((data: any) => data.data));
+  }
+
+  hrAction(applicationID , statusID)
+  {
+    const api = this.env.apiBaseURL+'/Employee/hrAction';
+    return this.http.post(
+        api,
+        {applicationID:applicationID, statusID:statusID},
         ).pipe(map((data: any) => data.data));
   }
 

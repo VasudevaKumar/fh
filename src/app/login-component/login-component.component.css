@@ -26,9 +26,11 @@
   }
   .wellcomeBigText{
     padding:0px; margin:0px; color:white; font-weight: bold;
+    font-size:23px;
   }
   .wellcomSmallText{
     padding:0px; margin:0px; color:white; font-weight: normal;
+    font-size:14px;
   }
   .mb-10{
     margin-bottom:10px;
@@ -38,4 +40,16 @@
   }
   #loginDialog .form-control:focus{
     color: #000 !important;
+  }
+  .body{
+    /* font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif !important; */
+     font-family: Open Sans !important;
+  }
+  .logo-title{
+    letter-spacing: 2px;
+    /*font-weight:bold;*/
+    line-height: 0px !important;
+  }
+  #PrivacyPolicy{
+    display:none;
   }

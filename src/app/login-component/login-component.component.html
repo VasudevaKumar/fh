@@ -7,8 +7,8 @@
 		<div class="header--standard-wrap" style="float:left;">
 			<a href="#" class="logo">
 				<div class="title-block">
-					<h4 class="logo-title"><strong>Facehiring</strong></h4>
-					<div style="font-size: 10px;">Konnecting | Jobseekers</div>
+					<h4 class="logo-title" style="font-family: 'Ubuntu', sans-serif; letter-spacing: 3px;"><strong>Facehiring</strong></h4>
+					<div style="font-size: 10px; font-family: 'Ubuntu', sans-serif; text-align: center; margin-left: -4px;">Konnecting | Jobseekers</div>
 				</div>
 			</a>
 
@@ -19,7 +19,7 @@
 </div>
 
 <div class="col col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 nogutter float-right toprightCorner">
-<div class="header--standard header--standard-landing" style="margin-top:-25px">
+<div class="header--standard header--standard-landing">
 	<div class="container-fluid">
 		<div class="header--standard-wrap col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 float-right" style="float:left; display:flex;">
 			<div class="col-md-6 float-left text-left nogutter"> 
@@ -73,10 +73,12 @@
 			</div>
 
 			</div>
+
+			<div class="wellcomSmallText" (click)="openPrivacyPolicy(); false;" style="cursor: pointer;">Privacy Policy</div>
 		</div>
 
 		
-	<div id="loginDialog">
+	<div id="loginDialog"> 
 		<div class="row" style="margin: 0px; padding: 0px;">
 			<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 			<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
@@ -125,9 +127,102 @@
 			</div>
 		</form>
 		</div>
-    </div>
+	</div>
+	
+	<div id="PrivacyPolicy"> 
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6><strong>1. Definitions</strong></h6>
+			<p style="text-align: justify;">Our data protection declaration should be legible and understandable for the general public, as well
+				as our customers and business partners. To ensure this, we would like to first explain the
+				terminology used.</p>
+		</div>
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">In this data protection declaration, we use, the following terms:</div>
+		<br />
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6>a) Personal data</h6>
+			<p style="text-align: justify;">Personal data means any information relating to a jobseeker or the employee. A person is one who
+				can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an
+				identification number, location data, an online identifier or to one or more factors specific to the
+				physical, physiological, genetic, mental, economic, cultural or social identity of that natural person.</p>
+		</div>
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6>b) Processing</h6>
+			<p style="text-align: justify;">Processing is any operation or set of operations which is performed on personal data or on sets of
+				personal data, such as collection, recording, organisation, structuring, storage, adaptation or
+				alteration, retrieval, consultation, use, disclosure by transmission, dissemination or otherwise
+				making available, alignment or combination, restriction, erasure or destruction.</p>
+		</div>
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6>c) Profiling</h6>
+			<p style="text-align: justify;">Profiling means any form of automated processing of personal data consisting of the use of personal
+				data to evaluate certain personal aspects relating to a natural person, in particular to analyse or
+				predict aspects concerning that natural person&#39;s performance at work, economic situation, health,
+				personal preferences, interests, reliability, behaviour, location or movements.</p>
+		</div>
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6>d) Consent</h6>
+			<p style="text-align: justify;">Consent of the data subject is any freely given, specific, informed and unambiguous indication of the data subject's wishes by which a candidate, by a statement or by a clear affirmative action, signifies agreement to the processing of personal data relating to the candidate.</p>
+		</div>
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6><strong>2. Cookies</strong></h6>
+			<p style="text-align: justify;">Cookies are text files that are stored in a computer system via an Internet browser.</p>
+			<p style="text-align: justify;">Many Internet sites and servers use cookies. Many cookies contain a so-called cookie ID. A cookie ID is a unique identifier of the cookie. This allows visited Internet sites and servers to differentiate the individual browser of the dates subject from other Internet browsers that contain other cookies. A specific Internet browser can be recognized and identified using the unique cookie ID.</p>
+			<p style="text-align: justify;">By means of a cookie, the information and offers on our website can be optimized with the user in mind. Cookies allow us, as previously mentioned, to recognize our website users. The purpose of this recognition is to make it easier for users to utilize our website. The website user that uses cookies, e.g. does not have to enter access data each time the website is accessed, because this is taken over by the website, and the cookie is thus stored on the user's computer system. Another example is the cookie of a shopping cart in an online shop. The online store remembers the articles that a customer has placed in the virtual shopping cart via a cookie.</p>
+
+		</div>
+
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6><strong>3. Collection of general data and information</strong></h6>
+			<p style="text-align: justify;">This general data and information are stored in the server log files. Collected may be</p>
+			<p style="text-align: justify;">(1) the browser types and versions used,</p>
+			<p style="text-align: justify;">(2) the operating system used by the accessing system,</p>
+			<p style="text-align: justify;">(3) the website from which an accessing system reaches our website (so-called referrers),</p>
+			<p style="text-align: justify;">(4) the sub-websites,</p>
+			<p style="text-align: justify;">(5) the date and time of access to the Internet site, </p>
+			<p style="text-align: justify;">(6) an Internet protocol address (IP address), </p>
+			<p style="text-align: justify;">(7) the Internet service provider of the accessing system, and  </p>
+			<p style="text-align: justify;">(8) any other similar data and information that may be used in the event of attacks on our information technology systems.  </p>
+		</div>
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6><strong>Terms & Conditions</strong></h6>
+			<p style="text-align: justify;">(1). Provisions define the conditions under which Users may use the Facehiring platform. These General Terms and Conditions (“GTC”) apply exclusively for all Users of the Facehiring platform.</p>
+			<p style="text-align: justify;">(2). Any licensing conditions or the general terms and conditions from the User are not a part of the contract even if Facehiring does not explicitly object to them or if Facehiring, without reservation, provides the contractual services to the User without knowledge of any contradictory or deviating terms of the User.</p>
+			<p style="text-align: justify;">(3). Persons who have not reached 18 years of age are not allowed to register with Facehiring or use the Facehiring platform. Facehiring may verify the identity of Users by requesting suitable evidence.</p>
+			
+		</div>
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6><strong>Cancellation policy</strong></h6>
+			<p style="text-align: justify;">An easy cancellation process is available for all our esteemed customers. You can cancel your order before the product has been shipped. Your entire order amount will be refunded in case of Online Payment.</p>
+		</div>
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6><strong>Refund policy</strong></h6>
+			<p style="text-align: justify;">Refund is provided for PREPAID orders only.</p>
+			<p style="text-align: justify;">Your refund will be initiated within working days of receiving the refund request and authorization of the refund.</p>
+			<p style="text-align: justify;">Your refund is estimated to be credited in the account, used for order payment, between 40 days after initiating the refund. Please note that the timing of the actual account credit depends on multiple external agencies such as banks, payment gateways and external couriers.</p>
+		</div>
+
+		<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+			<h6><strong>Mode Of refund</strong></h6>
+			<p style="text-align: justify;">For both cancelled orders & returned products (due to incomplete sets, incorrect style, wrong sizes, or defective products delivered), the refund amount will be credited back into the same account (online banking, credit card, debit card) that was used to make the purchase.</p>
+		</div>
+
+
+
+
+
+	</div>
+	
 	
 </div>
+
 </div>
 </ng-template>
 

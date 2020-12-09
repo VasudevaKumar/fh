@@ -671,7 +671,11 @@
                          </div>
                             <div class="col-sm-6"  id="errorMsg{{i}}" style="display:none; padding:5px; color:red;"></div>
                       </div>
- 
+                      
+                      <div class="row">
+                        <p class="mb-0 mt-0 small">If you are fresher, please <a href="" (click)="removeExp(i); false;" style="cursor:pointer;">click here</a> to skip experience details.</p>
+                       </div>
+                       
                       <hr>
  
                    </div> <!-- actualContent -->
@@ -787,11 +791,13 @@
                         <div class="col-sm-1" *ngIf="isLast">
                            <i class="fa fa-plus-circle fa-2x" aria-hidden="true" title="Add Education" (click)="addEdu(i); false;" style="cursor:pointer;"></i>
                         </div>
-                        <div class="col-sm-1">
+                        <div class="col-sm-1" *ngIf="i>0">
                               <i class="fa fa-minus-circle fa-2x" aria-hidden="true" title="Remove Education" (click)="removeEdu(i); false;" style="cursor:pointer;"></i>
                         </div>
                            <div class="col-sm-6"  id="errorMsg_edu{{i}}" style="display:none; padding:5px; color:red;"></div>
                      </div>
+
+                     
 
                      <hr>
 

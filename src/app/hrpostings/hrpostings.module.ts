@@ -23,6 +23,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { EditjobComponent } from './editjob/editjob.component';
 import { UserprofilesComponent } from './userprofiles/userprofiles.component';
 import { ViewprofileComponent } from './viewprofile/viewprofile.component';
+import { ViewjobComponent } from './viewjob/viewjob.component';
 
 @Pipe({name: 'replaceImg78'})
 export class replaceImg78Pipe implements PipeTransform {
@@ -39,7 +40,7 @@ export class replaceImg40Pipe implements PipeTransform {
 }
 
 @NgModule({
-  declarations: [HrpostingsComponent, replaceImg78Pipe,replaceImg40Pipe, PostjobComponent, EditjobComponent, UserprofilesComponent, ViewprofileComponent],
+  declarations: [HrpostingsComponent, replaceImg78Pipe,replaceImg40Pipe, PostjobComponent, EditjobComponent, UserprofilesComponent, ViewprofileComponent, ViewjobComponent],
   imports: [
     CommonModule,
     HrpostingsRoutingModule,

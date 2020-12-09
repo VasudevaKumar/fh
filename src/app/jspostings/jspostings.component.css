@@ -13,7 +13,7 @@
     opacity: .80;
   }
   button {
-    margin: 40px;
+    margin-left: 40px;
     padding: 5px 20px;
     cursor: pointer;
   }
@@ -34,3 +34,10 @@
           transform: rotate(360deg);
       }
   }
+
+.featured { overflow:hidden; width:560px; height:auto; }
+.featured img { max-width:100%; height:auto; }
+
+.featuredImg{width:560px; height:auto; overflow:hidden;}
+/*.featuredImg img {width:575px !important; height: auto; max-width:100%; object-fit: cover;}*/
+.cropClss{max-width:100%; height:auto;}

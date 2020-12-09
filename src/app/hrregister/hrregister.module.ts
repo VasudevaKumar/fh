@@ -19,6 +19,7 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { CompanyprofileComponent } from './companyprofile/companyprofile.component';
 
+
 @Pipe({name: 'replaceImg78'})
 export class replaceImg78Pipe implements PipeTransform {
   transform(value: string): string {

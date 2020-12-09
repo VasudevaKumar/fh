@@ -46,6 +46,17 @@ export class RegisterService {
         {emailAddress:emailAddress},
         ).pipe(map((data: any) => data.data));
   }
+
+  verifyReferenceCodeAvailability(randomCode:any)
+  {
+    const api = this.env.apiBaseURL+'/verifyCode';
+    return this.http.post(
+        api,
+        {randomCode:randomCode},
+        ).pipe(map((data: any) => data.data));
+  }
+
+  
   
   verifyEmailAvailabilityForEdit(emailAddress:any, employeeID:any)
   {

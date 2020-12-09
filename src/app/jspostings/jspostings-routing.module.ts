@@ -8,6 +8,7 @@ import { AdminGuard } from  './../../../_services/admin.guard';
 const routes: Routes = [
   { path: '', canActivate: [AdminGuard] , component: JspostingsComponent },
   { path: 'connections', canActivate: [AdminGuard] , component: ConnectionsComponent }
+  
 ];
 
 @NgModule({

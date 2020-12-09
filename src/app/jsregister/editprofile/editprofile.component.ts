@@ -47,6 +47,7 @@ export class EditprofileComponent implements OnInit {
   showCompanyErrorMessage = false;
   showSkillErrorMessage = false;
   showPositionErrorMessage = false;
+  isSkillsChecked = 'No';
 
   selectedLocation: any;
   selectedCompany: any;
@@ -167,9 +168,7 @@ export class EditprofileComponent implements OnInit {
           '', [Validators.required]
         ],
       bio:
-        [
-          '', [Validators.required]
-        ],
+        [],
       ddlLocation:
         [
           '', [Validators.required]
@@ -586,7 +585,8 @@ onFileChange(event) {
     this.submitted = true;
     this.showSkillErrorMessage = true;
     let expEduValidate = true;
-
+    
+    /*
     if (this.selectedSkillItems.length == 0) {
       this.showSkillErrorMessage = true;
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -594,8 +594,14 @@ onFileChange(event) {
     } else {
       this.showSkillErrorMessage = false;
     }
+    */
+   this.showSkillErrorMessage = false;
 
-
+   if (this.selectedSkillItems.length == 0) {
+    this.isSkillsChecked = 'No';
+  } else {
+    this.isSkillsChecked = 'Yes';
+  }
 
     
             /** Exp validation */
@@ -912,6 +918,8 @@ onFileChange(event) {
     //  formData.append('resume', this.EditForm.get('fileInput').value);
 
     formData.append('skills', this.slectedSkillItemString);
+    formData.append('isSkillsChecked', this.isSkillsChecked);
+
     formData.append('loggedInUser', this.loggedInEmployeeID);
 
     $("input[name='fromDate[]']").each(function(index, value) {

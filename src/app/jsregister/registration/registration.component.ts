@@ -71,6 +71,7 @@ export class RegistrationComponent implements OnInit {
 
     public isEmailAvailable = true;
     public isPhoneAvailable = true;
+    public isReferenceCodeAvailable = true;
 
     public countExp = 1;
     public countEdu = 1;
@@ -189,9 +190,7 @@ export class RegistrationComponent implements OnInit {
                     '',[Validators.required]
                 ],
                 bio: 
-                [
-                    '',[Validators.required]
-                ],
+                [],
                 ddlLocation:
                 [
                     '',[Validators.required]
@@ -218,8 +217,9 @@ export class RegistrationComponent implements OnInit {
                         Validators.pattern(/^[a-z\d\-_\s]+$/i)
                     ] 
                 ],
-                fileInput: ['', Validators.required],
+                fileInput: [],
                 fileInputSource:[],
+                referenceCode:['',[Validators.pattern(/^[0-9]\d*$/)]],
                 exps: this.formBuilder.array([
                     this.formBuilder.control(null)
                   ]),
@@ -641,6 +641,7 @@ onFileChange(event) {
         // stop here if form is invalid
         // console.log(this.selectedSkillItems);
         
+        /*
          if(this.selectedSkillItems.length == 0)
           {
               this.showSkillErrorMessage = true;
@@ -649,8 +650,8 @@ onFileChange(event) {
            } else {
                 this.showSkillErrorMessage = false;
            }
-
-          
+        */
+        this.showSkillErrorMessage = false;
 
             //else{
             //    this.showSkillErrorMessage = false;
@@ -1011,7 +1012,7 @@ onFileChange(event) {
             formData.append('description_edu[]', $(this).val());
           });
 
-
+          formData.append('referenceCode', this.registerForm.value.referenceCode);  
            
             const _that = this;
             this.RegisterService_
@@ -1233,6 +1234,30 @@ onFileChange(event) {
             }
         }
         // console.log(invalid);
+    }
+
+
+    // isReferenceCodeAvailable
+    // verifyReferenceCodeAvailability
+    
+    resetReferenceCode()
+    {
+        this.isReferenceCodeAvailable = false;
+    }
+    verifyReferenceCodeAvailability(referenceCode)
+    {
+        this.isReferenceCodeAvailable = true;
+        this.RegisterService_
+            .verifyReferenceCodeAvailability(referenceCode)
+            .subscribe((resp) => {
+                // console.log(resp.length);
+            if(resp.length==0)
+            {
+                $("#referenceCode").val('');
+                this.isReferenceCodeAvailable = false;
+            }
+
+              });
     }
 
     verifyEmailAvailability(emailAddress)

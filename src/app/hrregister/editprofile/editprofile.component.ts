@@ -111,7 +111,7 @@ ImageWidth:boolean=false;
               [
                   Validators.required,
                   //Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
-                  Validators.pattern(/^[a-z0-9 .\-]+$/i)  // alpha number with spaces
+                  Validators.pattern(/^[a-z0-9 .,_@\-]+$/i)  // alpha number with spaces and few special
                   
               ]
           ],
@@ -152,7 +152,10 @@ ImageWidth:boolean=false;
                   '',[Validators.required]
               ],
               companyAddress:[
-                  '',[Validators.required]
+                  '',[
+                        Validators.required,
+                        Validators.pattern(/[A-Za-z0-9'\.\-\s\,]/) // 
+                    ]
               ],               
               file:[],
               fileSource:[],
@@ -166,13 +169,15 @@ ImageWidth:boolean=false;
 
                         [
                             Validators.required,
-                            Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+                            // Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+                            Validators.pattern(/^[a-z0-9 .,_@\-]+$/i)  // alpha number with spaces and few special
                         ]
                 ],
                 companyType:[ '',
                         [
                             Validators.required,
-                            Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+                            // Validators.pattern(/^([a-zA-Z]+\s)*[a-zA-Z]+$/)
+                            Validators.pattern(/^[a-z0-9 .,_@\-]+$/i)  // alpha number with spaces and few special
                         ]
                 ],
                 Founded:[ '',
@@ -185,14 +190,14 @@ ImageWidth:boolean=false;
                             '',
                             [
                                 Validators.required,
-                                Validators.pattern(/^[a-zA-Z0-9,.!? ]*$/) // alpha number with space comma.
+                                Validators.pattern(/^[a-z0-9 .,_@\-]+$/i)  // alpha number with spaces and few special
                             ]
                 ],
                 specialties:[
                             '',
                             [
                                 Validators.required,
-                                Validators.pattern(/^[a-zA-Z0-9,.!? ]*$/) // alpha number with space comma.
+                                Validators.pattern(/^[a-z0-9 .,_@\-]+$/i)  // alpha number with spaces and few special
                             ]
                 ]
       }
@@ -404,6 +409,7 @@ onFileChange(event) {
                this.alerts.setMessage('Thank you. Your profile has been updated! Please wait ..' ,'success');
                setTimeout(function(){
                  // window.location.href = '/employee';
+                 $('.alertsContainer .alertsRow.success').attr("style", "display: none !important");
                  _that.router.navigate(['/hrregister/home']);
                }, 5000);
                

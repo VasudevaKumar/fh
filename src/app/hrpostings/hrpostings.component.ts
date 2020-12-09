@@ -57,6 +57,7 @@ export class HrpostingsComponent implements OnInit {
   
   public positionSearch = 'All';
   public statusSearch = 'All';
+  public searchProfiles = '0';
   public positionSearchString : any;
   public statusSearchString:any;
   public positionList:Array<any>;
@@ -264,15 +265,36 @@ export class HrpostingsComponent implements OnInit {
         cellRenderer: function (params) {
           const mainDiv = document.createElement('div');
           const filesDiv = document.createElement('div');
+          const shortlistDiv = document.createElement('div');
+          const rejectDiv = document.createElement('div');
 
           mainDiv.setAttribute('style', 'width:100%; text-align:center;');
           mainDiv.setAttribute('class', 'fa-sm');
+
           filesDiv.setAttribute('style', 'float:left; cursor:pointer;');
-          filesDiv.innerHTML  = '<i class="fa fa-user fa-1x" aria-hidden="true" title="View Profiles"></i>&nbsp;<span style="font-size:10px;">('+params.node.data.listingCount+')</span>';
+          filesDiv.innerHTML  = '<i class="fa fa-user fa-1x" aria-hidden="true" title="All Profiles"></i>&nbsp;<span style="font-size:10px;">('+params.node.data.listingCount+')</span>';
           filesDiv.addEventListener('click', () => {
             _that.joblisting(_that.loggedInEmployeeID , params.node.data.id)
           });
+
+          shortlistDiv.setAttribute('style', 'float:left; cursor:pointer; margin-left:5px;');
+          shortlistDiv.innerHTML  = '<i class="fa fa-check" aria-hidden="true" title="Shortlisted Profiles"></i>&nbsp;<span style="font-size:10px;">('+params.node.data.shortListCount+')</span>';
+          shortlistDiv.addEventListener('click', () => {
+            _that.searchProfiles = '5';
+             _that.joblisting(_that.loggedInEmployeeID , params.node.data.id)
+          });
+
+          rejectDiv.setAttribute('style', 'float:left; cursor:pointer; margin-left:5px;');
+          rejectDiv.innerHTML  = '<i class="fa fa-close" aria-hidden="true" title="Rejected Profiles"></i>&nbsp;<span style="font-size:10px;">('+params.node.data.rejectCount+')</span>';
+          rejectDiv.addEventListener('click', () => {
+            _that.searchProfiles = '6';
+            _that.joblisting(_that.loggedInEmployeeID , params.node.data.id)
+          });
+
+
           mainDiv.appendChild(filesDiv);
+          mainDiv.appendChild(shortlistDiv);
+          mainDiv.appendChild(rejectDiv);
           return mainDiv;
 
         }
@@ -443,7 +465,10 @@ export class HrpostingsComponent implements OnInit {
   {
     this.selectedJobPosting = [];
     this.selectedJobPosting = this.rowData.find( ({ id }) => id === rowID );
-    // console.log(this.selectedJobPosting);
+    this.router.navigate(['/hrpostings/viewJob/'+rowID]);
+
+    /*
+    console.log(this.selectedJobPosting);
 
       let _that = this;
       $('#viewdialog').dialog({
@@ -463,7 +488,8 @@ export class HrpostingsComponent implements OnInit {
         // _that.submitForm('left');
       }
     });
-    
+    */
+
   }
   
   editJobPost(employeeID , rowID)
@@ -476,6 +502,8 @@ export class HrpostingsComponent implements OnInit {
 
   joblisting(employeeID , rowID)
   {
+    localStorage.removeItem('searchProfiles');
+    localStorage.setItem('searchProfiles', this.searchProfiles);
     // window.location.href = '/employee/joblisting/'+rowID;
     this.router.navigate(['/hrpostings/userprofile/'+rowID]);
   }

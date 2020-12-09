@@ -58,9 +58,10 @@
   
   <div class="col-md-12 nogutter" *ngIf="isGridDataReady" style="margin-top: 10px !important;">
       <div class="col-md-12" style="cursor:pointer;">
-          <div class="col-md-4 float-left all-listing-flex-container">
-            <div class="col-md-1 float-left" *ngIf="usedPostings<10">
+          <div class="col-md-5 float-left all-listing-flex-container">
+            <div class="col-md-2 float-left text-left" *ngIf="usedPostings<10">
               <i class="fa fa-plus-circle fa-2x" aria-hidden="true" title="Add Job Posting" (click)="postAJob(); false;"></i>
+             <span class="postJob" (click)="postAJob(); false;" style="font-size: 14px;"> Post Job</span>
             </div>
   
             <div class="col-md-6 float-left"> {{positionSearchString}}</div>

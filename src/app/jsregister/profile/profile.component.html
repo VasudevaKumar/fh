@@ -5,7 +5,7 @@
           <aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
              <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
                 <div class="py-4 px-3 border-bottom" *ngIf="myProfileBasicInfo.length > 0">
-                   <img src="{{myProfileBasicInfo[0].imageProfile | replaceImg78}}" class="img-fluid mt-2 rounded-circle" alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
+                   <img src="{{myProfileBasicInfo[0].imageProfile}}" class="img-fluid mt-2 rounded-circle" alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
                    <h5 class="font-weight-bold text-dark mb-1 mt-4">{{myProfileBasicInfo[0].firstName}} {{myProfileBasicInfo[0].lastName}}</h5>
                    <p class="mb-0 text-muted">{{myProfileBasicInfo[0].positionName}}</p>
                 </div>
@@ -53,24 +53,25 @@
                    <div class="p-3 border-bottom">
                       <div class="position-relative icon-form-control mb-2" *ngIf="socialMediaLinks[0].socialProfile!=''">
                          <i class="feather-instagram position-absolute text-warning"></i>
-                         <a href="https://{{socialMediaLinks[0].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[0].socialProfile}}</a>
+                         <a href="https://{{socialMediaLinks[0].socialProfile}}" target="-blank" class="ml-3">{{socialMediaLinks[0].socialProfile | truncatetext:[30, '...']}}</a>
                       </div>
                       <div class="position-relative icon-form-control mb-2" *ngIf="socialMediaLinks[1].socialProfile!=''">
                          <i class="feather-facebook position-absolute text-primary"></i>
-                         <a href="https://{{socialMediaLinks[1].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[1].socialProfile}}</a>
+                         <a href="https://{{socialMediaLinks[1].socialProfile}}" target="-blank" class="ml-3">{{socialMediaLinks[1].socialProfile | truncatetext:[30, '...']}}</a>
                       </div>
                       <div class="position-relative icon-form-control mb-2" *ngIf="socialMediaLinks[2].socialProfile!=''">
                          <i class="feather-twitter position-absolute text-info"></i>
-                         <a href="https://{{socialMediaLinks[2].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[2].socialProfile}}</a>
+                         <a href="https://{{socialMediaLinks[2].socialProfile}}" target="-blank" class="ml-3">{{socialMediaLinks[2].socialProfile | truncatetext:[30, '...']}}</a>
                       </div>
                       <div class="position-relative icon-form-control mb-2" *ngIf="socialMediaLinks[3].socialProfile!=''">
                          <i class="feather-youtube position-absolute text-danger"></i>
-                         <a href="https://{{socialMediaLinks[3].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[3].socialProfile}}</a>
+                         <a href="https://{{socialMediaLinks[3].socialProfile}}" target="-blank" class="ml-3">{{socialMediaLinks[3].socialProfile | truncatetext:[30, '...']}}</a>
                       </div>
                       <div class="position-relative icon-form-control mb-0" *ngIf="socialMediaLinks[4].socialProfile!=''">
                          <i class="feather-github position-absolute text-dark"></i>
-                         <a href="https://{{socialMediaLinks[4].socialProfile}}" target="-blank" class="ml-5">{{socialMediaLinks[4].socialProfile}}</a>
+                         <a href="https://{{socialMediaLinks[4].socialProfile}}" target="-blank" class="ml-3">{{socialMediaLinks[4].socialProfile | truncatetext:[30, '...']}}</a>
                       </div>
+
                    </div>
                    <!-- <div class="overflow-hidden text-center p-3">
                       <a class="font-weight-bold btn btn-light rounded p-3 d-block" href="#"> Update Social Profiles </a>

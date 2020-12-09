@@ -20,6 +20,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 
+
 @Pipe({name: 'replaceImg78'})
 export class replaceImg78Pipe implements PipeTransform {
   transform(value: string): string {
@@ -34,10 +35,20 @@ export class replaceImg40Pipe implements PipeTransform {
   }
 }
 
+@Pipe({
+  name: 'truncatetext'
+ })
+  export class truncatetextPipe implements PipeTransform {
+  transform(value: string, args: any[]): string {
+     const limit = args.length > 0 ? parseInt(args[0], 10) : 20;
+     const trail = args.length > 1 ? args[1] : '...';
+     return value.length > limit ? value.substring(0, limit) + trail : value;
+    }
+ }
+
 @NgModule({
   declarations: [JsregisterComponent, RegistrationComponent, EditprofileComponent, ProfileComponent,replaceImg78Pipe,
-    replaceImg40Pipe,
-    ChangepasswordComponent],
+    replaceImg40Pipe,ChangepasswordComponent,truncatetextPipe],
   imports: [
     CommonModule,
     JsregisterRoutingModule,

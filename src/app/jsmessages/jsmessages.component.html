@@ -1,0 +1,130 @@
+<!-- ... end Main Header Account -->
+
+
+<!-- Your Account Personal Information -->
+
+<div class="container" *ngIf="isChatDataLoaded">
+	<div class="row">
+		<div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
+			<div class="ui-block">
+				<div class="ui-block-title">
+					<h6 class="title">Chat / Messages</h6>
+				</div>
+				<div class="col-md-5 nogutter" style="padding-top: 5px !important; padding-bottom: 5px !important;">
+					<input type="text" name="searchField" class="form-control" placeholder="Search by name" [(ngModel)]="employeeFilter.employeeName">
+				</div>	
+
+
+				<div class="row">
+					<div class="col col-lg-5 col-md-5 col-sm-12 col-12 padding-r-0">
+
+						
+						<!-- Notification List Chat Messages -->
+						
+						<ul class="notification-list chat-message" *ngIf="latestChatMessages.length>0">
+							<li *ngFor="let latestChatMessage of latestChatMessages | filterBy: employeeFilter">
+								<div class="author-thumb">
+									<img src="{{latestChatMessage.imageProfile | replaceImg40}}" alt="author" onerror="this.src='assets/files/profilePics/blank_36.png';">
+								</div>
+								<div class="notification-event">
+									<a href="" class="h6 notification-friend" (click)="getAllChatMessages(latestChatMessage.user_id, latestChatMessage.id);false;"><strong>{{latestChatMessage.employeeName}}</strong></a>
+									<span class="chat-message-item">{{latestChatMessage.latestMessage}}...</span>
+									<span class="notification-date"><time class="entry-date updated" datetime="2004-07-24T18:18">{{latestChatMessage.created_at}}</time></span>
+								</div>
+							</li>
+						</ul>
+						
+						<!-- ... end Notification List Chat Messages -->
+
+						
+						<!-- Popup Chat -->
+						
+						
+						
+						<!-- ... end Popup Chat -->
+						
+
+					</div>
+
+					<div class="col col-lg-7 col-md-7 col-sm-12 col-12 padding-l-0">
+
+						
+						<!-- Chat Field -->
+						
+						<div class="chat-field">
+							 <div class="ui-block-title">
+								<h6 class="title">Chat with {{sendToEmployeeName[0]['sendToName']}}</h6>
+								<a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="#olymp-three-dots-icon"></use></svg></a>
+							</div>
+						
+							<div class="mCustomScrollbar" data-mcs-theme="dark" style="max-height: 100%;" *ngIf="chatDetailMessages.length>0">
+								<ul class="notification-list chat-message chat-message-field">
+									<li *ngFor="let chatDetailMessage of chatDetailMessages">
+										<div class="author-thumb">
+											<img src="{{chatDetailMessage.imageProfile | replaceImg40}}" alt="author" onerror="this.src='assets/files/profilePics/blank_36.png';">
+
+										</div>
+										<div class="notification-event" style="max-width: 100%; width: 92%;">
+											<div class="event-info-wrap">
+												<div class="col col-lg-10 col-md-10 col-sm-12 col-12 padding-l-0">
+													<span class="h6 notification-friend">{{chatDetailMessage.employeeName}}</span>
+												</div>
+
+												<span class="notification-date float-right">{{chatDetailMessage.created_at}}</span>
+											</div>
+											<span class="chat-message-item">{{chatDetailMessage.latestMessage}}.</span>
+										</div>
+									</li>
+						
+									
+								</ul>
+							</div>
+							
+							<div class="mCustomScrollbar" data-mcs-theme="dark" *ngIf="chatDetailMessages.length==0">
+								<div class="p-3">No messages</div>
+							</div>
+							
+							
+						
+								<div class="form-group">
+									<textarea class="form-control" placeholder="Write your reply here..." [(ngModel)]="replyMsg"></textarea>
+								</div>
+						
+								<div class="border-top p-3 d-flex align-items-center">
+                   
+									<div class="mr-auto">
+									 <div class="warning-block" *ngIf="isPostEmpty">Submit your reply</div>
+
+									 </div> 
+								   <div class="flex-shrink-1">
+									  <!-- <button type="button" class="btn btn-light btn-sm">Preview</button> -->
+									  <button type="button" class="btn btn-primary btn-sm" (click)="submitReply();">Post Reply</button>
+								   </div>
+								</div>
+						
+							
+						
+						</div>
+						
+						<!-- ... end Chat Field -->
+
+					</div>
+				</div>
+
+			</div>
+
+			
+		
+			<div id="overlay" *ngIf="isHomePicUploaing">
+				<div class="spinner"></div>
+				<br/>
+				Loading...
+			 </div>
+
+			 
+
+		</div>
+
+	</div>
+</div>
+<!-- ... end Your Account Personal Information -->

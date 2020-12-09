@@ -51,6 +51,10 @@ export class HomeComponent implements OnInit {
   imageSrcLeft: string;
   loggedInCompanyID:any;
   isHomePicUploaing:boolean = false;
+  c_updates:any = '';
+  c_updatesFlag:boolean = true;
+  c_updatesCareer:any = '';
+  c_updatesCareerFlag:boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -97,7 +101,6 @@ export class HomeComponent implements OnInit {
           }
           this.isEmployeeProfileLoaded = true;
           this.loggedInCompanyID = this.employeeProfiles[0]['companyID'];
-
           this.loadCompanyContent(this.loggedInCompanyID);
 
       });
@@ -295,5 +298,50 @@ export class HomeComponent implements OnInit {
             $('#overlay').fadeOut();
             });
       }
+
+      submitUpdate()
+      {
+        this.c_updatesFlag = true;
+
+        if(this.c_updates == '')
+        {
+          this.c_updatesFlag = false;
+        }
+        else{
+          this.companyUpdates.unshift({
+            message: this.c_updates,
+            companyLogo:this.employeeProfiles[0]['companyLogo'],
+            companyName:this.employeeProfiles[0]['companyName'],
+            contactPersonDesignation:this.employeeProfiles[0]['contactPersonDesignation'],
+            contactPersonName:this.employeeProfiles[0]['contactPersonName'],
+            created_at:new Date()
+          });
+      
+          
+          this.HrserviceService_.pushUpdates(this.loggedInCompanyID , this.c_updates).toPromise();
+          this.c_updates = '';
+        }
+      }
+
+      submitCareer()
+      {
+        this.c_updatesCareerFlag = true;
+        
+
+        if(this.c_updatesCareer == '')
+        {
+          this.c_updatesCareerFlag = false;
+        }
+        else{
+          this.companyCareers.unshift({
+            careerDeatils:this.c_updatesCareer,
+            created_at:new Date()
+            });
+      
+            this.HrserviceService_.pushCareer(this.loggedInCompanyID , this.c_updatesCareer).toPromise();
+            this.c_updatesCareer = '';
+        }
+      }
+
 
 }

@@ -1,36 +1,39 @@
 <div class="content-bg-wrap"></div>
 <!-- Header Standard Landing  -->
 <div class="row nogutter">
-	<div class="col-md-8 float-left nogutter">
+	<div class="col-md-12 float-left nogutter">
 		<div class="header--standard header--standard-landing" id="header--standard">
 			<div class="container-fluid">
-				<div class="header--standard-wrap" style="float:left;">
+				<div class="header--standard-wrap col-md-6 nogutter float-left">
 					<a href="#" class="logo">
 						<div class="title-block">
 							<h4 class="logo-title"><strong>Facehiring</strong></h4>
 							<div style="font-size: 10px;">Konnecting | Jobseekers</div>
 						</div>
 					</a>
-
 				</div>
+				
+				<div class="col-md-3 nogutter float-left" >
+					<input type="text" name="searchField" class="form-control" placeholder="Search by college" [(ngModel)]="employeeFilter.collageName">
+				</div>
+
+				<div class="col-md-3 nogutter float-left">
+			
+				</div>
+
 			</div>
 		</div>
 	</div>
 
-	<div class="col-md-4 float-right toprightCorner nogutter">
-		<div class="header--standard header--standard-landing" style="margin-top:-25px">
-			<div class="container-fluid">
-				<div class="header--standard-wrap col-md-12 float-right" style="float:left; display:flex;">
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 </div>
 
 <div class="header-spacer--standard"></div>
-<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 nogutter" id="bodyContent">
-	
+<div class="row">
+<main class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+<div class="nogutter" id="bodyContent">
+
 	<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12 float-left text-left nogutter">
     	<div id="overlay" *ngIf="!isContentLoaded">
 			<div class="spinner"></div>
@@ -42,20 +45,42 @@
 			<h6 class="fontWhite">No records available</h6>
 		</div>
 
-		<div class="float-left mt--5 ml-50" *ngIf="careermanagerdetails.length > 0">
-        <div class="flip-card float-left" *ngFor="let cm of careermanagerdetails">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img src="{{cm.imageProfile}}" alt="Profile Picture" style="max-width: 100%; height: auto;" onerror="this.src='assets/files/profilePics/blank.png';">
-              </div>
-              <div class="flip-card-back">
-                <h4 class="fontWhite">{{cm.firstName}} {{cm.lastName}}</h4> 
-                <h5 class="fontWhite mt-20">{{cm.collageName}}</h5>
-                <h5 class="fontWhite">{{cm.departmentName}}</h5>
-              </div>
-            </div>
-		  </div>
-		</div> 
+		<div class="tab-content" id="myTabContent">
+				  <div class="row" *ngIf="careermanagerdetails.length > 0">
+					 <div class="col-md-2" *ngFor="let cm of careermanagerdetails | filterBy: employeeFilter">
+						
+						   <div class="network-item rounded">
+							  <div class="p-1 d-flex align-items-center network-item-header">
+								<div class="pl-3 pr-3 pb-3 px-4">
+									<img src="{{cm.imageProfile}}" onerror="this.src='assets/files/profilePics/blank.png';" class="mt-2 rounded-circle" alt="Responsive image">
+									<div class="font-weight-bold ml-3">
+									<h6 class="font-weight-bold text-dark mb-0 fontWhite">{{cm.firstName}} {{cm.lastName}}</h6>
+									<div class="small fontWhite">{{cm.departmentName}} at {{cm.collageName}}</div>
+								</div>
+								 </div>
+							  </div>
+						   </div>
+						
+					 </div>
+				  </div>
+			   
+			
+			
+		 </div>
 	</div>
 
+</div>
+</main>
+<!-- 
+<aside class="col col-xl-3 order-xl-2 col-lg-12 order-lg-2 col-12">
+	<div class="box shadow-sm mb-3 border rounded bg-white ads-box text-center">
+	  <img src="assets/images/add/facehireLogin.png" class="img-fluid" alt="Responsive image">
+	</div>
+
+	<div class="box shadow-sm mb-3 border rounded bg-white ads-box text-center">
+	  <img src="assets/images/add/doordonot.png" class="img-fluid" alt="Responsive image">
+	</div>
+
+ </aside>
+ -->
 </div>

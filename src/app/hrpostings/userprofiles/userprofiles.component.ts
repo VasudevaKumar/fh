@@ -26,6 +26,8 @@ export class UserprofilesComponent implements OnInit {
   public currentUser:any;
   jobID:any;
   public isGridDataReady = false;
+  public searchProfiles = '';
+  public typeOfProfiles = 'All profiles';
 
   public gridOptions: any;
   userSubscription: Subscription;
@@ -41,6 +43,19 @@ export class UserprofilesComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.searchProfiles = localStorage.getItem('searchProfiles');
+    
+    if(this.searchProfiles == '5')
+    {
+      this.typeOfProfiles = 'Shortlisted profiles';
+    }
+
+    if(this.searchProfiles == '6')
+    {
+      this.typeOfProfiles = 'Rejected profiles';
+    }
+
+    
     this.loggedInEmployeeID  = this.currentUser[0].user_id;
 
     this.userSubscription = this.route.params.subscribe(
@@ -55,9 +70,11 @@ export class UserprofilesComponent implements OnInit {
 
   getjobListings(employeeID , jobID)
   {
+      // console.log(this.searchProfiles);
+
       const _that = this;
           this.HrserviceService_
-        .getjobListings(employeeID , jobID)
+        .getjobListings(employeeID , jobID , this.searchProfiles)
         .subscribe(jobListings => (_that.jobListings = jobListings))
         .add(() => {
           /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
@@ -68,7 +85,34 @@ export class UserprofilesComponent implements OnInit {
         });
   }
 
- 
+  rejectProfile(applicationID:any)
+  {
+    var item = this.jobListings.find(x => x.application_id == applicationID);
+    if (item) {
+      item.action_id = 6;
+    }
+    const _that = this;
+          this.HrserviceService_
+        .hrAction(applicationID , 6)
+        .subscribe()
+  }
+
+  shortListProfile(applicationID:any)
+  {
+    // console.log('application');
+    var item = this.jobListings.find(x => x.application_id == applicationID);
+    if (item) {
+      item.action_id = 5;
+    }
+
+    const _that = this;
+    this.HrserviceService_
+  .hrAction(applicationID , 5)
+  .subscribe()
+
+
+  }
+
    
 
 }

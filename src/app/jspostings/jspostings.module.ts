@@ -24,8 +24,20 @@ export class replaceImg40Pipe implements PipeTransform {
   }
 }
 
+
+@Pipe({
+  name: 'truncatetext'
+ })
+  export class truncatetextPipe implements PipeTransform {
+  transform(value: string, args: any[]): string {
+     const limit = args.length > 0 ? parseInt(args[0], 10) : 20;
+     const trail = args.length > 1 ? args[1] : '...';
+     return value.length > limit ? value.substring(0, limit) + trail : value;
+    }
+ }
+
 @NgModule({
-  declarations: [JspostingsComponent,replaceImg78Pipe,replaceImg40Pipe, ConnectionsComponent],
+  declarations: [JspostingsComponent,replaceImg78Pipe,replaceImg40Pipe, ConnectionsComponent,truncatetextPipe],
   imports: [
     CommonModule,
     JspostingsRoutingModule,

@@ -5,6 +5,7 @@ import { CareermanagersRoutingModule } from './careermanagers-routing.module';
 import { CareermanagersComponent } from './careermanagers.component';
 import { RegisterComponent } from './register/register.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 @NgModule({
   declarations: [CareermanagersComponent, RegisterComponent],
@@ -13,7 +14,9 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
     CareermanagersRoutingModule,
     NgxIntlTelInputModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FilterPipeModule
+
 
   ]
 })

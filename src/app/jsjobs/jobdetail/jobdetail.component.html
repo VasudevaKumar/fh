@@ -8,7 +8,7 @@
              <div class="d-flex align-items-center py-3">
                 <div class="profile-left">
                    <h5 class="font-weight-bold text-dark mb-1 mt-0">{{jobProfile[0]['lookingFor']}}</h5>
-                   <p class="mb-0 text-muted"><a class="mr-2 font-weight-bold" href="#">{{employeeProfiles[0]['companyName']}}</a> <i class="feather-map-pin"></i> {{employeeProfiles[0]['address']}} -- DatePosted {{jobProfile[0]['created_at']}}</p>
+                   <p class="mb-0 text-muted"><a class="mr-2 font-weight-bold" href="http://{{employeeProfiles[0]['website']}}" target="_blank">{{employeeProfiles[0]['companyName']}}</a> <i class="feather-map-pin"></i> {{employeeProfiles[0]['address']}} -- DatePosted {{jobProfile[0]['created_at']}}</p>
                 </div>
                 <div class="profile-right ml-auto">
                    <!-- <button type="button" class="btn btn-light mr-1"> &nbsp; Save &nbsp; </button> -->
@@ -35,8 +35,8 @@
                    <table class="table table-borderless mb-0">
                       <tbody>
                          <tr class="border-bottom"><th class="p-3">Job Location:</th><td class="p-3">{{jobProfile[0]['jobLocation']}}</td></tr>
-                         <tr class="border-bottom"><th class="p-3">Years:</th><td class="p-3">{{jobProfile[0]['yearMin']}} - {{jobProfile[0]['yearMax']}}</td></tr>
-                         <tr class="border-bottom"><th class="p-3">Salary:</th><td class="p-3">{{jobProfile[0]['salMin']}} - {{jobProfile[0]['salMax']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Years of Experience:</th><td class="p-3">{{jobProfile[0]['yearMin']}} - {{jobProfile[0]['yearMax']}}</td></tr>
+                         <tr class="border-bottom"><th class="p-3">Salary:</th><td class="p-3">{{jobProfile[0]['salMin']}} - {{jobProfile[0]['salMax']}} &nbsp;&nbsp;lakhs/annum</td></tr>
                          <tr class="border-bottom"><th class="p-3">Job Role:</th><td class="p-3">{{jobProfile[0]['jobRole']}}</td></tr>
                          <tr class="border-bottom"><th class="p-3">Industry Type:</th><td class="p-3">{{jobProfile[0]['industryType']}}</td></tr>
                          <tr class="border-bottom"><th class="p-3">Functional area:</th><td class="p-3">{{jobProfile[0]['functionalArea']}}</td></tr>
@@ -56,7 +56,7 @@
           <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
              <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
                 <div class="p-5">
-                   <img src="../employee/{{employeeProfiles[0]['companyLogo']}}" class="img-fluid" alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
+                   <img src="{{employeeProfiles[0]['companyLogo']}}" class="img-fluid" alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
                 </div>
                 <div class="p-3 border-top border-bottom">
                    <h5 class="font-weight-bold text-dark mb-1 mt-0">{{employeeProfiles[0]['companyName']}}</h5>

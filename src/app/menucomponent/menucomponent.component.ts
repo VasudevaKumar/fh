@@ -4,9 +4,12 @@ import { Router } from '@angular/router';
 import { Location } from "@angular/common";
 import { EmployeeService } from '../../../_services/employee.service';
 import {InteractionService} from'../../../_services/interaction.service';
+import { Subscription, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 declare var jQuery: any;
 declare var $: any;
+
 
 
 @Component({
@@ -15,16 +18,19 @@ declare var $: any;
   styleUrls: ['./menucomponent.component.css']
 })
 export class MenucomponentComponent implements OnInit {
-
+  subscription: Subscription;
   loggedInEmployeeID:any;
   currentUser:any;
   pendingRequests = [];
   approvedRequets = [];
   notificationComments = [];
   isCommentNotificationRequired =  false;
+  pendingChatMessages = [];
   isMenuLinks = true;
   totalPendingCounts = 0;
   role_id:any = 0;
+  isMessagesPage = false;
+  pr = [];
   
 
   constructor(
@@ -50,6 +56,20 @@ export class MenucomponentComponent implements OnInit {
       this.isCommentNotificationRequired = true;
       
     }
+    if(location.path() == '/js/messages')
+    {
+      this.isMessagesPage = true;
+      
+    }
+
+    if(location.path() == '/jspostings')
+    {
+      this.isMessagesPage = false;
+
+    }
+
+
+    
    
   });
 
@@ -64,9 +84,9 @@ export class MenucomponentComponent implements OnInit {
     this._interactionService.teacherMessage$
     .subscribe(
       message => {
-       // console.log('serview');
+      // console.log('serview');
        // console.log(message);
-        this.role_id = message;
+        this.role_id = message[0]['role_id'];
 
       });
 
@@ -78,18 +98,48 @@ export class MenucomponentComponent implements OnInit {
         {
           this.getPendingRequests();
           this.getNotifications();
-          this.getApprovedNotifications();  
+          this.getApprovedNotifications();
+          this.getPendingChatMessages();  
+          this.crequest();
         }
       
     }
 
   }
 
+  crequest()
+  {
+    this.subscription = timer(0, 10000).pipe(
+      switchMap(() => this.EmployeeService_.getPendingRequests(this.loggedInEmployeeID))
+    ).subscribe(pr => this.pr = pr);
+
+    // console.log(this.pr);
+  }
+  getPendingChatMessages()
+  {
+    const _that = this;
+      this.EmployeeService_
+    .getPendingChatMessages(this.loggedInEmployeeID)
+    .subscribe(pendingChatMessages => (_that.pendingChatMessages = pendingChatMessages))
+    .add(() => {
+      
+      //console.log(_that.pendingChatMessages);
+    //  this.totalPendingCounts += _that.pendingRequests.length;
+    
+    });
+
+  }
+
+  clearPendingMessages()
+  {
+    this.pendingRequests = [];
+    this.router.navigate(['/js/messages']);
+
+  }
   getPendingRequests()
   {
       const _that = this;
-      this.EmployeeService_
-    .getPendingRequests(this.loggedInEmployeeID)
+      this.EmployeeService_.getPendingRequests(this.loggedInEmployeeID)
     .subscribe(pendingRequests => (_that.pendingRequests = pendingRequests))
     .add(() => {
       /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
@@ -313,6 +363,11 @@ export class MenucomponentComponent implements OnInit {
         .then(() => this.router.navigate(['/hrregister/home']));
     }
     
+  }
+
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

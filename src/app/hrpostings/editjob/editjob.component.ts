@@ -46,7 +46,10 @@ export class EditjobComponent implements OnInit {
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
-      ['bold']
+      ['bold', 'heading', 'fontName', 'backgroundColor', 'link',
+      'unlink',
+      'insertImage',
+      'insertVideo',]
       ],
     customClasses: [
       {
@@ -88,18 +91,18 @@ export class EditjobComponent implements OnInit {
     })
     
     this.postJobForm = this.formBuilder.group({
-      lookingFor:['',[Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,/#&+-]*$/)]], // alpha num with spaces
-      jobLocation:['',[Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,/#&+-]*$/)]], // alpha num with spaces
-      yearMin:['',[Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
-      yearMax:['',[Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
-      salMin:['',[Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
-      salMax:['',[Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
-      jobRole:['',[Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,/#&+-]*$/)]], // alpha num with spaces
-      industryType:['',[Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,/#&+-]*$/)]], // alpha num with spaces
-      functionalArea:['',[Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,/#&+-]*$/)]], // alpha num with spaces
-      employmentType:['',[Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,/#&+-]*$/)]], // alpha num with spaces
-      roleCategory:['',[Validators.required, Validators.pattern(/^[ A-Za-z0-9_@.,/#&+-]*$/)]], // alpha num with spaces
-      requiredQualification:['',[Validators.required , Validators.pattern(/^[ A-Za-z0-9_@.,/#&+-]*$/)]], 
+      lookingFor:['',[Validators.required]], // alpha num with spaces
+      jobLocation:['',[Validators.required]], // alpha num with spaces
+      yearMin:['',[Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      yearMax:['',[Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
+      salMin:['',[Validators.required, Validators.pattern(/^[0-9]\d*(\.\d+)?$/)]],
+      salMax:['',[Validators.required, Validators.pattern(/^[0-9]\d*(\.\d+)?$/)]],
+      jobRole:['',[Validators.required]], // alpha num with spaces
+      industryType:['',[Validators.required]], // alpha num with spaces
+      functionalArea:['',[Validators.required]], // alpha num with spaces
+      employmentType:['',[Validators.required]], // alpha num with spaces
+      roleCategory:['',[Validators.required]], // alpha num with spaces
+      requiredQualification:['',[Validators.required ]], 
       jobDesription:['',[Validators.required]],
       jobRes:['',[Validators.required]],
       jobBenefit:['',[Validators.required]]
@@ -150,6 +153,7 @@ export class EditjobComponent implements OnInit {
                $('.alertsContainer .alertsRow.error').attr("style", "display: none !important");
                this.alerts.setMessage('Thank you. Your job posting has been successfully updated! Please wait ..' ,'success');
                setTimeout(function(){
+                $('.alertsContainer .alertsRow.success').attr("style", "display: none !important");
                _that.router.navigate(['/hrpostings']);
                }, 5000);
 
@@ -203,6 +207,15 @@ export class EditjobComponent implements OnInit {
         .then((confirmed) => { if (confirmed) { this.router.navigate(['/hrregister/home']); } })
         .catch(() => console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
   
+    }
+    
+    removeYearMax()
+    {
+      $("#yearMaxID").val('');
+    }
+    removeMaxSalary()
+    {
+      $("#salMaxID").val('');
     }
     
 }

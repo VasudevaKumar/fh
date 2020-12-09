@@ -40,16 +40,16 @@
                       <div class="p-3">
                         <div class="row" *ngIf ="filterConnectPeople.length == 0">No connections found </div>
                          <div class="row" *ngIf ="filterConnectPeople.length > 0">
-                            <div class="col-md-4" *ngFor="let item of filterConnectPeople | keyvalue; index as i;">
+                            <div class="col-md-4" *ngFor="let item of filterConnectPeople.slice(0, 200) | keyvalue; index as i;">
                                  <div class="border network-item rounded mb-3">
                                      <div class="p-3 d-flex align-items-center network-item-header">
-                                        <div class="dropdown-list-image mr-3">
-                                           <img class="rounded-circle" src="{{item.value['connections'].imageProfile | replaceImg40}}" alt="" onerror="this.src='assets/files/profilePics/blank.png';" alt="">
+                                        <div class="dropdown-list-image mr-3 connectContent">
+                                           <img class="rounded-circle mt-15" src="{{item.value['connections'].imageProfile | replaceImg40}}" alt="" onerror="this.src='assets/files/profilePics/blank.png';" alt="">
                                         </div>
                                         <a href="" (click)="showProfile(item.value['connections'].id); false;" title="show profile">
                                         <div class="font-weight-bold">
                                            <h6 class="font-weight-bold text-dark mb-0">{{item.value['connections'].firstName}} {{item.value['connections'].lastName}}</h6>
-                                           <div class="small text-black-50">{{item.value['connections'].positionName}} at {{item.value['connections'].companyName}}</div>
+                                           <div class="small text-black-50">{{item.value['connections'].positiondetails}} </div>
                                         </div>
                                        </a>
                                      </div>
@@ -70,7 +70,7 @@
 
 
                                        <div class="col-6 pl-3 pr-1" *ngIf="item.value['connections'].status_type == 'A'" >
-                                          <button type="button" class="btn btn-primary btn-sm btn-block btn-green" disabled > Connected </button>
+                                          <button type="button" class="btn btn-sm btn-block btn-grey" disabled > Connected </button>
                                        </div>
 
 
@@ -208,34 +208,14 @@
              </div>
           </main>
           <aside class="col col-xl-3 order-xl-2 col-lg-12 order-lg-2 col-12">
-             <div class="box mb-3 shadow-sm border rounded bg-white list-sidebar">
-                <div class="box-title p-3">
-                   <h6 class="m-0">Manage my network</h6>
-                </div>
-                <ul class="list-group list-group-flush">
-                   
-                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-users mr-2 text-dark"></i> Connections <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalConneections}}</span></li>
-                   
-                   
-                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-book mr-2 text-dark"></i> Contacts <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalContacts}}</span></li>
-                   
-                   
-                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-user-check mr-2 text-dark"></i> People I Follow <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalFollow}}</span></li>
-                   
-                   
-                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-message-circle mr-2 text-dark"></i> Groups <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalGroups}}</span></li>
-                   
-                   
-                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-clipboard mr-2 text-dark"></i> Page <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalPages}}</span></li>
-                   
-                   
-                      <li class="list-group-item pl-3 pr-3 d-flex align-items-center text-dark"><i class="feather-tag mr-2 text-dark"></i> Hashtag <span class="ml-auto font-weight-bold" *ngIf="totalConnects.length >0">{{totalConnects[0].totalHashTag}}</span></li>
-                   
-                </ul>
-             </div>
              <div class="box shadow-sm mb-3 border rounded bg-white ads-box text-center">
                <img src="assets/images/add/facehireLogin.png" class="img-fluid" alt="Responsive image">
              </div>
+
+             <div class="box shadow-sm mb-3 border rounded bg-white ads-box text-center">
+               <img src="assets/images/add/doordonot.png" class="img-fluid" alt="Responsive image">
+             </div>
+
           </aside>
        </div>
     </div>

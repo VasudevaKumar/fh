@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef  } from '@angular/core';
+import { Component, OnInit, TemplateRef,ViewChild  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeService } from './../../../_services/employee.service';
@@ -19,7 +19,8 @@ declare var $: any;
 })
 export class JspostingsComponent implements OnInit {
 
-  
+  @ViewChild('myFileInput') myFileInput;
+
   modalRef: BsModalRef;  
   
   imageChangedEvent: any = '';
@@ -56,7 +57,14 @@ export class JspostingsComponent implements OnInit {
 
   isContentLoaded = false;
   viewDetails = '';
+  postMessage = '';
+
+
+  public imagePath;
+  public imgURL: any;
+  public message: string;
   
+
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -67,7 +75,16 @@ export class JspostingsComponent implements OnInit {
     defaultParagraphSeparator: 'p',
     defaultFontName: 'Arial',
     toolbarHiddenButtons: [
-      ['fontName']
+      [
+        'fontName', 
+        'heading',
+        'customClasses',
+        'insertImage',
+        'insertVideo',
+        'insertHorizontalRule',
+        'removeFormat',
+        'toggleEditorMode'
+      ]
       ],
     customClasses: [
       {
@@ -301,7 +318,7 @@ export class JspostingsComponent implements OnInit {
 
     pushComment(commentNotes , key , postID, event)
     {
-      this.postComments[key]['posts']['comments'].unshift({
+      this.postComments[key]['posts']['comments'].push({
         comments: commentNotes,
         companyName: "",
         created_at: new Date(),
@@ -348,10 +365,14 @@ export class JspostingsComponent implements OnInit {
 
     postImage()
     {
+      
+      let imageCommentVal = $("#imageComments").val();
+
       this.isHomePicUploaing = true;
       $('#overlay').fadeIn();
       const formData = new FormData();
-      formData.append('uploadImageSource', this.HomePagePostForm.value.uploadImageSource);  
+      formData.append('uploadImageSource', this.HomePagePostForm.value.uploadImageSource); 
+      formData.append('imageComments', imageCommentVal);       
       formData.append('loggedInUser', this.loggedInEmployeeID);      
     //   formData.append('leftSidefile', this.HomPageForm.get('leftSidefileSource').value);
       const _that = this;
@@ -359,7 +380,10 @@ export class JspostingsComponent implements OnInit {
             .postImage(formData)
             .subscribe((resp) => {})
             .add(() => {
+              _that.modalRef.hide();
+              this.myFileInput.nativeElement.value = '';
               /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
+              this.postMessage = 'Your photo has been posted';
               this.isAddPost = true;
               this.postComments= [];
               this.getPosts();
@@ -386,6 +410,7 @@ export class JspostingsComponent implements OnInit {
         this.thoughts = '';
         // $("#successfulPost").show().delay(5000).fadeOut();
         /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
+        this.postMessage = '';
         this.isAddPost = true;
         this.postComments= [];
         this.getPosts();
@@ -405,17 +430,19 @@ export class JspostingsComponent implements OnInit {
       // console.log(_that.postComments);
       if(this.isAddPost)
       {
+        $("#successfulPost").html(this.postMessage);
         $("#successfulPost").show().delay(5000).fadeOut();
         this.isAddPost = false;
       }
-
       this.isHomePicUploaing = false;
+      
       $('#overlay').fadeOut();
 
     });
 
     }
 
+    
     postSharing(postID, shareCount)
     {
        // alert(postID);
@@ -482,7 +509,7 @@ export class JspostingsComponent implements OnInit {
 
     displayMessage(postID)
     {
-      $("#commentPost_"+postID).show();
+      $("#commentPost_"+postID).toggle();
     }
 
 
@@ -613,7 +640,8 @@ cropperReadyR() {
       // alert(postID);
 
       // this.postComments['posts'] = this.postComments['posts'].filter( ({ id }) => id != postID);
-
+      this.isHomePicUploaing = true;
+       $('#overlay').fadeIn();
       const _that = this;
       this.EmployeeService_.deletePost(postID)
       .subscribe(postComments => (_that.postComments = postComments))
@@ -718,5 +746,122 @@ cropperReadyR() {
             $('#overlay').fadeOut();
             });
       }
+
+   
+      preview(template: TemplateRef<any>, files:any) {  
+        const _that = this;
+      // this.myFileInput.nativeElement.value = '';
+        // this.spinner.show();
+
+        if (files.length === 0)
+          return;
+     
+        var mimeType = files[0].type;
+        if (mimeType.match(/image\/*/) == null) {
+         // this.spinner.hide();
+          this.message = "Only images are supported.";
+          return;
+        }
+     
+        var reader = new FileReader();
+        this.imagePath = files;
+        let img = new Image();
+        img.src = window.URL.createObjectURL( files[0] );
+
+        reader.readAsDataURL(files[0]); 
+        reader.onload = (_event) => { 
+          this.imgURL = reader.result; 
+          
+          const width = img.naturalWidth;
+          const height = img.naturalHeight;
+          const newModalWidth = width +10;
+          // console.log('new wid' + newModalWidth);
+          // $(".modal-lg").css({'maxWidth':newModalWidth});
+          this.HomePagePostForm.patchValue({
+            uploadImageSource: files[0]
+        });
+
+         // this.spinner.hide();
+        }
+
+          _that.modalRef = this.modalService.show(  
+            template,  
+            Object.assign({}, { class: 'gray modal-lg' })  
+            );  
+
+            
+
+                    
+        
+
+      /*
+       this.modalRef = this.modalService.show(  
+         template,  
+          Object.assign({}, { class: 'gray modal-lg' })  
+          );  
+        
+        */
+
+       // this.myFileInput.nativeElement.value = '';
+
+      } 
+
+      
+
+      /*
+      ngAfterViewChecked()
+      {
+        const _that = this;
+        console.log('after content initiated');
+
+          $('#txtImages img').each(function() {
+            console.log('one');
+           var str = ($(this).attr("src"));
+            var pos = str.indexOf(';base64,');
+            var type = str.substring(5, pos);
+            var b64 = str.substr(pos + 8);
+
+            //_that.resizeBase64Img($(this).attr("src"), 545 , 545);
+
+            _that.resizeBase64Img(b64, 100, 100).then(function(newImg){
+              
+            $("body").append(newImg);
+        });
+
+        });
+      }
+
+        resizeBase64Img(base64, width, height) {
+        var canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        var context = canvas.getContext("2d");
+        var deferred = $.Deferred();
+        $("<img/>").attr("src", "data:image/gif;base64," + base64).load(function() {
+            context.scale(width/this.width,  height/this.height);
+            context.drawImage(this, 0, 0); 
+            deferred.resolve($("<img/>").attr("src", canvas.toDataURL()));               
+        });
+        return deferred.promise();    
+    }
+
+      imageLoaded() {
+        var w = $(this).width();
+        var h = $(this).height();
+        var parentW = $(this).parent().width();
+        var parentH = $(this).parent().height();
+
+       // console.log(w + '-' + h + '-' + parentW + '-' + parentH);
+        
+        if (w >= parentW){ //always true because of CSS
+          if (h > parentH){
+            $(this).css('top', -(h-parentH)/2);
+          } else if (h < parentH){
+            $(this).css('height', parentH).css('width', 'auto');
+            $(this).css('left', -($(this).width()-parentW)/2);
+          }
+        }
+     }
+     */
 
 }

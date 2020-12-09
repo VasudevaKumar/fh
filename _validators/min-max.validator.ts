@@ -14,7 +14,7 @@ export class MinMaxValidation {
   static checkSalary(control: AbstractControl) {
     let salMin = control.get('salMin').value;
     let salMax = control.get('salMax').value;
-    if (parseInt(salMin) > parseInt(salMax)) {
+    if (parseFloat(salMin) > parseFloat(salMax)) {
       control.get('salMax').setErrors({ salMax: true });
     }
     else {

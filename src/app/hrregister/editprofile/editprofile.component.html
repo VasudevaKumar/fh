@@ -76,7 +76,7 @@
                                <span class="text-danger">*</span>
                                </label>
                                <div class="form-group">
-                                  <input type="text" formControlName="companyName" class="form-control" 
+                                  <input type="text" formControlName="companyName" autocomplete="off" class="form-control" 
                                   [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" placeholder="Enter your company name" aria-label="Enter your company name" />
                                   <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
                                         <div *ngIf="f.companyName.errors.required">Company name required</div>
@@ -94,7 +94,7 @@
                                <span class="text-danger">*</span>
                                </label>
                                <div class="form-group">
-                                  <input type="text" formControlName="companyContact" class="form-control" 
+                                  <input type="text" formControlName="companyContact" autocomplete="off" class="form-control" 
                                   [ngClass]="{ 'is-invalid': submitted && f.companyContact.errors }" placeholder="Enter company contact name" aria-label="Enter company contact name" />
                                   <div *ngIf="submitted && f.companyContact.errors" class="invalid-feedback">
                                         <div *ngIf="f.companyContact.errors.required">Contact person name is required</div>
@@ -117,7 +117,7 @@
                               <span class="text-danger">*</span>
                               </label>
                               <div class="form-group">
-                                 <input type="text" formControlName="designation" class="form-control" 
+                                 <input type="text" formControlName="designation" autocomplete="off" class="form-control" 
                                  [ngClass]="{ 'is-invalid': submitted && f.designation.errors }" placeholder="Enter contact person designation" aria-label="Enter contact person designation" />
                                  <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
                                        <div *ngIf="f.designation.errors.required">Contact person designation is required</div>
@@ -180,7 +180,7 @@
                                <span class="text-danger">*</span>
                                </label>
                                      <div class = "form-group">
-                                      <input type="text" formControlName="sizeOfCompany" class="form-control" 
+                                      <input type="text" formControlName="sizeOfCompany" autocomplete="off" class="form-control" 
                                      [ngClass]="{ 'is-invalid': submitted && f.sizeOfCompany.errors }" placeholder="Enter size of the company" aria-label="Enter size of the company" />
                                      <div *ngIf="submitted && f.sizeOfCompany.errors" class="invalid-feedback">
                                            <div *ngIf="f.sizeOfCompany.errors.required">Company size is required</div>
@@ -201,7 +201,7 @@
                                <span class="text-danger">*</span>
                                </label>
                                <div class="form-group">
-                                  <input type="text" class="form-control" name="webSite" [ngClass]="{ 'is-invalid': submitted && f.webSite.errors }" formControlName="webSite" placeholder="Enter website" aria-label="Enter website">
+                                  <input type="text" class="form-control" autocomplete="off" name="webSite" [ngClass]="{ 'is-invalid': submitted && f.webSite.errors }" formControlName="webSite" placeholder="Enter website" aria-label="Enter website">
                                   <div *ngIf="submitted && f.webSite.errors" class="invalid-feedback">
                                      <div *ngIf="f.webSite.errors.required">Website is required</div>
                                      <div *ngIf="f.webSite.errors.pattern">Enter valid website address</div>
@@ -227,7 +227,7 @@
                                <span class="text-danger">*</span>
                                </label>
                                      <div class = "form-group">
-                                      <input type="text" formControlName="Industry" class="form-control" 
+                                      <input type="text" formControlName="Industry" autocomplete="off" class="form-control" 
                                      [ngClass]="{ 'is-invalid': submitted && f.Industry.errors }" placeholder="IT Industry" aria-label="Enter Industry" />
                                      <div *ngIf="submitted && f.Industry.errors" class="invalid-feedback">
                                            <div *ngIf="f.Industry.errors.required">Industry is required</div>
@@ -248,7 +248,7 @@
                                <span class="text-danger">*</span>
                                </label>
                                <div class="form-group">
-                                  <input type="text" class="form-control" name="companyType" [ngClass]="{ 'is-invalid': submitted && f.companyType.errors }" formControlName="companyType" placeholder="Public Sector" aria-label="Enter company type">
+                                  <input type="text" class="form-control" autocomplete="off" name="companyType" [ngClass]="{ 'is-invalid': submitted && f.companyType.errors }" formControlName="companyType" placeholder="Public Sector" aria-label="Enter company type">
                                   <div *ngIf="submitted && f.companyType.errors" class="invalid-feedback">
                                      <div *ngIf="f.companyType.errors.required">Company type is required</div>
                                      <div *ngIf="f.companyType.errors.pattern">Only characters and spaces are allowed.</div>
@@ -270,7 +270,7 @@
                                <span class="text-danger">*</span>
                                </label>
                                      <div class = "form-group">
-                                      <input type="text" formControlName="Founded" class="form-control" 
+                                      <input type="text" formControlName="Founded" autocomplete="off" class="form-control" 
                                      [ngClass]="{ 'is-invalid': submitted && f.Founded.errors }" placeholder="1990" aria-label="Founded" [maxLength]="4"/>
                                      <div *ngIf="submitted && f.Founded.errors" class="invalid-feedback">
                                            <div *ngIf="f.Founded.errors.required">Founded is required</div>
@@ -340,10 +340,11 @@
                               <span class="text-danger">*</span>
                               </label>
                                     <div class = "form-group">
-                                     <input type="text" formControlName="companyAddress" class="form-control" 
+                                     <input type="text" formControlName="companyAddress" autocomplete="off" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.companyAddress.errors }" placeholder="Enter size of the company" aria-label="Enter size of the company" [maxLength]="250"/>
                                     <div *ngIf="submitted && f.companyAddress.errors" class="invalid-feedback">
                                           <div *ngIf="f.companyAddress.errors.required">Company address is required</div>
+                                          <div *ngIf="f.companyAddress.errors.pattern">Enter valid address</div>
                                     </div>
 
                                  </div>
@@ -361,10 +362,10 @@
                                <span class="text-danger">*</span>
                                </label>
                                <div class="form-group">
-                                  <input type="text" class="form-control" name="headQts" [ngClass]="{ 'is-invalid': submitted && f.headQts.errors }" formControlName="headQts" placeholder="Mountain View, CA" aria-label="Enter head quarters">
+                                  <input type="text" class="form-control" autocomplete="off" name="headQts" [ngClass]="{ 'is-invalid': submitted && f.headQts.errors }" formControlName="headQts" placeholder="Mountain View, CA" aria-label="Enter head quarters">
                                   <div *ngIf="submitted && f.headQts.errors" class="invalid-feedback">
                                      <div *ngIf="f.headQts.errors.required">Head quarters is required</div>
-                                     <div *ngIf="f.companyAddress.errors.pattern">Enter valid address</div>
+                                     <div *ngIf="f.headQts.errors.pattern">Enter valid address</div>
                                </div>
  
                                </div>
@@ -384,7 +385,7 @@
                               <span class="text-danger">*</span>
                               </label>
                                     <div class = "form-group">
-                                     <input type="text" formControlName="specialties" class="form-control" 
+                                     <input type="text" formControlName="specialties" autocomplete="off" class="form-control" 
                                     [ngClass]="{ 'is-invalid': submitted && f.specialties.errors }" placeholder="search, ads, mobile, android, online video, apps, machine learning, virtual reality" aria-label="Enter specialties" [maxLength]="250"/>
                                     <div *ngIf="submitted && f.specialties.errors" class="invalid-feedback">
                                           <div *ngIf="f.specialties.errors.required">Specialties is required</div>

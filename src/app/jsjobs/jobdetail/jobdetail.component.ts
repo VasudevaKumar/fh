@@ -98,6 +98,7 @@ export class JobdetailComponent implements OnInit {
    .subscribe((resp) => {})
    .add(() => {
      /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
+     _that.isAlreadyApplied = 'Yes';
      this.spinner.hide();
      window.scrollTo({ top: 0, behavior: 'smooth' });
     this.alerts.setDefaults('timeout',500);

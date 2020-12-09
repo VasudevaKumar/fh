@@ -1,8 +1,11 @@
 <div class="py-4" *ngIf="isGridDataReady">
-
+   <div class="container">
+      <div class="col-md-12 p-1"><h6 class="font-weight-bold text-dark mb-0 text-truncate">{{typeOfProfiles}}</h6></div>
+   </div>
   <div class="container" *ngIf="jobListings.length==0">
     <div class="row" style="font-size:12px;">
        <!-- Main Content -->
+       
        <main class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
           <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
             <div class="col-md-12 p-3" style="background-color:#dedede;"><h6 class="font-weight-bold text-dark mb-0 text-truncate">No profiles found for this job</h6></div>
@@ -28,7 +31,7 @@
                                       <div class="col-md-10 nogutter float-left">
                                       <div class="overflow-hidden mr-2">
                                         <div class="pl-1 pb-2 col-md-12 float-left"><div class="col-md-1 float-left"><strong>Skills:</strong></div><div class="col-md-11 float-left">{{item.skills}}</div></div>       
-                                        <div class="pl-1 pb-2 col-md-12 float-left"><div class="col-md-1 float-left"><strong>Exp:</strong></div><div class="col-md-11 float-left">{{item.experienceString}}</div></div>       
+                                        <div class="pl-1 pb-2 col-md-12 float-left" *ngIf="item.experienceString"><div class="col-md-1 float-left"><strong>Exp:</strong></div><div class="col-md-11 float-left">{{item.experienceString}}</div></div>       
                                         <div class="pl-1 pb-2 col-md-12 float-left"><div class="col-md-1 float-left"><strong>Education:</strong></div><div class="col-md-11 float-left">{{item.educationString}}</div></div>       
                                        
                                       </div>
@@ -39,12 +42,31 @@
                                       <i class="fa fa-phone" aria-hidden="true"></i><span style="font-size: 10px;">{{item.primaryPhone}}</span>
                                     </div>
                                    </div>
+                                   <div class="d-flex">
                                    <div class="p-3 job-item-footer">
                                       <small class=""><i class="feather-clock"></i> Applied on {{item.applied_date}}</small>
-                                      <small class="ml-5"><i class="feather-download"></i><a href="https://facehiring.com/{{item.resumePath}}">Download Resume</a></small>
-                                      <small class="ml-5"><i class="feather-user"></i><a href="" target="_blank" [routerLink]="'/hrpostings/viewprofile/'+item.user_id">View Profile</a></small>
+                                      <small class="ml-5" *ngIf="item.resumePath!=null"><i class="feather-download"></i><a href="https://facehiring.com/{{item.resumePath}}">Download Resume</a></small>
+                                      <small class="ml-5" *ngIf="item.resumePath==null"><i class="feather-download"></i>&nbsp;No Resume&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</small>
+                                      <small class="ml-5"><i class="feather-user"></i><a href="" [routerLink]="'/hrpostings/viewprofile/'+item.user_id">View Profile</a></small>
 
                                    </div>
+
+                                   <div class="col-md-6 p-3 job-item-footer float-right text-right" *ngIf="item.action_id == '1'">
+                                    <small class="float-right ml-2 cursorHand" (click)="rejectProfile(item.application_id); false;"><i class="fa fa-close" aria-hidden="true" title="Reject Profile"></i> Reject</small>  
+                                    <small class="float-right cursorHand" (click)="shortListProfile(item.application_id); false;"><i class="fa fa-check" aria-hidden="true" title="Shortlist Profile" ></i> Shortlist</small>
+                                    </div>
+
+                                    <div class="col-md-6 p-3 job-item-footer float-right text-right" *ngIf="item.action_id == '5'">
+                                       <small class="float-right"><i class="fa fa-check" aria-hidden="true"></i>Shortlisted</small>
+                                    </div>
+
+                                    <div class="col-md-6 p-3 job-item-footer float-right text-right" *ngIf="item.action_id == '6'">
+                                       <small class="float-right"><i class="fa fa-close" aria-hidden="true"></i>Rejected</small>
+                                    </div>
+
+
+                                 </div>
+
                                 </div>
                              
                           </div>

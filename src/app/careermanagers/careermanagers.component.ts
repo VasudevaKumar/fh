@@ -16,6 +16,7 @@ export class CareermanagersComponent implements OnInit {
 
   isContentLoaded = false;
   careermanagerdetails = [];
+  employeeFilter: any = { collageName : '' };
 
   constructor(
     private formBuilder: FormBuilder,

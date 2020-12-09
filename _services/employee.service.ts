@@ -359,6 +359,43 @@ export class EmployeeService {
         ).pipe(map((data: any) => data.data));
   }
 
+
+  getLatestChatMessages(employeeID:any)
+  {
+    const api = this.env.apiBaseURL+'/getLatestChatMessages';
+    return this.http.post(
+        api,
+        {employeeID:employeeID},
+        ).pipe(map((data: any) => data.data));
+  }
+
+  getAllChatMessages(employeeID:any, latestSendToId:any)
+  {
+    const api = this.env.apiBaseURL+'/getAllChatMessages';
+    return this.http.post(
+        api,
+        {employeeID:employeeID,latestSendToId:latestSendToId },
+        ).pipe(map((data: any) => data.data));
+  }
+
+  getPendingChatMessages(employeeID:any)
+  {
+    const api = this.env.apiBaseURL+'/getPendingChatMessages';
+    return this.http.post(
+        api,
+        {employeeID:employeeID},
+        ).pipe(map((data: any) => data.data));
+  }
+
+
+  submitChatReply(employeeID:any, latestSendToId:any,replyMsg:any)
+  {
+    const api = this.env.apiBaseURL+'/submitChatReply';
+    return this.http.post(
+        api,
+        {employeeID:employeeID,latestSendToId:latestSendToId,replyMsg:replyMsg },
+        ).pipe(map((data: any) => data.data));
+  }
   acceptRequestNotification(ID:any, category:any)
   {
     const api = this.env.apiBaseURL+'/acceptRequestNotification';
@@ -414,5 +451,13 @@ export class EmployeeService {
         ).pipe(map((data: any) => data.data));
   }
 
+  clearPendingChatMessages(employeeID:any)
+  {
+    const api = this.env.apiBaseURL+'/clearPendingChatMessages';
+    return this.http.post(
+        api,
+        {employeeID:employeeID},
+        ).pipe(map((data: any) => data.data));
+  }
 
 }

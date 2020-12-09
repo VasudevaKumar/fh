@@ -57,9 +57,11 @@ export class LoginComponentComponent implements OnInit {
     private _interactionService:InteractionService
   ){
 
+    /*
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
-  }
+    }
+    */
   }
 
   changePreferredCountries() {
@@ -163,21 +165,33 @@ export class LoginComponentComponent implements OnInit {
                           if(this.currentUser.length > 0)
                           {
                             _that.loginPage = false;
-                            this._interactionService.sendMessage(this.currentUser[0]['role_id']);
+                            this._interactionService.sendMessage(this.currentUser);
                             $("#loginDialog").dialog('close');
+
                             if(this.currentUser[0]['role_id'] == 2)
                             {
                               setTimeout(function(){
                                 $('.alertsContainer .alertsRow.success').attr("style", "display: none !important");
-                                _that.router.navigate(['/jspostings']);
-                                }, 8000);
+                                _that.loginPage = false;
+                                $("#loginDialog").dialog('close');
+                                // _that.router.navigate(['/jspostings']);
+                                window.location.href = '/jspostings';
+
+                                }, 2000);
                             }
                             if(this.currentUser[0]['role_id'] == 3)
                             {
+                            
+                            _that.loginPage = false;
+                            $("#loginDialog").dialog('close');
+
                               setTimeout(function(){
                                 $('.alertsContainer .alertsRow.success').attr("style", "display: none !important");
-                                _that.router.navigate(['/hrregister/home']);
-                              }, 8000);
+                                _that.loginPage = false;
+                                $("#loginDialog").dialog('close');
+                                //_that.router.navigate(['/hrregister/home']);
+                                window.location.href = '/hrregister/home';
+                              }, 2000);
                             }
                           }
                          }
@@ -345,4 +359,17 @@ export class LoginComponentComponent implements OnInit {
     localStorage.clear();
   }
 
+  openPrivacyPolicy(){
+    $('#PrivacyPolicy').dialog({
+      modal: true,
+       title: 'Privacy Policy',
+       zIndex: 1,
+       maxHeight: 600,
+       height: 600,
+       maxWidth: 800,
+       width: 800,
+       resizable: false,
+       dialogClass: 'no-titlebar'
+     });
+  }
 }

@@ -16,7 +16,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { ConfirmationDialogComponentComponent } from './confirmation-dialog-component/confirmation-dialog-component.component';
 import { MenucomponentComponent } from './menucomponent/menucomponent.component';
 import { Pipe, PipeTransform } from '@angular/core';
-
+import { NgChatModule } from 'ng-chat';
 
 
 @Pipe({name: 'replaceImg78'})
@@ -33,6 +33,17 @@ export class replaceImg40Pipe implements PipeTransform {
   }
 }
 
+@Pipe({
+  name: 'truncatetext'
+ })
+  export class truncatetextPipe implements PipeTransform {
+  transform(value: string, args: any[]): string {
+     const limit = args.length > 0 ? parseInt(args[0], 10) : 20;
+     const trail = args.length > 1 ? args[1] : '...';
+     return value.length > limit ? value.substring(0, limit) + trail : value;
+    }
+ }
+
 @NgModule({
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -44,7 +55,8 @@ export class replaceImg40Pipe implements PipeTransform {
     MatIconModule,
     NgxIntlTelInputModule,
     AppRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgChatModule
     
   ],
   declarations: [
@@ -56,7 +68,8 @@ export class replaceImg40Pipe implements PipeTransform {
     ConfirmationDialogComponentComponent,
     MenucomponentComponent,
     replaceImg78Pipe,
-    replaceImg40Pipe
+    replaceImg40Pipe,
+    truncatetextPipe
     
 
   ],

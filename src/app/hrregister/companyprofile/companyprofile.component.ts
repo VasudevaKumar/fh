@@ -37,7 +37,7 @@ export class CompanyprofileComponent implements OnInit {
   companyUpdates:Array<any>;
   companyCareers:Array<any>;
   isContentLoaded = false;
-
+  loggedInCompanyID:any;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -82,7 +82,10 @@ export class CompanyprofileComponent implements OnInit {
           // console.log(_that.employeeProfiles);
           this.imageSrcLeft = this.employeeProfiles[0]['companyProfilePicture'];
           this.isEmployeeProfileLoaded = true;
-          this.loadCompanyContent(employeeID);
+          this.loggedInCompanyID = this.employeeProfiles[0]['companyID'];
+          this.loadCompanyContent(this.loggedInCompanyID);
+         
+         //  this.loadCompanyContent(employeeID);
 
       });
 
@@ -90,6 +93,7 @@ export class CompanyprofileComponent implements OnInit {
 
     async loadCompanyContent(employeeID) {
      
+      console.log('employee id ' + employeeID);
       let keyword = this.getFirstWord(this.employeeProfiles[0].Industry);
      /* const similarProfiles = this.HrserviceService_.getSimilarCompanyProfiles(employeeID, keyword).toPromise();
       const updates = this.HrserviceService_.companyUpdates(employeeID).toPromise();
@@ -107,7 +111,8 @@ export class CompanyprofileComponent implements OnInit {
       this.activeJobPostings = res[0]['activeJobs'];
 
       this.isContentLoaded = true;
-      // console.log(this.companyUpdates);
+      this.isSimilarProfileLoaded = true;
+      // console.log(this.similarCompanyProfiles);
      // console.log(this.companyCareers);
       this.spinner.hide();
 

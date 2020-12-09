@@ -1,0 +1,130 @@
+<div class="py-4" *ngIf="isContentLoaded">
+  <div class="container">
+    <div class="row">
+      <form style="width:100%; max-height: 100%;">
+        <div class="row">
+          <!-- Main Content -->
+
+          <aside class="col-md-3" *ngIf="employeeProfiles.length>0">
+            <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+              <div class="py-4 px-3 border-bottom">
+                <img src="{{employeeProfiles[0]['companyLogo']}}" class="img-fluid mt-2 rounded-circle"
+                  alt="Responsive image" onerror="this.src='assets/files/profilePics/blank.png';">
+                <h5 class="font-weight-bold text-dark mb-1 mt-4">{{employeeProfiles[0]['companyName']}}</h5>
+              </div>
+            </div>
+          </aside>
+
+
+          <main class="col-md-9" *ngIf="selectedJobPosting.length>0">
+            <div class="border rounded bg-white mb-3" style="height: 100%; line-height: 2rem;">
+              <div class="box-title border-bottom p-3">
+                <h6 class="m-0">View job</h6>
+                <p class="mb-0 mt-0 small">
+                </p>
+              </div>
+              <div class="box-body p-3" style="max-height: 100%;">
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Looking For:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].lookingFor}}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Job Location:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].jobLocation}}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Years:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].yearMin}} -
+                      {{selectedJobPosting[0].yearMax}} Years</div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Salary:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].salMin}} -
+                      {{selectedJobPosting[0].salMax}} lakhs/annum</div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Job Role:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].jobRole}}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Industry Type:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].industryType}}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Functional area:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].functionalArea}}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Role category:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].roleCategory}}</div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Required qualification:</div>
+                    <div class="col-md-8 text-left float-left">{{selectedJobPosting[0].requiredQualification}}</div>
+                  </div>
+                </div>
+
+                
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Job Description:</div>
+                    <div class="col-md-8 text-left float-left" [innerHTML]="selectedJobPosting[0].jobDesription"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Job Responsibilities:</div>
+                    <div class="col-md-8 text-left float-left" [innerHTML]="selectedJobPosting[0].jobRes"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-12 nogutter" style="margin-bottom: 30px !important;">
+                  <div class="col-md-12 nogutter float-left">
+                    <div class="col-md-4 text-left float-left boldFont">Benefits & Perks:</div>
+                    <div class="col-md-8 text-left float-left" [innerHTML]="selectedJobPosting[0].jobBenefit"></div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+
+
+          </main>
+
+        </div>
+      </form>
+
+    </div>
+
+
+  </div>
+
+</div>

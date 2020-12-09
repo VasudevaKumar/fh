@@ -1,6 +1,6 @@
-<div class="profile-cover text-center">
-    <form [formGroup]="HomPageForm" style="width:100%;" enctype="multipart/form-data" style="margin:0px; padding:0px;">
-     <img [src]="imageSrcLeft || 'assets/img/employee_default.png'" id="leftSidePrfilePicImg" (click)="fn_leftSidePrfilePic();" class="cursorHand" style="width:1335px; height:270px">
+<div class=" col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12 profile-cover text-center" style="width:100%; height:270px;">
+    <form [formGroup]="HomPageForm" style="width:100%;" enctype="multipart/form-data" style="margin:0px; padding:0px;" >
+     <img [src]="imageSrcLeft || 'assets/img/employee_default.png'" id="leftSidePrfilePicImg" (click)="fn_leftSidePrfilePic();" class="cursorHand" style="width: 100%; height:270px;">
              <input type="file" id="leftSideFile" style="display:none" name="file-attachment" (change)="onLeftSidePicChange($event);" accept="image/*" formControlName="leftSideFile"/> 
              <div *ngIf="ImageSizeerror" class="warning-block">Please upload large images (more than 1500 X 300)</div>
              <div *ngIf="ImageTypeeerror" class="warning-block">Only allow images (.png , .jpg, .jpg)</div>
@@ -13,7 +13,7 @@
   <div class="bg-white shadow-sm border-bottom" *ngIf="isEmployeeProfileLoaded && employeeProfiles.length > 0">
      <div class="container">
         <div class="row">
-           <div class="col-md-12">
+           <div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
               <div class="d-flex align-items-center py-3">
                  <div class="profile-left">
                     <h5 class="font-weight-bold text-dark mb-1 mt-0">{{employeeProfiles[0]['companyName']}} <span class="text-info"><i data-toggle="tooltip" data-placement="top" title="Verified" class="feather-check-circle"></i></span></h5>
@@ -137,7 +137,18 @@
                       <div class="box shadow-sm border rounded bg-white mb-3 osahan-post" style="width: 100%;">
                          <div class="p-3">
                             <!-- <textarea placeholder="Add Comment..." class="form-control border-0 p-0 shadow-none" rows="1" (change)="pushComment($event.target.value, i,item.value['posts'].id);" (blur)="clearValue($event);" value=""></textarea> -->
-                            <input type="text" placeholder="Add updates..." class="form-control border-0 p-0 shadow-none" (keydown.enter)="pushUpdates($event.target.value, $event);" >
+                            <input type="text" placeholder="Add updates..." class="form-control border-0 p-0 shadow-none" (keydown.enter)="pushUpdates($event.target.value, $event);" [(ngModel)]="c_updates">
+
+                            <div class="flex-shrink-1" style="width: 100%;">
+                              <!-- <button type="button" class="btn btn-light btn-sm">Preview</button> -->
+                              <div class="float-left" style="color: red;" *ngIf="!c_updatesFlag">
+                                 Please enter updates
+                              </div>
+                              <div class="float-right">
+                                 <button type="button" class="btn btn-primary btn-sm" (click)="submitUpdate();" style="margin:0px 0px 5px 0px;">Post</button>
+                              </div>
+                           </div>
+
                          </div>
                       </div>
  
@@ -194,12 +205,25 @@
  
                        <div class="box shadow-sm border rounded bg-white mb-3 osahan-post" style="width: 100%;">
                          <div class="p-3">
-                            <textarea placeholder="Add Comment..." class="form-control border-0 p-0 shadow-none" rows="2" (keydown.enter)="pushCareer($event.target.value, $event);"></textarea>
+
+                           <textarea placeholder="Add Careers..." class="form-control border-0 p-0 shadow-none" rows="2" (keydown.enter)="pushCareer($event.target.value, $event);" [(ngModel)]="c_updatesCareer" style="margin-bottom: 10px;"></textarea>
+
+                           <div class="flex-shrink-1" style="width: 100%;">
+                              <!-- <button type="button" class="btn btn-light btn-sm">Preview</button> -->
+                              <div class="float-left" style="color: red; margin-top: 25px;" *ngIf="!c_updatesCareerFlag">
+                                 Please enter career
+                              </div>
+                              <div class="float-right">
+                                 <button type="button" class="btn btn-primary btn-sm" (click)="submitCareer();" style="margin:25px 0px 5px 0px;">Post</button>
+                              </div>
+                              <div class="float-none"></div>
+                           </div>
+                           
                             <!-- <input type="text" placeholder="Add updates..." class="form-control border-0 p-0 shadow-none" (keydown.enter)="pushUpdates($event.target.value, i, $event);" >-->
                          </div>
                       </div>
                       
-                      <div class="row" >
+                      <div class="box shadow-sm border rounded bg-white mb-3 osahan-post">
                        <div class="box-body p-3" *ngFor="let companyCareer of companyCareers">
                           {{companyCareer.careerDeatils}}
                           <div class="p-3 job-item-footer">

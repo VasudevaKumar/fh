@@ -25,6 +25,21 @@
       border-right-color: transparent;
       border-radius: 50%;
   }
+  button.btn {
+    padding: .4rem 1rem !important;
+}
+.btn {
+   color: #000;
+}
+.btn-grey{
+ background-color: gray;
+  border-color: gray;
+}
+
+.connectContent{
+  height:70px;
+}
+
   @keyframes rotate {
       0% {
           transform: rotate(0deg);
