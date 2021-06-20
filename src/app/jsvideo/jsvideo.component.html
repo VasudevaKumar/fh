@@ -1,0 +1,69 @@
+<div class="py-4">
+  <div class="container">
+     <div class="row">
+        <!-- Main Content -->
+        <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" style="padding-left: 100px;">
+          <div class ="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" style="padding-left:16px;"> 
+            <form>
+              <label class="radio-inline">
+                <input type="radio" name="optradio" (click)="showNew();" checked><span class="pl-5">Create new video</span>
+              </label>
+              <label class="radio-inline pl-5" *ngIf="videoUrl!=''">
+                <input type="radio" name="optradio" (click)="showExisting(); "><span class="pl-5">Review existing video</span>
+              </label>
+            </form>
+          </div>
+          <div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" *ngIf="isCreate"> 
+          <div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+                    <video id="video_{{idx}}" class="video-js vjs-default-skin" playsinline></video>
+           </div>
+
+           <div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" *ngIf="isReadyToPublish">
+            <div class="col col-xl-2 order-xl-2 col-lg-2 order-lg-1 col-md-2 col-sm-2 col-2 float-left nogutter">
+              <button type="button" class="btn btn-primary mt-5" (click)="reset(); false;">Reset</button>
+            </div>
+
+            <div class="col col-xl-2 order-xl-2 col-lg-2 order-lg-1 col-md-2 col-sm-2 col-2 float-left nogutter" >
+              <button type="button" class="btn btn-success mt-5" (click)="publish(); false;">Publish</button>
+            </div>
+
+            <div class="col col-xl-6 order-xl-2 col-lg-6 order-lg-1 col-md-6 col-sm-6 col-6 float-left nogutter">
+            </div>
+           </div>
+
+           <div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12 alert alert-success" role="alert" *ngIf="successmsg!=''">{{successmsg}}</div>
+          </div>
+           <div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12" *ngIf="isExiting">
+            <video width="320" height="240" controls *ngIf="videoUrl">
+              <source src="{{videoUrl}}" type="video/mp4">
+            Your browser does not support the video tag.
+            </video>
+
+           </div>
+        </main>
+        <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+           <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+             <img src="assets/images/add/tomorrow.png" class="img-fluid" alt="Responsive image">
+           </div>
+
+           <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+             <img src="assets/images/add/startyourjob.png" class="img-fluid" alt="Responsive image">
+          </div>
+
+        </aside>
+        <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
+
+          <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+             <img src="assets/images/add/facehireLogin.png" class="img-fluid" alt="Responsive image">
+          </div>
+
+          <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center overflow-hidden">
+             <img src="assets/images/add/doordonot.png" class="img-fluid" alt="Responsive image">
+          </div>
+          
+
+           
+        </aside>
+     </div>
+  </div>
+</div>

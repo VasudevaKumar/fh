@@ -273,5 +273,22 @@ export class HrserviceService {
         ).pipe(map((data: any) => data.data));
   }
 
+  loadEmployeeDetails(role_id)
+  {
+    const api = this.env.apiBaseURL+'/Employee/loadEmployeeDetails';
+    return this.http.post(
+        api,
+        {role_id:role_id},
+        ).pipe(map((data: any) => data.data));
+  }
+
+  loadCount()
+  {
+    const api = this.env.apiBaseURL+'/Employee/loadCount';
+    return this.http.get(
+        api,
+        {},
+        ).pipe(map((data: any) => data.data));
+  }
 
 }

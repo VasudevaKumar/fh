@@ -72,7 +72,7 @@ export class LoginComponentComponent implements OnInit {
     this.authenticationService.logout();
     this.clearLocalstorage();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    
+    this._interactionService.checkChatVisible(false);
 
     this.userSubscription = this.route.params.subscribe(
       (params: Params) => {
@@ -235,9 +235,20 @@ export class LoginComponentComponent implements OnInit {
     this.loginPage = true;
     this.registrationPage = false;
 
+    let logintitle = '';
+    if(roleID == 2)
+    {
+      logintitle = 'Login as Jobseeker';
+    }
+    if(roleID == 3)
+    {
+      logintitle = 'Login as Employer';
+    }
+
+
     $('#loginDialog').dialog({
       modal: true,
-       title: 'Login here',
+       title: logintitle,
        zIndex: 10000,
        maxHeight: 270,
        height: 270,

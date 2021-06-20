@@ -25,7 +25,6 @@ export class ActivateComponent implements OnInit {
   currentUser =  '';
   isCredentialsCorrect = true;
   activationString = '';
-
   userSubscription: Subscription;
   
   constructor(private formBuilder: FormBuilder,

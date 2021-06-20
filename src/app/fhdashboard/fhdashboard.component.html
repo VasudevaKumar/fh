@@ -1,0 +1,51 @@
+<div id="layoutSidenav_content">
+    <main *ngIf="isGridDataReady">
+        <div class="container-fluid">
+            <div class="row nogutter">
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-primary text-white mb-1">
+                        <div class="card-body">Total Job Seeker Profiles As On Today : {{employeeCounts[0]['number']}}</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="" (click)="viewDetails('2'); false;">View Details</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-success text-white mb-1">
+                        <div class="card-body">Total Career Manager Profiles As On Today : {{employeeCounts[2]['number']}}</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="" (click)="viewDetails('4'); false;">View Details</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-warning text-white mb-1">
+                        <div class="card-body">Total Company Profiles As On Today : {{employeeCounts[1]['number']}}</div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="" (click)="viewDetails('3'); false;">View Details</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row ml-3"><h6>{{roleType_description}}</h6></div>
+            <div class="row">
+                <div style="height: 300px; width: 100%; padding: 0px; margin: 0px;">
+                    <ag-grid-angular
+                      #agGrid
+                      style="width: 100%;"
+                      id="myGrid"
+                      class="ag-theme-balham"
+                      [columnDefs]="columnDefs"
+                      [rowData]="rowData"
+                      (gridReady)="onGridReady($event)"
+                    ></ag-grid-angular>
+                  </div>
+            </div>
+            
+        </div>
+    </main>
+</div>

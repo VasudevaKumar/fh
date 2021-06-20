@@ -1,0 +1,286 @@
+<div class="py-4 mt--25">
+    <div class="container" *ngIf="isContentLoaded">
+      
+
+       <div class="row" style="height: 5px;"></div>
+       <div class="row">
+          <!-- Main Content -->
+          <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+
+            <div class="row" *ngIf ="postComments.length == 0">
+               <h4>No activities found</h4>
+            </div>
+             <div class="row" *ngIf ="postComments.length > 0">
+               <div class="box mb-3 shadow-sm border rounded bg-white osahan-post full-width" id="fhPostID{{item.value['posts'].id}}" *ngFor="let item of postComments | keyvalue ; index as i" >
+                <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
+                   <div class="dropdown-list-image mr-3">
+                      <img class="rounded-circle" src="{{item.value['posts'].imageProfile | replaceImg40}}" onerror="this.src='assets/files/profilePics/blank.png';" alt="">
+                      <div class="status-indicator bg-success"></div>
+                   </div>
+                   <div class="font-weight-bold">
+                      <div class="text-truncate"><a href="" (click)="showProfile(item.value['posts'].user_id); false;">{{item.value['posts'].firstName}} {{item.value['posts'].lastName}}</a></div>
+                      <div class="small text-gray-500">{{item.value['posts'].positionName}} at {{item.value['posts'].companyName}}</div>
+                   </div>
+                   <span class="ml-auto small">{{item.value['posts'].created_at}}</span>
+                </div>
+                <div class="p-1 border-bottom osahan-post-body featuredImg"  *ngIf="item.value['posts'].type == 'text'" [innerHTML] = "item.value['posts'].post" >
+               </div>
+                <div class="p-1 border-bottom osahan-post-body featured" *ngIf="item.value['posts'].type == 'image'">
+                  <div class="" style="width: 473px !important;">{{item.value['posts'].notes}}</div>
+                  <img src="{{item.value['posts'].post}}" onerror="this.src='assets/files/profilePics/blank.png';" class="">
+                </div>
+                
+                <div class="p-3 border-bottom osahan-post-footer">
+                   <a href="" class="mr-3 text-secondary" *ngIf="item.value['posts'].isLiked == 'N' && item.value['posts'].user_id != loggedInEmployeeID" (click)="postLike(item.value['posts'].id , item.value['posts'].cnt_likes); false;"><i class="feather-heart text-danger"></i></a>
+                   <a href="" class="mr-3 text-secondary isDisabled " *ngIf="item.value['posts'].isLiked == 'Y'"><img src="assets/images/redcolorHeart.jpg" class="img-fluid mt--2" (click)="preventDefault();false;"></a>
+                   <a href="" class="mr-3 text-secondary isDisabled" *ngIf="item.value['posts'].isLiked == 'N' && item.value['posts'].user_id == loggedInEmployeeID"><img src="assets/images/redcolorHeart.jpg" class="img-fluid mt--2" (click)="preventDefault();false;"></a>
+
+                   <a href="" class="mr-3 text-secondary" (click)="displayMessage(item.value['posts'].id); false;"><i class="feather-message-square"></i><span id="commentDiv_{{item.value['posts'].id}}">{{item.value['posts'].cnt_comments}}</span></a>
+                   <!-- <a href="" class="mr-3 text-secondary" title="Share to your time line" *ngIf="item.value['posts'].user_id != loggedInEmployeeID" (click)="postSharing(item.value['posts'].id , item.value['posts'].cnt_shares); false;"><i class="feather-share-2"></i><span id="shareDiv_{{item.value['posts'].id}}">{{item.value['posts'].cnt_shares}}</span></a> -->
+                   <a href="" class="mr-3 text-secondary" (click)="deletePost(item.value['posts'].id); false;" *ngIf="item.value['posts'].user_id == loggedInEmployeeID"><i class="feather-trash"></i></a>
+
+                   
+                </div>
+                <div class="p-3 border-bottom osahan-post-footer" id="likePost_{{item.value['posts'].id}}">
+                  <a href="" class="mr-3 text-secondary" title="View likes" (click)="fn_likesView(likestemplate, item.value['posts'].id); false;" *ngIf="item.value['posts'].cnt_likes > 0"><img src="assets/images/viewlike.jpg" class="img-fluid mt--2" (click)="preventDefault();false;"><span id="likeDiv_{{item.value['posts'].id}}">{{item.value['posts'].cnt_likes}}</span></a>
+                </div>
+                <div class="row" style="display: none;" id="commentPost_{{item.value['posts'].id}}">
+                <div class="p-3 d-flex align-items-top border-bottom osahan-post-comment fullwidth" *ngFor="let cmt of item.value['posts'].comments">
+                   <div class="dropdown-list-image mr-3">
+                      <img class="rounded-circle" src="{{cmt.imageProfile | replaceImg40}}" onerror="this.src='assets/files/profilePics/blank.png';" alt="">
+                      <div class="status-indicator bg-success"></div>
+                   </div>
+                   <div class="">
+                      <div class="text-truncate full-width"> <a href="" (click)="showProfile(cmt.user_id); false;">{{cmt.firstName}} {{cmt.lastName}}</a> <span class="float-right small">{{cmt.created_at}}</span></div>
+                      <div class="" style="width: 473px !important;">{{cmt.comments}}</div>
+                   </div>
+                </div>
+                <div class="p-3">
+                   <!-- <textarea placeholder="Add Comment..." class="form-control border-0 p-0 shadow-none" rows="1" (change)="pushComment($event.target.value, i,item.value['posts'].id);" (blur)="clearValue($event);" value=""></textarea> -->
+                   <input type="text" placeholder="Add Comment..." class="form-control border-0 p-0 shadow-none" (keydown.enter)="pushComment($event.target.value, i,item.value['posts'].id, $event);" >
+                </div>
+               </div>
+               </div>
+            </div>
+          </main>
+          <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+             <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+               <div  *ngIf="isEmployeeProfileLoaded">
+               <div class="py-4 px-3 border-bottom">
+                   <img src="{{employeeProfiles[0].imageProfile}}" onerror="this.src='assets/files/profilePics/blank.png';" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+                   <h5 class="font-weight-bold text-dark mb-1 mt-4">{{employeeProfiles[0].firstName}} {{employeeProfiles[0].lastName}}</h5>
+                   <p class="mb-0 text-muted">{{employeeProfiles[0].positionName}}</p>
+                </div>
+               </div> 
+                <div class="d-flex">
+                   <div class="col-6 border-right p-3">
+                      <h6 class="font-weight-bold text-dark mb-1">{{totalConnects[0].totalConneections}}</h6>
+                      <p class="mb-0 text-black-50 small">Connections</p>
+                   </div>
+                   <div class="col-6 p-3">
+                      <h6 class="font-weight-bold text-dark mb-1">{{totalConnects[0].totalViews}}</h6>
+                      <p class="mb-0 text-black-50 small"><a href="" (click)="fn_profilView(viewstemplate); false;">Views</a></p>
+                   </div>
+                </div>
+                <div class="overflow-hidden border-top">
+                   <a class="font-weight-bold p-3 d-block" [routerLink]="['/jsregister/profile']"> View my profile </a>
+                </div>
+             </div>
+
+
+             <div class="box mb-3 shadow-sm rounded bg-white view-box overflow-hidden">
+                <div class="d-flex text-center">
+                  <img src="assets/images/add/startyourjob.png" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="overflow-hidden border-top text-center">
+                  <img src="assets/images/add/tomorrow.png" class="img-fluid" alt="Responsive image">
+                </div>
+             </div>
+             <div class="box shadow-sm mb-3 rounded bg-white ads-box text-center">
+               <img src="assets/images/add/doordonot.png" class="img-fluid" alt="Responsive image">
+             </div>
+          </aside>
+          <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
+             <div class="box shadow-sm border rounded bg-white mb-3">
+                <div class="box-title border-bottom p-3">
+                   <h6 class="m-0">People you might know</h6>
+                </div>
+
+                <div class="box-body p-3" *ngIf ="peopleWhoMayKnow.length == 0">
+                  <p>No profiles found</p>
+                </div>
+                <div class="box-body p-3" *ngIf ="peopleWhoMayKnow.length > 0">
+                   <div class="d-flex align-items-center osahan-post-header mb-3 people-list" *ngFor="let item of peopleWhoMayKnow">
+                      <div class="dropdown-list-image mr-3">
+                         <img class="rounded-circle" src="{{item.imageProfile}}" alt="">
+                         <div class="status-indicator bg-success"></div>
+                      </div>
+                      <a href="" (click)="showProfile(item.user_id); false;">
+                      <div class="font-weight-bold mr-2">
+                         <div class="text-truncate">{{item.firstName}} {{item.lastName}}</div>
+                         <div class="small text-gray-500" *ngif="item.positionName!=''">{{item.positionName}} at {{item.companyName}}
+                         </div>
+                      </div>
+                     </a>
+                      <!--<span class="ml-auto"><button type="button" class="btn btn-light btn-sm"><i class="feather-user-plus"></i></button>
+                      </span> -->
+                   </div>
+                   
+                </div>
+             </div>
+             <div class="box shadow-sm border rounded bg-white mb-3">
+               <img src="assets/images/add/doordonot.png" class="img-fluid" alt="Responsive image">
+             </div>
+             <div class="box shadow-sm border rounded bg-white mb-3">
+               <img src="assets/images/add/facehireLogin.png" class="img-fluid" alt="Responsive image">
+             </div>
+          </aside>
+       </div>
+    </div>
+    <div id="waitDialog" style="display: none; "></div>
+
+    <div id="imageCropDailogL" style="display: none; display: flex;  justify-content: center;">
+      <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="4 / 1"
+      format="png"
+      (imageCropped)="imageCroppedL($event)"
+      (imageLoaded)="imageLoadedL()"
+      (cropperReady)="cropperReadyL()"
+      (loadImageFailed)="loadImageFailedL()"
+  ></image-cropper>
+  </div>
+
+
+  <div id="imageCropDailogR" style="display: none; display: flex;  justify-content: center;">
+   <image-cropper
+   [imageChangedEvent]="imageChangedEventR"
+   [maintainAspectRatio]="true"
+   [aspectRatio]="4 / 1"
+   format="png"
+   (imageCropped)="imageCroppedR($event)"
+   (imageLoaded)="imageLoadedR()"
+   (cropperReady)="cropperReadyR()"
+   (loadImageFailed)="loadImageFailedR()"
+></image-cropper>
+</div>
+
+<div id="overlay" *ngIf="isHomePicUploaing">
+   <div class="spinner"></div>
+   <br/>
+   Loading...
+</div>
+
+ </div>
+
+ <ng-template #viewstemplate>  
+      <div class="modal-header">  
+        <h4 class="modal-title pull-left">Who viewed your profile</h4>  
+   
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">  
+   
+         <span aria-hidden="true">×</span>  
+   
+       </button>  
+   
+     </div>  
+   
+     <div class="modal-body">  
+       
+      <div class="row" *ngIf ="profileViewDetails.length == 0"> No one viewed your profile</div>
+
+
+       <div class="row" *ngIf ="profileViewDetails.length > 0">
+       <div class="input-group h-40" *ngFor="let pitem of profileViewDetails">
+            <div class="dropdown-list-image mr-3 mt--15">
+               <img src="{{pitem.imageProfile | replaceImg40}}" onerror="this.src='assets/files/profilePics/blank.png';" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+               <div class="status-indicator bg-success"></div>
+            </div>
+            <div class="overflow-hidden backgroundGrey">
+               <div class="text-truncate"><a href="" (click)="closeModel(pitem.user_id); false;">{{pitem.firstName}} {{pitem.lastName}}</a> viewed your profile at {{pitem.viewed_date}}</div>
+            </div>
+         </div>
+         <hr>
+      </div>
+      
+
+   
+   
+     </div>  
+   
+     <div class="modal-footer">  
+   
+       <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>  
+   
+     </div>  
+   
+   </ng-template> 
+
+   <ng-template #likestemplate>  
+      <div class="modal-header">  
+        <h4 class="modal-title pull-left">Who liked your post</h4>  
+   
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">  
+   
+         <span aria-hidden="true">×</span>  
+   
+       </button>  
+   
+     </div>  
+   
+     <div class="modal-body">  
+      <div class="row" *ngIf ="postLikeDetails.length == 0"> No details found</div>
+       <div class="row" *ngIf ="postLikeDetails.length > 0">
+       <div class="input-group h-40" *ngFor="let litem of postLikeDetails">
+            <div class="dropdown-list-image mr-3 mt--15">
+               <img src="{{litem.imageProfile | replaceImg40}}" onerror="this.src='assets/files/profilePics/blank.png';" class="img-fluid mt-2 rounded-circle" alt="Responsive image">
+               <div class="status-indicator bg-success"></div>
+            </div>
+            <div class="overflow-hidden backgroundGrey">
+               <div class="text-truncate"><a href="" (click)="closeModel(litem.user_id); false;">{{litem.firstName}} {{litem.lastName}}</a> liked {{litem.postOwner}} post at {{litem.created_at}}</div>
+            </div>
+         </div>
+         <hr>
+      </div>
+      
+
+   
+   
+     </div>  
+   
+     <div class="modal-footer">  
+   
+       <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>  
+   
+     </div>  
+   
+   </ng-template> 
+
+
+   <ng-template #imageUpload>  
+      <div class="modal-header">  
+        <h4 class="modal-title pull-left">Submit your post</h4>  
+       <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">  
+         <span aria-hidden="true">×</span>  
+       </button>  
+   
+     </div>  
+   
+     <div class="modal-body" style="max-width:800px; max-height:800px;">  
+      
+      <div class="row nogutter">
+         <textarea placeholder="Add comments..." class="form-control border-0 p-0 shadow-none" rows="2" style="margin-bottom: 10px;" id="imageComments" maxlength="500"></textarea>
+      </div>
+
+      <div class="col col-xl-12 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12 profile-cover text-center">
+         <img [src]="imgURL || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR2EkcTCrrdW1cyriPIgrCzaB8X3B0Mp1lXkFgSoX5n0gh9x40dA&s'" style="max-height: 730px; max-width: 100%;" >     
+      </div>  
+
+     </div>
+     <div class="modal-footer">  
+      <button type="button" class="btn btn-primary btn-sm" (click)="postImage();" style="margin:5px 0px 5px 0px;">Post</button> 
+      </div>  
+     </ng-template> 
+
+   

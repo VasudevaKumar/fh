@@ -106,8 +106,17 @@ export class RegisterService {
     return this.http.get(api).pipe(map((data: any) => data.data));
   }
   
+  
 
-
+  friendlist(employeeID:any)
+  {
+    const api = this.env.apiBaseURL+'/friendlist';
+    return this.http.post(
+        api,
+        {employeeID:employeeID},
+        ).pipe(map((data: any) => data.data));
+  }
+  
 
 
 

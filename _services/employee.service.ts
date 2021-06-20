@@ -16,6 +16,7 @@ export class EmployeeService {
   getEmployeeHomDetails(employeeID:any)
   {
     const api = this.env.apiBaseURL+'/getEmployeeHomDetails';
+    
     return this.http.post(
         api,
         {employeeID:employeeID},
@@ -66,6 +67,26 @@ export class EmployeeService {
         {employeeID:employeeID},
         ).pipe(map((data: any) => data.data));
   }
+
+  getMyPosts(employeeID:any)
+  {
+    const api = this.env.apiBaseURL+'/getMyPosts';
+    return this.http.post(
+        api,
+        {employeeID:employeeID},
+        ).pipe(map((data: any) => data.data));
+  }
+
+  getIntervalPosts(employeeID:any, lastPostDate:any)
+  {
+    const api = this.env.apiBaseURL+'/getIntervalPosts';
+    return this.http.post(
+        api,
+        {employeeID:employeeID, lastPostDate:lastPostDate},
+        ).pipe(map((data: any) => data.data));
+  }
+
+  
   pushComments(employeeID:any , postID:any, commentNotes:any)
   {
     const api = this.env.apiBaseURL+'/pushComments';
@@ -369,6 +390,27 @@ export class EmployeeService {
         ).pipe(map((data: any) => data.data));
   }
 
+  getIntervalChatMessages(employeeID:any, lastPostDate:any)
+  {
+    const api = this.env.apiBaseURL+'/getIntervalChatMessages';
+    return this.http.post(
+        api,
+        {employeeID:employeeID, lastPostDate:lastPostDate},
+        ).pipe(map((data: any) => data.data));
+  }
+
+  
+
+  getIntervalMessages(employeeID:any, latestSendToId:any, lastPostDate:any)
+  {
+    const api = this.env.apiBaseURL+'/getIntervalMessages';
+    return this.http.post(
+        api,
+        {employeeID:employeeID,latestSendToId:latestSendToId, lastPostDate:lastPostDate},
+        ).pipe(map((data: any) => data.data));
+  }
+
+
   getAllChatMessages(employeeID:any, latestSendToId:any)
   {
     const api = this.env.apiBaseURL+'/getAllChatMessages';
@@ -459,5 +501,43 @@ export class EmployeeService {
         {employeeID:employeeID},
         ).pipe(map((data: any) => data.data));
   }
+
+  updateLogout(employeeID:any)
+  {
+    const api = this.env.apiBaseURL+'/updateLogout';
+    return this.http.post(
+        api,
+        {employeeID:employeeID},
+        ).pipe(map((data: any) => data.data))
+  }
+
+  
+  myvideo(employeeID:any)
+  {
+    const api = this.env.apiBaseURL+'/myvideo';
+    return this.http.post(
+        api,
+        {employeeID:employeeID},
+        ).pipe(map((data: any) => data.data));
+  }
+
+  addVideo(formData:any)
+  {     
+    const api = this.env.apiBaseURL+'/uploadvideo';
+    return this.http.post(
+        api,
+        formData,
+        ).pipe(map((data: any) => data.data));
+  }
+
+  sendEmailConfirmation(likeEmplyee:any)
+  {
+    const api = this.env.apiBaseURL+'/confirmation16PF';
+    return this.http.post(
+        api,
+        {likeEmplyee:likeEmplyee},
+        ).pipe(map((data: any) => data.data));
+  }
+
 
 }

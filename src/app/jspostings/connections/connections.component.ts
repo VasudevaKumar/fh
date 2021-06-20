@@ -292,6 +292,7 @@ export class ConnectionsComponent implements OnInit {
       if(searchJobString!='')
       {
         this.filterConnectPeople = this.filterConnectPeople.filter( ({ connections }) => connections.firstName.toLowerCase().includes(searchJobString));
+        
         this.filterMyconnects = this.filterMyconnects.filter( ({ firstName }) => firstName.toLowerCase().includes(searchJobString));
         this.filterAllGroups = this.filterAllGroups.filter( ({ firstName }) => firstName.toLowerCase().includes(searchJobString));
 

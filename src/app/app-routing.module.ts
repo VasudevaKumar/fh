@@ -5,10 +5,12 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { ActivateComponent } from './activate/activate.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 
 const routes: Routes = [  
  
  { path : 'activate/:string',component:ActivateComponent},
+ { path : 'thankyou/:string',component:ThankyouComponent},
  { path : 'forgotPassword',  component:ForgotPasswordComponent},
  { path : 'updatePassword/:string',component:UpdatePasswordComponent},
  { path: 'careermanagers', loadChildren: () => import('./careermanagers/careermanagers.module').then(m => m.CareermanagersModule) },
@@ -18,8 +20,10 @@ const routes: Routes = [
  { path: 'hrregister', loadChildren: () => import('./hrregister/hrregister.module').then(m => m.HrregisterModule) },
  { path: 'hrpostings', loadChildren: () => import('./hrpostings/hrpostings.module').then(m => m.HrpostingsModule) },
  { path: 'js', loadChildren: () => import('./jsmessages/jsmessages.module').then(m => m.JsmessagesModule) },
+ { path: 'fhdashboard', loadChildren: () => import('./fhdashboard/fhdashboard.module').then(m => m.FhdashboardModule) },
+ { path: 'capturevideo', loadChildren: () => import('./jsvideo/jsvideo.module').then(m => m.JsvideoModule) },
  { path: '', component: LoginComponentComponent },
- { path: '**', component: LoginComponentComponent }
+  { path: '**', component: LoginComponentComponent }
 ];
 @NgModule({
  imports: [

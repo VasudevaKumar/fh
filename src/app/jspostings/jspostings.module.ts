@@ -8,6 +8,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { Pipe, PipeTransform } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ConnectionsComponent } from './connections/connections.component';
+import { MyactivityComponent } from './myactivity/myactivity.component';
 
 
 @Pipe({name: 'replaceImg78'})
@@ -37,7 +38,7 @@ export class replaceImg40Pipe implements PipeTransform {
  }
 
 @NgModule({
-  declarations: [JspostingsComponent,replaceImg78Pipe,replaceImg40Pipe, ConnectionsComponent,truncatetextPipe],
+  declarations: [JspostingsComponent,replaceImg78Pipe,replaceImg40Pipe, ConnectionsComponent,truncatetextPipe, MyactivityComponent],
   imports: [
     CommonModule,
     JspostingsRoutingModule,

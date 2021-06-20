@@ -35,6 +35,9 @@
   .mb-10{
     margin-bottom:10px;
   }
+  .ml-30{
+    margin-left:30px;
+  }
   .pl-3{
     padding-left:3px !important;
   }
@@ -52,4 +55,7 @@
   }
   #PrivacyPolicy{
     display:none;
+  }
+  .header--standard{
+    padding:30px 55px !important;
   }

@@ -24,20 +24,25 @@
 		<div class="header--standard-wrap col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 float-right" style="float:left; display:flex;">
 			<div class="col-md-6 float-left text-left nogutter"> 
 				
-				<div class="col col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4 float-left text-left">
+				<div class="col col-xl-12 col-lg-12 col-md-4 col-sm-12 col-12">
 					<a href="#" class="logo" [routerLink]="['/careermanagers']"><div class="title-block"><h6 class="logo-title">Career Managers</h6></div></a>
 				</div>
-				<div class="col col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 float-left text-left"></div>
 				
-				<div class="col-md-2 float-left text-right">
+				
+				<div class="col-md-3 col-12 float-left text-right ml-30">
 					<div class="title-block"><h6 class="logo-title" style="color:#fff;">Login as</h6></div>
 				</div>
-				<div class="col-md-2 float-left text-left">
-					<a href="#" class="logo"><div class="title-block"><h6 class="logo-title" (click)="openLoginForm('2'); false;">Jobseeker</h6></div></a>
+
+				<div class="col col-xl-12 col-lg-12 col-md-3 col-sm-12 col-12">
+					<div class="col-md-2 col-12 float-left text-left" style="padding-bottom: 10px;">
+						<a href="#" class="logo"><div class="title-block"><h6 class="logo-title" (click)="openLoginForm('2'); false;">Jobseeker</h6></div></a>
+					</div>
+					
+					<div class="col-md-2 col-12 float-left text-left">
+						<a href="#" class="logo"><div class="title-block"><h6 class="logo-title"  (click)="openLoginForm('3'); false;">Employer</h6></div></a>
+					</div>
 				</div>
-				<div class="col-md-2 float-left text-left">
-					<a href="#" class="logo"><div class="title-block"><h6 class="logo-title"  (click)="openLoginForm('3'); false;">Employer</h6></div></a>
-				</div>
+
 
 			</div>
 		

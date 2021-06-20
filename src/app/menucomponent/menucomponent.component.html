@@ -3,8 +3,8 @@
    <div style="float:left; padding-left:125px; color:aliceblue; font-weight: bold; font-size: 14px; line-height: 35px; font-size:16px;"><a style="color:#FFF;" [routerLink]="['/']">Facehiring</a></div>
  </nav>
  <nav class="navbar navbar-expand navbar-dark bg-dark osahan-nav-top p-0" *ngIf="role_id">
-    <div style="float:left; padding-left:125px; color:aliceblue; font-weight: bold; font-size: 16px;" *ngIf="!isMessagesPage"><a href="" style="color:#FFF;" (click)="goToLandingPage($event); false;">Facehiring<div class="circle white" style="float: right;"></div></a></div>
-    <div style="float:left; padding-left:125px; color:aliceblue; font-weight: bold; font-size: 16px;" *ngIf="isMessagesPage"><a href="" style="color:#FFF;" [routerLink]="['/jspostings']">Facehiring<div class="circle white" style="float: right;"></div></a></div>
+    <div style="float:left; padding-left:125px; color:aliceblue; font-weight: bold; font-size: 16px;" *ngIf="!isMessagesPage"><a href="" style="color:#FFF;" (click)="goToLandingPage($event); false;">Facehiring<div class="circle white" style="float: right; position: absolute;" *ngIf="totalPendingCounts>0"></div></a></div>
+    <div style="float:left; padding-left:125px; color:aliceblue; font-weight: bold; font-size: 16px;" *ngIf="isMessagesPage"><a href="" style="color:#FFF;" [routerLink]="['/jspostings']">Facehiring<div class="circle white" style="float: right; position: absolute;" *ngIf="totalPendingCounts>0"></div></a></div>
 
      <div class="container">
         
@@ -55,10 +55,23 @@
             </div>
          </li>
 
-         
-          <li class="nav-item"  *ngIf="isMenuLinks">
-            <a class="nav-link" [routerLink]="['/jsregister/profile']" ><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline" >My Profile</span></a>
+         <li class="nav-item dropdown mr-2" >
+            <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" *ngIf="isMenuLinks">
+               <li class="nav-item"  *ngIf="isMenuLinks">
+                  <a class="nav-link" [routerLink]="['/jsregister/profile']" ><i class="feather-briefcase mr-2"></i><span class="d-none d-lg-inline" >My Profile</span></a>
+               </li>
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow-sm" *ngIf="isMenuLinks">
+               <a class="dropdown-item" [routerLink]="['/capturevideo']" ><i class="feather-video mr-1"></i> Video Pitch </a>
+               <a class="dropdown-item" [routerLink]="['/jspostings/myactivity']" ><i class="feather-briefcase mr-1"></i> My Activities </a>
+
+            </div>
          </li>
+
+
+         
+         
           
          <li class="nav-item"  *ngIf="!isMenuLinks">
             <a class="nav-link" href="#"><span class="d-none d-lg-inline" >&nbsp;</span></a>
@@ -67,11 +80,11 @@
             <a class="nav-link " [routerLink]="['/jspostings/connections']"><i class="feather-file-text mr-2"></i><span class="d-none d-lg-inline">All Connection</span></a>
          </li>
 
-         <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown" *ngIf="pendingChatMessages.length>0">
+         <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown" *ngIf="pendingChatCount>=0">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="clearPendingMessages(); false;">
                <i class="feather-message-square"></i>
                <!-- Counter - Alerts -->
-               <span class="badge badge-danger badge-counter" *ngIf="pendingChatMessages[0].Num>0">{{pendingChatMessages[0].Num}}</span>
+               <span class="badge badge-danger badge-counter" *ngIf="pendingChatCount>0">{{pendingChatCount}}</span>
             </a>
             <!-- Dropdown - Alerts -->
 

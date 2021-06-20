@@ -929,10 +929,10 @@ onFileChange(event) {
             /** End Edu validation */
 
 
-             // return;
+            // return;
 
 
-            this.spinner.show();
+          //  this.spinner.show();
 
            // console.log(this.registerForm.value);
            const formData = new FormData();
@@ -1043,7 +1043,7 @@ onFileChange(event) {
                 this.alerts.setMessage('Thank you. Your registration has been completed! Please check your email to activate the facehiring account! Please wait ..' ,'success');
                 setTimeout(function(){
                     _that.router.navigate(['/']);
-                   }, 2000);
+                   }, 7000);
                
               }
               

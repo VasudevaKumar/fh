@@ -5,7 +5,6 @@ import { first } from 'rxjs/operators';
 
 import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
 import { HrserviceService } from './../../../_services/hrservice.service';
-
 import { NgxSpinnerService } from "ngx-spinner";
 import { AlertsService } from 'angular-alert-module';
 import { ConfirmationDialogService } from './../confirmation-dialog-component/confirmation-dialog-service';
@@ -25,6 +24,7 @@ export class HrpostingsComponent implements OnInit {
   loggedInEmployeeID:any;
   jobPostings:Array<any>;
   selectedJobPosting=[];
+  
   public currentUser:any;
   public isGridDataReady = false;
   public totalPostings = 10;

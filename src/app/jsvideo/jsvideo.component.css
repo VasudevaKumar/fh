@@ -1,0 +1,20 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+
+  .video-js video {
+    /*background-color: #42f489;*/
+    background-color: rgba(50 , 88 , 148, 0.95);
+
+}
+/*
+.video_clip1-dimensions{
+  width:380px !important;
+  height: 300px !important;
+}
+*/
+

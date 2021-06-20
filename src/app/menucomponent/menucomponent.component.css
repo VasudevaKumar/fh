@@ -22,10 +22,16 @@
 .white {
     background-color: white;
     position: relative;
-    top: 50%;
-    left: 4%;
+    top: 27%;
+    left: 16%;
     -webkit-animation: up-right 1s infinite;
     -moz-animation: up-right 1s infinite;
     -o-animation: up-right 1s infinite;
     animation: up-right 1s infinite;
 }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) 
+     {
+     .white  {     left: 16%;      } /* IE10 */
+     *::-ms-backdrop, .white  {     left: 16%;      } /* IE11 */
+     }

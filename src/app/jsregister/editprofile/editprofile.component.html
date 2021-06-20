@@ -93,8 +93,8 @@
                          <input placeholder="Add Youtube link" type="text" class="form-control" formControlName="YoutubeLink">
                       </div>
                       <div class="position-relative icon-form-control mb-0">
-                         <i class="feather-github position-absolute text-dark"></i>
-                         <input placeholder="Add Github link" type="text" class="form-control" formControlName="GithubLink">
+                         <i class="feather-linkedin position-absolute text-dark"></i>
+                         <input placeholder="Add LinkedIn link" type="text" class="form-control" formControlName="GithubLink">
                       </div>
                    </div>
                    <!-- <div class="overflow-hidden text-center p-3">
@@ -585,8 +585,8 @@
  
                 <div class="box-body px-3 pt-3 pb-0" id="experienceMainDiv">
                    <div class="actualExpContent" id="topdiv1" style="width:100%;" *ngFor="let exp of EditForm.get('exps')['controls']; let i = index; last as isLast;">
-                   <div class="row" style="height:75px;">
-                      <div class="col-sm-6 mb-4">
+                   <div class="row">
+                      <div class="col-sm-6">
                          <!-- Input -->
                          <div class="position-relative">
                             <div class ="fromDateCls" style="margin:0px; padding:0px;">
@@ -602,7 +602,7 @@
                          <!-- End Input -->
                          <div class="col-sm-12 warning-block"  id="fromDateErrorMsg{{i}}" style="display:none; padding:5px; color:red;"></div>
                       </div>
-                      <div class="col-sm-6 mb-4">
+                      <div class="col-sm-6">
                          <!-- Input -->
                          <div class="position-relative">
                             <mat-form-field color="accent" style="width: 95%;">
@@ -616,8 +616,8 @@
                          <div class="col-sm-12 warning-block"  id="toDateErrorMsg{{i}}" style="display:none; padding:5px; color:red;"></div>
                       </div>
                    </div>
-                   <div class="row" style="height:75px;">
-                      <div class="col-sm-6 mb-4">
+                   <div class="row">
+                      <div class="col-sm-6">
                          <label id="companyLabel" class="form-label">Company</label>
                          <!-- Input -->
                             <div class="form-group">
@@ -630,7 +630,7 @@
                         
                          <!-- End Input -->
                       </div>
-                      <div class="col-sm-6 mb-4">
+                      <div class="col-sm-6">
                          <label id="positionLabel" class="form-label">Position</label>
                          <!-- Input -->
                          <div class="form-group">
@@ -640,11 +640,11 @@
                          </div>
  
                          <!-- End Input -->
-                      </div>`
+                      </div>
                    </div>
  
                    <div class="row">
-                      <div class="col-sm-12 mb-4">
+                      <div class="col-sm-12">
                          <label id="companyLabel" class="form-label">Description</label>
                          <!-- Input -->
                             <div class="form-group">
@@ -711,8 +711,8 @@
 
                <div class="box-body px-3 pt-3 pb-0" id="experienceMainDiv">
                   <div class="actualContent" id="topdiv1" style="width:100%;" *ngFor="let exp of EditForm.get('edus')['controls']; let i = index; last as isLast;">
-                  <div class="row" style="height:75px;">
-                     <div class="col-sm-6 mb-4">
+                  <div class="row">
+                     <div class="col-sm-6">
                         <!-- Input -->
                         <div class="position-relative">
                            <div class ="fromDateCls" style="margin:0px; padding:0px;">
@@ -727,7 +727,7 @@
                         <!-- End Input -->
                         <div class="col-sm-12 warning-block"  id="fromDateErrorMsg_edu{{i}}" style="display:none; padding:5px; color:red;"></div>
                      </div>
-                     <div class="col-sm-6 mb-4">
+                     <div class="col-sm-6">
                         <!-- Input -->
                         <div class="position-relative">
                            <mat-form-field color="accent" style="width: 95%;">
@@ -741,8 +741,8 @@
                         <div class="col-sm-12 warning-block"  id="toDateErrorMsg_edu{{i}}" style="display:none; padding:5px; color:red;"></div>
                      </div>
                   </div>
-                  <div class="row" style="height:75px;">
-                     <div class="col-sm-6 mb-4">
+                  <div class="row">
+                     <div class="col-sm-6">
                         <label id="companyLabel" class="form-label">Education <span class="text-danger">*</span> </label>
                         <!-- Input -->
                            <div class="form-group">
@@ -755,7 +755,7 @@
                        
                         <!-- End Input -->
                      </div>
-                     <div class="col-sm-6 mb-4">
+                     <div class="col-sm-6">
                         <label id="positionLabel" class="form-label">College/University <span class="text-danger">*</span></label>
                         <!-- Input -->
                         <div class="form-group">
@@ -765,11 +765,11 @@
                         </div>
 
                         <!-- End Input -->
-                     </div>`
+                     </div>
                   </div>
 
                   <div class="row">
-                     <div class="col-sm-12 mb-4">
+                     <div class="col-sm-12">
                         <label id="companyLabel" class="form-label">Description</label>
                         <!-- Input -->
                            <div class="form-group">

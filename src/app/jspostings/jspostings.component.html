@@ -126,7 +126,7 @@
                    <a href="" class="mr-3 text-secondary isDisabled" *ngIf="item.value['posts'].isLiked == 'N' && item.value['posts'].user_id == loggedInEmployeeID"><img src="assets/images/redcolorHeart.jpg" class="img-fluid mt--2" (click)="preventDefault();false;"></a>
 
                    <a href="" class="mr-3 text-secondary" (click)="displayMessage(item.value['posts'].id); false;"><i class="feather-message-square"></i><span id="commentDiv_{{item.value['posts'].id}}">{{item.value['posts'].cnt_comments}}</span></a>
-                   <!-- <a href="" class="mr-3 text-secondary" title="Share to your time line" *ngIf="item.value['posts'].user_id != loggedInEmployeeID" (click)="postSharing(item.value['posts'].id , item.value['posts'].cnt_shares); false;"><i class="feather-share-2"></i><span id="shareDiv_{{item.value['posts'].id}}">{{item.value['posts'].cnt_shares}}</span></a> -->
+                   <a href="" class="mr-3 text-secondary" title="Share to your time line" *ngIf="item.value['posts'].user_id != loggedInEmployeeID" (click)="postSharing(item.value['posts'].id , item.value['posts'].cnt_shares); false;"><i class="feather-share-2"></i><span id="shareDiv_{{item.value['posts'].id}}">{{item.value['posts'].cnt_shares}}</span></a>
                    <a href="" class="mr-3 text-secondary" (click)="deletePost(item.value['posts'].id); false;" *ngIf="item.value['posts'].user_id == loggedInEmployeeID"><i class="feather-trash"></i></a>
 
                    
@@ -208,7 +208,7 @@
                       <a href="" (click)="showProfile(item.user_id); false;">
                       <div class="font-weight-bold mr-2">
                          <div class="text-truncate">{{item.firstName}} {{item.lastName}}</div>
-                         <div class="small text-gray-500">{{item.positionName}} at {{item.companyName}}
+                         <div class="small text-gray-500" *ngif="item.positionName!=''">{{item.positionName}} at {{item.companyName}}
                          </div>
                       </div>
                      </a>

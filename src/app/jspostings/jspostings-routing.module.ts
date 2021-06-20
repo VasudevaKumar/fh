@@ -3,11 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { JspostingsComponent } from './jspostings.component';
 import { ConnectionsComponent } from './connections/connections.component';
+import { MyactivityComponent } from './myactivity/myactivity.component';
+
 import { AdminGuard } from  './../../../_services/admin.guard';
 
 const routes: Routes = [
   { path: '', canActivate: [AdminGuard] , component: JspostingsComponent },
-  { path: 'connections', canActivate: [AdminGuard] , component: ConnectionsComponent }
+  { path: 'connections', canActivate: [AdminGuard] , component: ConnectionsComponent },
+  { path: 'myactivity', canActivate: [AdminGuard] , component: MyactivityComponent }
   
 ];
 

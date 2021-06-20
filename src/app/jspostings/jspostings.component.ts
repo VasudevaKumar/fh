@@ -7,6 +7,8 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { NgxSpinnerService } from "ngx-spinner";
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'; 
+import { Subscription, timer , interval} from 'rxjs';
+import _ from 'lodash';
 
 declare var jQuery: any;
 declare var $: any;
@@ -22,7 +24,7 @@ export class JspostingsComponent implements OnInit {
   @ViewChild('myFileInput') myFileInput;
 
   modalRef: BsModalRef;  
-  
+  subscription: Subscription;
   imageChangedEvent: any = '';
   imageChangedEventR:any = '';
 
@@ -40,6 +42,7 @@ export class JspostingsComponent implements OnInit {
   totalConnects = [];
   profileViewDetails = [];
   postLikeDetails = [];
+  intervelPostComments = [];
 
   isEmployeeProfileLoaded = false;
   ImageSizeerror:boolean = false;
@@ -64,6 +67,8 @@ export class JspostingsComponent implements OnInit {
   public imgURL: any;
   public message: string;
   
+  public lastPostDate:any  = new Date();
+
 
   config: AngularEditorConfig = {
     editable: true,
@@ -121,7 +126,8 @@ export class JspostingsComponent implements OnInit {
     this.loggedInEmployeeID  = this.currentUser[0].user_id;
     this.loadContent(this.loggedInEmployeeID);
     // console.log(this.loggedInEmployeeID);
-
+    this.lastPostDate.setSeconds(0, 0);
+    this.lastPostDate = this.lastPostDate.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
     this.HomPageForm = this.formBuilder.group({
       leftSideFile: [],
       leftSidefileSource:[],
@@ -135,7 +141,13 @@ export class JspostingsComponent implements OnInit {
 
     });
 
-    
+   
+    this.subscription= interval(40000).subscribe((x =>{
+      this.getIntervalPosts();
+    }));
+   
+   
+
  }
  get f() { return this.HomPageForm.controls; }
 
@@ -243,8 +255,14 @@ export class JspostingsComponent implements OnInit {
      // console.log(_that.employeeHomePagePics);
 
      this.spinner.hide();
-     
+     if(_that.postComments.length > 0)
+     {
+      this.lastPostDate = _that.postComments.sort((a,b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())[0];
+      this.lastPostDate = this.lastPostDate.posts.updated_at;
+     }
+
       this.isContentLoaded = true;
+      // console.log(this.lastPostDate.posts.created_at);
       // _that.imageSrcLeft =  _that.isEmployeeProfileLoaded.data
 
     }
@@ -333,6 +351,9 @@ export class JspostingsComponent implements OnInit {
       let cnt = $("#commentDiv_"+postID).text();
       $("#commentDiv_"+postID).html(parseInt(cnt)+1);
 
+      this.lastPostDate = new Date();
+      this.lastPostDate.setSeconds(0, 0);
+      this.lastPostDate = this.lastPostDate.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
       this.EmployeeService_.pushComments(this.loggedInEmployeeID , postID , commentNotes).toPromise();
       this.clearValue(event);
     }
@@ -438,9 +459,67 @@ export class JspostingsComponent implements OnInit {
       
       $('#overlay').fadeOut();
 
+      if(_that.postComments.length > 0)
+     {
+      this.lastPostDate = _that.postComments.sort((a,b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())[0];
+      this.lastPostDate = this.lastPostDate.posts.updated_at;
+      // console.log(this.lastPostDate);
+     }
+
+
     });
 
     }
+
+
+    getIntervalPosts()
+    {
+      const _that = this;
+      _that.intervelPostComments = [];
+      this.EmployeeService_
+    .getIntervalPosts(this.loggedInEmployeeID , this.lastPostDate)
+    .subscribe(intervelPostComments => (_that.intervelPostComments = intervelPostComments))
+    .add(() => {
+     
+     // _that.postComments.push(..._that.intervelPostComments);
+     
+     // _that.postComments = _.uniqBy([..._that.postComments, ..._that.intervelPostComments], 'id');
+
+     // console.log(_that.postComments);
+
+
+     if(_that.intervelPostComments.length > 0)
+     {
+
+      let newArray = _that.postComments.filter(function(objFromA) {
+        return !_that.intervelPostComments.find(function(objFromB) {
+          return objFromA.posts.id === objFromB.posts.id
+        })
+      });
+
+      _that.postComments = _that.intervelPostComments.concat(newArray);
+      this.lastPostDate = _that.intervelPostComments.sort((a,b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime())[0];
+      this.lastPostDate = this.lastPostDate.posts.updated_at;
+     }
+
+    });
+
+    }
+
+
+    removeDuplicates(originalArray, prop) {
+      var newArray = [];
+      var lookupObject  = {};
+ 
+      for(var i in originalArray) {
+         lookupObject[originalArray[i][prop]] = originalArray[i];
+      }
+ 
+      for(i in lookupObject) {
+          newArray.push(lookupObject[i]);
+      }
+       return newArray;
+  }
 
     
     postSharing(postID, shareCount)
@@ -473,9 +552,13 @@ export class JspostingsComponent implements OnInit {
       .subscribe((resp) => {})
       .add(() => {
         //this.closewaitdialog();
+        this.lastPostDate = new Date();
+        this.lastPostDate.setSeconds(0, 0);
+        this.lastPostDate = this.lastPostDate.toISOString().replace(/T/, " ").replace(/:00.000Z/, "");
+
         this.isHomePicUploaing = false;
         $('#overlay').fadeOut();
-        $("#likeDiv_"+postID).html(parseInt(likeCount)+1);
+        $("#likeDiv_"+postID).html(parseInt(likeCount)+1);        
       });
 
       /* Update Like */
@@ -864,4 +947,12 @@ cropperReadyR() {
      }
      */
 
+
+    ngOnDestroy() {
+      if(this.subscription && !this.subscription.closed)
+      {
+        this.subscription.unsubscribe();
+      }
+    }
+    
 }

@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { AlertsModule } from 'angular-alert-module';
@@ -16,8 +17,7 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
 import { ConfirmationDialogComponentComponent } from './confirmation-dialog-component/confirmation-dialog-component.component';
 import { MenucomponentComponent } from './menucomponent/menucomponent.component';
 import { Pipe, PipeTransform } from '@angular/core';
-import { NgChatModule } from 'ng-chat';
-
+import { ThankyouComponent } from './thankyou/thankyou.component';
 
 @Pipe({name: 'replaceImg78'})
 export class replaceImg78Pipe implements PipeTransform {
@@ -46,6 +46,7 @@ export class replaceImg40Pipe implements PipeTransform {
 
 @NgModule({
   imports: [
+    CommonModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AlertsModule.forRoot(),
     HttpClientModule,
@@ -55,8 +56,7 @@ export class replaceImg40Pipe implements PipeTransform {
     MatIconModule,
     NgxIntlTelInputModule,
     AppRoutingModule,
-    NgxSpinnerModule,
-    NgChatModule
+    NgxSpinnerModule
     
   ],
   declarations: [
@@ -69,9 +69,8 @@ export class replaceImg40Pipe implements PipeTransform {
     MenucomponentComponent,
     replaceImg78Pipe,
     replaceImg40Pipe,
-    truncatetextPipe
-    
-
+    truncatetextPipe,
+    ThankyouComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

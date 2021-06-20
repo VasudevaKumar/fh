@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Location } from "@angular/common";
 import { EmployeeService } from '../../../_services/employee.service';
 import {InteractionService} from'../../../_services/interaction.service';
-import { Subscription, timer } from 'rxjs';
+import { Subscription, timer , interval} from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 declare var jQuery: any;
@@ -31,6 +31,7 @@ export class MenucomponentComponent implements OnInit {
   role_id:any = 0;
   isMessagesPage = false;
   pr = [];
+  pendingChatCount = 0;
   
 
   constructor(
@@ -96,11 +97,17 @@ export class MenucomponentComponent implements OnInit {
       this.role_id =  this.currentUser[0].role_id;
         if(this.role_id == 2)
         {
-          this.getPendingRequests();
-          this.getNotifications();
-          this.getApprovedNotifications();
-          this.getPendingChatMessages();  
-          this.crequest();
+
+          
+          this.subscription= interval(60000).subscribe((x =>{
+             this.getPendingRequests();
+             this.getNotifications();
+             this.getApprovedNotifications();
+             this.getPendingChatMessages();
+           }));
+          
+
+          // this.crequest();
         }
       
     }
@@ -125,6 +132,8 @@ export class MenucomponentComponent implements OnInit {
       
       //console.log(_that.pendingChatMessages);
     //  this.totalPendingCounts += _that.pendingRequests.length;
+
+      _that.pendingChatCount = _that.pendingChatMessages[0].Num;
     
     });
 
@@ -132,8 +141,8 @@ export class MenucomponentComponent implements OnInit {
 
   clearPendingMessages()
   {
-    this.pendingRequests = [];
-    this.router.navigate(['/js/messages']);
+    this.pendingChatCount = 0;
+   this.router.navigate(['/js/messages']);
 
   }
   getPendingRequests()
@@ -144,7 +153,7 @@ export class MenucomponentComponent implements OnInit {
     .add(() => {
       /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
       // console.log(_that.pendingRequests);
-      this.totalPendingCounts += _that.pendingRequests.length;
+      this.totalPendingCounts = _that.pendingRequests.length;
     
     });
   }
@@ -159,11 +168,15 @@ export class MenucomponentComponent implements OnInit {
     /*console.log(_that.employeeProfiles['profileData'][0].firstName);*/
     // console.log(_that.pendingRequests);
     this.totalPendingCounts += this.approvedRequets.filter( ({ isViewed }) => isViewed == '0' ).length;
-
-    
-  
   });
+  }
 
+  updateLogout()
+  {
+    const _that = this;
+    this.EmployeeService_
+    .updateLogout(this.loggedInEmployeeID)
+    .subscribe()
   }
   acceptRequest(connectID)
   {
@@ -218,11 +231,13 @@ export class MenucomponentComponent implements OnInit {
 
   logout()
   {
+    this.updateLogout();
     localStorage.removeItem('currentUser');
     localStorage.removeItem('companyID');
     localStorage.removeItem('appliedJob');
     localStorage.removeItem('searchUser');
     localStorage.clear();
+    this._interactionService.checkChatVisible(false);
     window.location.href = '/';
   }
 
@@ -367,7 +382,10 @@ export class MenucomponentComponent implements OnInit {
 
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if(this.subscription && !this.subscription.closed)
+    {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

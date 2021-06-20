@@ -2,11 +2,13 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Location } from "@angular/common";
 import { Router } from "@angular/router";
-import { ChatAdapter, IChatGroupAdapter, Group, Message, ChatParticipantStatus, ParticipantResponse, ChatParticipantType, IChatParticipant, MessageType } from 'ng-chat';
-import { fhAdapter } from '../../_services/fhadapter';
+// import { fhAdapter } from '../../_services/fhadapter';
 import {InteractionService} from'../../_services/interaction.service';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
+import { RegisterService } from '../../_services/register.service';
+import { ChatAdapter } from 'ng-chat';
+// import { DemoAdapter } from './../../_services/fhadapter';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +17,23 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'ssr-serverless';
-  userId:any;
+  
   platform: string;
   public isHeaderVisible = true;
   public isChatVisible = false;
-  public adapter: ChatAdapter = new fhAdapter('0', this.http);
-  
+  // public adapter: ChatAdapter = new fhAdapter('0', this.http);
+  userId:any;
+  username:any;
+  avatar:any;
 
-constructor(@Inject(PLATFORM_ID) private platformId: any, location: Location, router: Router,private _interactionService:InteractionService, private http: HttpClient) {
+   public adapter: ChatAdapter;
+  
+  currentUser: any;
+  loggedInEmployeeID: any;
+
+
+  constructor(@Inject(PLATFORM_ID) private platformId: any, location: Location, router: Router,private _interactionService:InteractionService, private http: HttpClient, private registerService : RegisterService) 
+{
   router.events.subscribe(val => {
     if(location.path() == '/hrpostings' || location.path() ==  '/careermanagers' || location.path() ==  '/careermanagers/register')
     {
@@ -31,50 +42,47 @@ constructor(@Inject(PLATFORM_ID) private platformId: any, location: Location, ro
       this.isHeaderVisible = true;
     }
   });
+
+  this.isChatVisible = false;
+  this.userId = '';
+  
 }
 
-
-
 public ngOnInit(): void {
-    // this.userId = 999;
-    this._interactionService.teacherMessage$
-    .subscribe(
-      message => {
-      // console.log('serview');
-       // console.log(message);
-        this.userId = message[0]['user_id'];
-        this.isChatVisible = true;
-        
-     });
-      
-    this.platform = isPlatformBrowser(this.platformId) ? 'Browser' : 'Server';
-    
-    this.adapter.listFriends();
-  }
-/*
-  private fetchFriendsList(isBootstrapping: boolean): void
-    {
-        this.adapter.listFriends()
-        .pipe(
-            map((participantsResponse: ParticipantResponse[]) => {
-                this.participantsResponse = participantsResponse;
+  this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  this.isChatVisible = false;
+  if(this.currentUser!=null)
+  {
+   //  this.userId = this.currentUser[0].user_id;
+   //  this.username = this.currentUser[0].user_id;
+   //  this.InitializeSocketListerners(); 
+   //  this.joinRoom();
 
-                this.participants = participantsResponse.map((response: ParticipantResponse) => {
-                    return response.participant;
-                });
-            })
-        ).subscribe(() => {
-            if (isBootstrapping)
-            {
-                this.restoreWindowsState();
-            }
-        });
-    }
-*/
+    this.loggedInEmployeeID = this.currentUser[0].user_id;
+    this.username = this.currentUser[0].displayName;
+    this.avatar = this.currentUser[0].avatar;
+    
+    
+    
+  }
+
+  // this.userId = 999;
+  this._interactionService.teacherMessage$
+  .subscribe(
+    message => {
+   });
+
+   this._interactionService.isChatVisible$
+  .subscribe(
+    checkChatVisible => {
+     this.isChatVisible = false;
+   });
+    
+  this.platform = isPlatformBrowser(this.platformId) ? 'Browser' : 'Server';
+
   
-  
-  
-  
-  
+
+}
+
   
 }
